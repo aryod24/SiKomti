@@ -14,16 +14,15 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
+                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="nav-header">Data Pengguna</li>
             <li class="nav-item">
-                <a href="{{ url('/level') }}" class="nav-link {{ $activeMenu == 'level' ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-layer-group"></i>
-                    <p>Level User</p>
+                <a href="{{ url('/profile') }}" class="nav-link {{ $activeMenu == 'profile' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Profile</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -32,4 +31,70 @@
                     <p>Data User</p>
                 </a>
             </li>
-  
+            <li class="nav-item">
+                <a href="{{ url('/level') }}" class="nav-link {{ $activeMenu == 'level' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-layer-group"></i>
+                    <p>Level User</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/mahasiswa') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user-graduate"></i>
+                    <p>Data Mahasiswa</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/kompetensi') }}" class="nav-link {{ $activeMenu == 'kompetensi' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>Bidang Kompetensi</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/kompen') }}" class="nav-link {{ $activeMenu == 'kompen' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-tasks"></i>
+                    <p>List Kompen</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/progres') }}" class="nav-link {{ $activeMenu == 'progres' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-chart-line"></i>
+                    <p>Progres</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/rekap') }}" class="nav-link {{ $activeMenu == 'rekap' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-file-alt"></i>
+                    <p>Rekap</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/logout') }}" class="nav-link">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<style>
+    /* Custom CSS for Sidebar */
+    .sidebar {
+        background: linear-gradient(90deg, #3B465D, #2C3E50);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+    }
+
+    .sidebar .nav-link {
+        color: #ffffff;
+    }
+
+    .sidebar .nav-link.active {
+        background-color: #1F2937;
+        color: #ffffff;
+    }
+
+    .sidebar .nav-icon {
+        color: #ffffff;
+    }
+</style>
+

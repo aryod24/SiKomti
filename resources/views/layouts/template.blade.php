@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name', 'PWL Laravel Starter Code') }}</title>
+  <title>{{ config('app.name', 'SiKomti') }}</title>
 
   <meta name="csrf-token" content="{{csrf_token()}}"> <!-- Untuk mengirimkan token Laravel CSRF pada setiap request ajax -->
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -17,6 +18,25 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
   @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
+  
+  <!-- Custom CSS -->
+  <style>
+    .main-sidebar {
+      background: linear-gradient(90deg, #3B465D, #2C3E50);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+    }
+    .sidebar .nav-link {
+      color: #ffffff;
+    }
+    .sidebar .nav-link.active {
+      background-color: #1F2937;
+      color: #ffffff;
+    }
+    .sidebar .nav-icon {
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -29,8 +49,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-        <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PWL - Starter Code</span>
+      <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">SiKomti</span>
     </a>
 
     <!-- Sidebar -->
@@ -45,7 +65,7 @@
 
     <!-- Main content -->
     <section class="content">
-    @yield('content')
+      @yield('content')
     </section>
     <!-- /.content -->
   </div>
@@ -72,8 +92,6 @@
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/adminlte.min.js')}}"></script>
 <script>

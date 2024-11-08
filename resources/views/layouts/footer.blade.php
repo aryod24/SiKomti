@@ -1,9 +1,6 @@
-<footer class="main-footer">
-    <!-- Konten footer dikosongkan -->
-  </footer>
-  
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Konten sidebar kontrol dikosongkan -->
-  </aside>
-  <!-- /.control-sidebar -->
+<footer style="background: linear-gradient(90deg, #2C3E50, #3B465D); padding: 1rem; text-align: center; color: #ffffff;">
+  <div class="container">
+    <!-- Isi footer bisa ditambahkan di sini, seperti hak cipta atau informasi tambahan -->
+    &copy; {{ date('Y') }} SiKomji. All rights reserved.
+  </div>
+</footer>
