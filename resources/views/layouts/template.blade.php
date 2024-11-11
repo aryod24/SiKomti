@@ -22,7 +22,7 @@
   <!-- Custom CSS -->
   <style>
     .main-sidebar {
-      background: linear-gradient(90deg, #5c759c, #2C3E50);
+      background: linear-gradient(90deg, #3B465D, #2C3E50);
       font-family: 'Montserrat', sans-serif;
       font-weight: bold;
     }
