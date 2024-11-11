@@ -16,21 +16,12 @@ Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'store']);
 // Keep this route to point to the WelcomeController
-Route::get('/', [WelcomeController::class, 'index']);
+//Route::get('/', [WelcomeController::class, 'index']);
 // Route::resource('level', LevelController::class);
 
-// Rute untuk Admin
+// Rute untuk User
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
-    Route::get('/admin/profile', [AdminController::class, 'profile']);
-    // Rute lainnya untuk Admin...
-});
-
-// Rute untuk Mahasiswa
-Route::middleware('auth')->group(function () {
-    Route::get('/mhs/dashboard', [MahasiswaController::class, 'dashboard']);
-    Route::get('/mhs/profile', [MahasiswaController::class, 'profile']);
-    // Rute lainnya untuk Mahasiswa...
+    Route::get('/', [WelcomeController::class, 'index']);
 });
 
 

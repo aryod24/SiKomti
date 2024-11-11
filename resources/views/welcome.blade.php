@@ -6,7 +6,7 @@
         <div class="card-tools"></div>
     </div>
     <div class="card-body">
-        Selamat datang semua, Ini adalah halaman utama dari aplikasi ini.
+        Selamat datang di SiKomti
     </div>
 </div>
 @endsection
