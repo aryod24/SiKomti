@@ -4,6 +4,9 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\KompenController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '[0-9]+');
@@ -16,9 +19,20 @@ Route::post('register', [AuthController::class, 'store']);
 Route::get('/', [WelcomeController::class, 'index']);
 // Route::resource('level', LevelController::class);
 
+// Rute untuk Admin
 Route::middleware('auth')->group(function () {
-    
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/admin/profile', [AdminController::class, 'profile']);
+    // Rute lainnya untuk Admin...
 });
+
+// Rute untuk Mahasiswa
+Route::middleware('auth')->group(function () {
+    Route::get('/mhs/dashboard', [MahasiswaController::class, 'dashboard']);
+    Route::get('/mhs/profile', [MahasiswaController::class, 'profile']);
+    // Rute lainnya untuk Mahasiswa...
+});
+
 
 Route::group(['prefix' => 'user', 'middleware'=>'authorize:ADM'], function() {
     Route::get('/', [UserController::class, 'index']);          // menampilkan halaman awal user
@@ -57,4 +71,25 @@ Route::group(['prefix' => 'level'], function() {
     Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']); 
     Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); 
     Route::delete('/{id}', [LevelController::class, 'destroy']);     
+});
+Route::group(['prefix' => 'kompen', 'middleware'=>'authorize:ADM'], function() {
+    Route::get('/', [KompenController::class, 'index']);          // Menampilkan halaman awal kompen
+    Route::post('/list', [KompenController::class, 'list']);      // Menampilkan data kompen dalam json untuk datatables
+    Route::get('/create', [KompenController::class, 'create']);   // Menampilkan halaman form tambah kompen
+    Route::post('/', [KompenController::class, 'store']);         // Menyimpan data kompen baru
+    Route::get('/create_ajax', [KompenController::class, 'create_ajax']); // Menampilkan halaman form tambah kompen Ajax
+    Route::post('/ajax', [KompenController::class, 'store_ajax']); // Menyimpan data kompen baru via Ajax
+    Route::get('/{uuid}', [KompenController::class, 'show']);       // Menampilkan detail kompen
+    Route::get('/{id}/show_ajax', [KompenController::class, 'show_ajax']); // Menampilkan detail kompen via Ajax
+    Route::get('/{uuid}/edit', [KompenController::class, 'edit']);  // Menampilkan halaman form edit kompen
+    Route::put('/{uuid}', [KompenController::class, 'update']);     // Menyimpan perubahan data kompen
+    Route::get('/{id}/edit_ajax', [KompenController::class, 'edit_ajax']); // Menampilkan halaman form edit kompen via Ajax
+    Route::put('/{id}/update_ajax', [KompenController::class, 'update_ajax']); // Menyimpan perubahan data kompen via Ajax
+    Route::get('/{id}/delete_ajax', [KompenController::class, 'confirm_ajax']); // Tampilkan form konfirmasi hapus kompen via Ajax
+    Route::delete('/{id}/delete_ajax', [KompenController::class, 'delete_ajax']); // Menghapus data kompen via Ajax
+    Route::delete('/{id}', [KompenController::class, 'destroy']); // Menghapus data kompen
+    Route::get('/import', [KompenController::class, 'import']); // Form untuk upload file excel
+    Route::post('/import_ajax', [KompenController::class, 'import_ajax']); // Proses import file excel via Ajax
+    Route::get('/export_excel', [KompenController::class, 'export_excel']); // Export data kompen ke Excel
+    Route::get('/export_pdf', [KompenController::class, 'export_pdf']); // Export data kompen ke PDF
 });

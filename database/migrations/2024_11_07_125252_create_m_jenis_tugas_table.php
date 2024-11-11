@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('m_jenis_tugas', function (Blueprint $table) {
             $table->id('id_tugas');
             $table->string('jenis_tugas', 100);
-            $table->unsignedBigInteger('id_kompetensi')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_kompetensi')->references('id_Kompetensi')->on('m_bidang_kompetensi')->onDelete('set null');
         });
     }
 
