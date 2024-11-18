@@ -21,15 +21,19 @@ return new class extends Migration
             $table->boolean('status_dibuka')->nullable();
             $table->date('tanggal_mulai')->nullable();
             $table->date('tanggal_akhir')->nullable();
-            $table->boolean('Is_Selesai')->nullable();
+            $table->boolean('is_selesai')->nullable();
             $table->unsignedBigInteger('id_kompetensi')->nullable();
             $table->string('periode_kompen', 50)->nullable();
+            $table->unsignedBigInteger('user_id')->nullable(); // Tambahkan kolom user_id
+            $table->unsignedBigInteger('level_id')->nullable(); // Tambahkan kolom level_id
             $table->timestamps();
-
+        
             $table->primary('UUID_Kompen');
             $table->foreign('jenis_tugas')->references('id_tugas')->on('m_jenis_tugas')->onDelete('set null');
             $table->foreign('id_kompetensi')->references('id_kompetensi')->on('m_bidang_kompetensi')->onDelete('set null');
-        });
+            $table->foreign('user_id')->references('user_id')->on('m_user')->onDelete('set null'); // Tambahkan foreign key untuk user_id
+            $table->foreign('level_id')->references('level_id')->on('m_level')->onDelete('set null'); // Tambahkan foreign key untuk level_id
+        });        
     }
 
     /**
