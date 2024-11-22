@@ -13,16 +13,21 @@ class BidangKompetensiSeeder extends Seeder
     public function run(): void
     {
         DB::table('m_bidang_kompetensi')->insert([
-            ['nama_kompetensi' => 'Pemrograman Dasar'],
-            ['nama_kompetensi' => 'Database Fundamental'],
-            ['nama_kompetensi' => 'Pengembangan Web'],
-            ['nama_kompetensi' => 'Jaringan Komputer'],
-            ['nama_kompetensi' => 'Sistem Operasi'],
-            ['nama_kompetensi' => 'Analisis dan Desain Sistem'],
-            ['nama_kompetensi' => 'Keamanan Informasi'],
-            ['nama_kompetensi' => 'Pengolahan Data'],
-            ['nama_kompetensi' => 'Pemrograman Mobile'],
-            ['nama_kompetensi' => 'Kecerdasan Buatan']
+            // Jenis Tugas 1
+            ['nama_kompetensi' => 'Pemrograman Dasar', 'id_tugas' => 1],
+            ['nama_kompetensi' => 'Database Fundamental', 'id_tugas' => 1],
+            ['nama_kompetensi' => 'Pengembangan Web', 'id_tugas' => 1],
+            
+            // Jenis Tugas 2
+            ['nama_kompetensi' => 'Jaringan Komputer', 'id_tugas' => 2],
+            ['nama_kompetensi' => 'Sistem Operasi', 'id_tugas' => 2],
+            ['nama_kompetensi' => 'Analisis dan Desain Sistem', 'id_tugas' => 2],
+
+            // Jenis Tugas 3
+            ['nama_kompetensi' => 'Keamanan Informasi', 'id_tugas' => 3],
+            ['nama_kompetensi' => 'Pengolahan Data', 'id_tugas' => 3],
+            ['nama_kompetensi' => 'Pemrograman Mobile', 'id_tugas' => 3],
+            ['nama_kompetensi' => 'Kecerdasan Buatan', 'id_tugas' => 3],
         ]);
     }
 }
