@@ -17,10 +17,13 @@ return new class extends Migration
             $table->string('bukti_kompen', 255)->nullable();
             $table->char('UUID_Kompen', 36)->nullable();
             $table->string('ni', 18)->nullable();
+            $table->integer('jam_kompen')->nullable(); // Added jam_kompen column
+            $table->boolean('status_acc')->nullable(); // Added status_acc column
             $table->timestamps();
 
             $table->foreign('UUID_Kompen')->references('UUID_Kompen')->on('t_kompen')->onDelete('set null');
             $table->foreign('ni')->references('ni')->on('m_user')->onDelete('set null');
+            $table->foreign('jam_kompen')->references('jam_kompen')->on('t_kompen')->onDelete('set null'); // Added foreign key reference to t_kompen
         });
     }
 

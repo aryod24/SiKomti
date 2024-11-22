@@ -16,8 +16,8 @@ class MahasiswaKompenSeeder extends Seeder
         DB::table('m_mahasiswa_kompen')->insert([
             [
                 'ni' => '2241760074', // Sesuaikan dengan data di UserSeeder
-                'UUID_Kompen' => '5098eec1-ad0b-4c37-a632-d1dad5054951', // Ubah sesuai UUID di t_kompen
-                'status_Acc' => 1
+                'UUID_Kompen' => 'a6c654e7-c8d0-47cf-9fb3-2c6da5108e57', // Ubah sesuai UUID di t_kompen
+                'status_Acc' => 0
             ],
         ]);
     }

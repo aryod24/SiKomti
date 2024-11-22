@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id('id_alpha');
             $table->string('ni', 18)->nullable();
             $table->integer('jam_alpha')->nullable();
+            $table->string('semester', 10); // Added semester field
+            $table->integer('jam_kompen')->nullable(); // Added jam_kompen field
             $table->timestamps();
+
+            $table->foreign('ni')->references('ni')->on('m_user'); // Reference ni to m_user table
         });
     }
 

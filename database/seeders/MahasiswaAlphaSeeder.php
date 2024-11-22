@@ -12,9 +12,17 @@ class MahasiswaAlphaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('m_mahasiswa_alpha')->insert([
-            ['ni' => '2241760074', 'jam_Alpha' => 10],
-            ['ni' => '2241760078', 'jam_Alpha' => 5],
-        ]);
+        $nim = '2241760074';
+
+        for ($semester = 1; $semester <= 8; $semester++) {
+            DB::table('m_mahasiswa_alpha')->insert([
+                'ni' => $nim,
+                'jam_alpha' => rand(1, 10), // Random alpha hours
+                'semester' => 'Semester ' . $semester,
+                'jam_kompen' => null, // jam_kompen is null
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

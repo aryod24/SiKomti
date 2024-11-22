@@ -16,18 +16,41 @@ class KompenSeeder extends Seeder
         DB::table('t_kompen')->insert([
             [
                 'UUID_Kompen' => Str::uuid(),
-                'nama_kompen' => 'Kompen A',
-                'deskripsi' => 'Deskripsi Kompen A',
-                'jenis_tugas' => 1,
+                'nama_kompen' => 'Kompen 1',
+                'deskripsi' => 'Deskripsi Kompen 1',
+                'jenis_tugas' => null,
                 'quota' => 10,
-                'jam_kompen' => 5,
-                'status_dibuka' => 1,
+                'jam_kompen' => 20,
+                'status_dibuka' => true,
                 'tanggal_mulai' => '2024-01-01',
                 'tanggal_akhir' => '2024-01-31',
-                'Is_Selesai' => 0,
-                'id_kompetensi' => 1,
-                'periode_kompen' => '2024'
+                'Is_Selesai' => false,
+                'id_kompetensi' => null,
+                'periode_kompen' => null,
+                'nama' => 'Administrator', // This should match the `nama` in `m_user` table
+                'level_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
+            [
+                'UUID_Kompen' => Str::uuid(),
+                'nama_kompen' => 'Kompen 2',
+                'deskripsi' => 'Deskripsi Kompen 2',
+                'jenis_tugas' => null,
+                'quota' => 15,
+                'jam_kompen' => 25,
+                'status_dibuka' => true,
+                'tanggal_mulai' => '2024-02-01',
+                'tanggal_akhir' => '2024-02-28',
+                'Is_Selesai' => false,
+                'id_kompetensi' => null,
+                'periode_kompen' => null,
+                'nama' => 'Administrator',  // This should match the `nama` in `m_user` table
+                'level_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+            // Add more entries as needed
         ]);
     }
 }

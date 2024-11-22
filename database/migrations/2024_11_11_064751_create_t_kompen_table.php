@@ -29,6 +29,14 @@ return new class extends Migration
             $table->primary('UUID_Kompen');
             $table->foreign('jenis_tugas')->references('id_tugas')->on('m_jenis_tugas')->onDelete('set null');
             $table->foreign('id_kompetensi')->references('id_kompetensi')->on('m_bidang_kompetensi')->onDelete('set null');
+
+            // Adding nama and level_id columns
+            $table->string('nama')->nullable(); // No longer a foreign key
+            $table->unsignedBigInteger('level_id')->nullable();
+            $table->foreign('level_id')->references('level_id')->on('m_user');
+
+            // Adding index for jam_kompen
+            $table->index('jam_kompen');
         });
     }
 

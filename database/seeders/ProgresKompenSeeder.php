@@ -13,12 +13,18 @@ class ProgresKompenSeeder extends Seeder
      */
     public function run(): void
     {
+        $uuid = Str::uuid()->toString();
+
         DB::table('t_progres_kompen')->insert([
             [
                 'nama_progres' => 'Progres 1',
                 'bukti_kompen' => 'bukti1.jpg',
-                'UUID_Kompen' => '5098eec1-ad0b-4c37-a632-d1dad5054951',
-                'ni' => '2241760074'
+                'UUID_Kompen' => 'a6c654e7-c8d0-47cf-9fb3-2c6da5108e57',
+                'ni' => '2241760074',
+                'jam_kompen' => 20,
+                'status_acc' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

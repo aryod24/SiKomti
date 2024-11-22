@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id('user_id');
             $table->string('username', 20)->unique();
             $table->string('password');
-            $table->string('nama', 100);
+            $table->string('nama', 100)->nullable();
             $table->string('jurusan', 100)->nullable();
             $table->string('ni', 18)->nullable()->unique();
             $table->unsignedBigInteger('level_id')->index();
             $table->timestamps();
 
             $table->foreign('level_id')->references('level_id')->on('m_level');
+
+            // Adding avatar column
+            $table->string('avatar')->nullable();
         });
 
         // Menambahkan indeks pada kolom ni
