@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisTugas;
 use App\Models\KompenModel;
+use App\Models\LevelModel;
 use App\Models\Kompetensi;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -21,13 +22,33 @@ class KompenController extends Controller
             'title' => 'Daftar kompen yang terdaftar dalam sistem'
         ];
         $activeMenu = 'kompen'; // set menu yang sedang aktif
+        $level = LevelModel::all();
         return view('kompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
     // Ambil data kompen dalam bentuk json untuk datatables
     public function list(Request $request)
     {
-        $kompens = KompenModel::select('UUID_Kompen', 'nama_kompen', 'deskripsi', 'jenis_tugas', 'quota', 'jam_kompen', 'status_dibuka', 'tanggal_mulai', 'tanggal_akhir', 'is_selesai', 'id_kompetensi', 'periode_kompen');
-        
+        $kompens = KompenModel::select(
+            'UUID_Kompen',
+            'nama_kompen',
+            'deskripsi',
+            'jenis_tugas',
+            'quota',
+            'jam_kompen',
+            'status_dibuka',
+            'tanggal_mulai',
+            'tanggal_akhir',
+            'is_selesai',
+            'id_kompetensi',
+            'periode_kompen',
+            'nama',
+            'level_id' // Add level_id to select fields
+        );
+    
+        if ($request->has('level_id') && $request->level_id != '') {
+            $kompens->where('level_id', $request->level_id); // Apply level_id filter if provided
+        }
+    
         // Return data untuk DataTables
         return DataTables::of($kompens)
             ->addIndexColumn() // menambahkan kolom index / nomor urut
@@ -36,13 +57,14 @@ class KompenController extends Controller
                 $btn = '<a href="' . url('/kompen/' . $kompen->UUID_Kompen) . '" class="btn btn-info btn-sm">Detail</a> ';
                 $btn .= '<a href="' . url('/kompen/' . $kompen->UUID_Kompen . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/kompen/' . $kompen->UUID_Kompen) . '">'
-                    . csrf_field() . method_field('DELETE') . 
-                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
+                    . csrf_field() . method_field('DELETE')
+                    . '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
                 return $btn;
             })
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi berisi HTML
             ->make(true);
     }
+    
     // Menampilkan halaman form tambah kompen
     public function create()
     {
@@ -89,9 +111,12 @@ class KompenController extends Controller
             'is_selesai'     => $request->is_selesai,
             'id_kompetensi'  => $request->id_kompetensi,
             'periode_kompen' => $request->periode_kompen,
-            'user_id'        => auth()->id(), 
+            'nama'           => auth()->user()->nama, 
             'level_id'       => auth()->user()->level_id, 
         ]);
+        
+        return redirect('/kompen')->with('success', 'Data kompen berhasil disimpan');
+        
     
         return redirect('/kompen')->with('success', 'Data kompen berhasil disimpan');
     }

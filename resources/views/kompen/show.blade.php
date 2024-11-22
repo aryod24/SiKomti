@@ -77,7 +77,7 @@
                     </tr>
                     <tr>
                         <th>Nama Pembuat Kompen</th>
-                        <td>{{ $kompen->user ? $kompen->user->nama : 'Tidak Diketahui' }}</td>
+                        <td>{{ $kompen->nama}}</td>
                     </tr>
                     <tr>
                         <th>Level Pembuat Kompen</th>

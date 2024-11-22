@@ -63,8 +63,8 @@ class UserController extends Controller
              // username harus diisi, berupa string, minimal 3 karakter, dan bernilai unik ditabel m_user komol username
             'username' =>'required|string|min:3|unique:m_user,username',
             'nama'     =>'required|string|max:100',
-            'jurusan'  => 'required|string|max:100',
-            'ni'       => 'required|string|max:18',
+            'jurusan'  => 'nullable|string|max:100',
+            'ni'       => 'nullable|string|max:18',
             'password' => 'required|min:5',
             'level_id' =>'required|integer'
         ]);
@@ -115,11 +115,11 @@ class UserController extends Controller
             // username harus diisi, berupa string, minimal 3 karakter,
             // dan bernilai unik di tabel m_user kolom username kecuali untuk user dengan id yang sedang diedit
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
-            'nama' => 'required|string|max:100',
-            'jurusan'  => 'required|string|max:100',
-            'ni'       => 'required|string|max:18',
+            'nama' => 'nullable|string|max:100',
+            'jurusan'  => 'nullable|string|max:100',
+            'ni'       => 'nullable|string|max:18',
             'password' => 'nullable|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'nullable|integer'
         ]);
         $user = UserModel::find($id);
 

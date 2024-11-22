@@ -14,6 +14,22 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label">Filter:</label>
+                        <div class="col-3">
+                            <select class="form-control" id="level_id" name="level_id">
+                                <option value="">- Semua -</option>
+                                <option value="1">Admin</option>
+                                <option value="3">Dosen</option>
+                                <option value="4">Tendik</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">Level Pengguna</small>
+                    </div>
+                </div>
+            </div>
             <table class="table table-bordered table-striped table-hover table-sm" id="table_kompen">
                 <thead>
                     <tr>
@@ -21,6 +37,7 @@
                         <th>Nama Kompen</th>
                         <th>Deskripsi</th>
                         <th>Jenis Kompen</th>
+                        <th>Pembuat Tugas</th>
                         <th>Quota</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -137,7 +154,7 @@
                     "dataType": "json",
                     "type": "POST",
                     "data": function (d) {
-                        d.kompen_id = $('#kompen_id').val(); // Jika ada filter untuk kompen
+                        d.level_id = $('#level_id').val(); // Menambahkan filter level_id
                     }
                 },
                 columns: [
@@ -176,6 +193,12 @@
                         }
                     },
                     {
+                        data: "nama", // Field for Pembuat Tugas
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
                         data: "quota",
                         className: "text-center",
                         orderable: true,
@@ -202,7 +225,7 @@
                 ]
             });
 
-            $('#kompen_id').on('change', function() {
+            $('#level_id').on('change', function() {
                 dataKompen.ajax.reload();
             });
         });

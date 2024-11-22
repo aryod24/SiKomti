@@ -68,7 +68,7 @@ class KompenApiController extends Controller
                 'is_selesai'     => $request->is_selesai,
                 'id_kompetensi'  => $request->id_kompetensi,
                 'periode_kompen' => $request->periode_kompen,
-                'user_id'        => $request->user_id, // Mengisi user_id secara otomatis
+                'nama'        => $request->nama, // Mengisi user_id secara otomatis
                 'level_id'       => $request->level_id, // Mengisi level_id secara otomatis
             ]);
 

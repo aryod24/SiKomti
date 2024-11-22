@@ -27,7 +27,7 @@ class KompenModel extends Model
         'is_selesai', 
         'id_kompetensi',
         'periode_kompen',
-        'user_id', 
+        'nama', 
         'level_id', 
         'created_at',
         'updated_at'
