@@ -45,8 +45,14 @@
             </li>
             <li class="nav-item">
                 <a href="{{ url('/kompetensi') }}" class="nav-link {{ $activeMenu == 'kompetensi' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-book"></i>
+                    <i class="nav-icon fas fa-cogs"></i>
                     <p>Bidang Kompetensi</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/jenistugas') }}" class="nav-link {{ $activeMenu == 'jenistugas' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>Jenis Tugas</p>
                 </a>
             </li>
             <li class="nav-item">

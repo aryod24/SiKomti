@@ -47,21 +47,47 @@
                     </tr>
                     <tr>
                         <th>Kompetensi</th>
-                        <td> @if($kompen->id_kompetensi == 1)
-                            Pemrograman Dasar
-                        @else
-                            {{ $kompen->id_kompetensi?? 'Tidak Diketahui' }}
-                        @endif</td>
+                        <td>
+                            @if($kompen->id_kompetensi == 1)
+                                Pemrograman Dasar
+                            @elseif($kompen->id_kompetensi == 2)
+                                Pengembangan Web
+                            @elseif($kompen->id_kompetensi == 3)
+                                Pengembangan Aplikasi Mobile
+                            @else
+                                {{ $kompen->id_kompetensi ?? 'Tidak Diketahui' }}
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th>Periode Kompen</th>
                         <td>{{ $kompen->periode_kompen }}</td>
                     </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>
+                            @if($kompen->is_selesai == '1')
+                                <span class="badge bg-success">Selesai</span>
+                            @elseif($kompen->is_selesai == '0')
+                                <span class="badge bg-warning">Belum Selesai</span>
+                            @else
+                                <span class="badge bg-secondary">Status Tidak Diketahui</span>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nama Pembuat Kompen</th>
+                        <td>{{ $kompen->user ? $kompen->user->nama : 'Tidak Diketahui' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Level Pembuat Kompen</th>
+                        <td>{{ $kompen->level ? $kompen->level->level_nama : 'Tidak Diketahui' }}</td>
+                    </tr>
                 </table>
             @endempty
-        <a href="{{ url('kompen') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            <a href="{{ url('kompen') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+        </div>
     </div>
-</div>
 @endsection
 @push('css')
 @endpush

@@ -15,6 +15,7 @@
                 <form method="POST" action="{{ url('/kompen/'.$kompen->UUID_Kompen) }}" class="form-horizontal">
                     @csrf
                     {!! method_field('PUT') !!}
+                    <!-- Nama Kompen -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Nama Kompen</label>
                         <div class="col-11">
@@ -24,6 +25,8 @@
                             @enderror
                         </div>
                     </div>
+                    
+                    <!-- Deskripsi -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Deskripsi</label>
                         <div class="col-11">
@@ -33,15 +36,40 @@
                             @enderror
                         </div>
                     </div>
+                    
+                    <!-- Jenis Tugas -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Jenis Tugas</label>
                         <div class="col-11">
-                            <input type="number" class="form-control" name="jenis_tugas" value="{{ old('jenis_tugas', $kompen->jenis_tugas) }}">
+                            <select class="form-control" name="jenis_tugas" required>
+                                <option value="">- Pilih Jenis Tugas -</option>
+                                @foreach ($jenisTugas as $jenis)
+                                    <option value="{{ $jenis->id_tugas }}" {{ old('jenis_tugas', $kompen->jenis_tugas) == $jenis->id_tugas ? 'selected' : '' }}>{{ $jenis->jenis_tugas }}</option>
+                                @endforeach
+                            </select>
                             @error('jenis_tugas')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
+
+                    <!-- Bidang Kompetensi -->
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label">Bidang Kompetensi</label>
+                        <div class="col-11">
+                            <select class="form-control" name="id_kompetensi" required>
+                                <option value="">- Pilih Kompetensi -</option>
+                                @foreach ($kompetensi as $kompeten)
+                                    <option value="{{ $kompeten->id_kompetensi }}" {{ old('id_kompetensi', $kompen->id_kompetensi) == $kompeten->id_kompetensi ? 'selected' : '' }}>{{ $kompeten->nama_kompetensi }}</option>
+                                @endforeach
+                            </select>
+                            @error('id_kompetensi')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    <!-- Quota -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Quota</label>
                         <div class="col-11">
@@ -51,6 +79,8 @@
                             @enderror
                         </div>
                     </div>
+                    
+                    <!-- Jam Kompen -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Jam Kompen</label>
                         <div class="col-11">
@@ -60,6 +90,8 @@
                             @enderror
                         </div>
                     </div>
+                    
+                    <!-- Status Dibuka -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Status Dibuka</label>
                         <div class="col-11">
@@ -72,6 +104,8 @@
                             @enderror
                         </div>
                     </div>
+                    
+                    <!-- Tanggal Mulai -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Tanggal Mulai</label>
                         <div class="col-11">
@@ -81,6 +115,8 @@
                             @enderror
                         </div>
                     </div>
+                    
+                    <!-- Tanggal Akhir -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Tanggal Akhir</label>
                         <div class="col-11">
@@ -90,6 +126,8 @@
                             @enderror
                         </div>
                     </div>
+
+                    <!-- Periode Kompen -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Periode Kompen</label>
                         <div class="col-11">
@@ -99,11 +137,26 @@
                             @enderror
                         </div>
                     </div>
+                    
+                    <!-- Status Selesai -->
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label"></label>
+                        <label class="col-1 control-label col-form-label">Status Selesai</label>
                         <div class="col-11">
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                            <a class="btn btn-sm btn-default ml-1" href="{{ url('kompen') }}">Kembali</a>
+                            <select class="form-control" name="is_selesai">
+                                <option value="1" {{ old('is_selesai', $kompen->is_selesai) == 1 ? 'selected' : '' }}>Selesai</option>
+                                <option value="0" {{ old('is_selesai', $kompen->is_selesai) == 0 ? 'selected' : '' }}>Belum Selesai</option>
+                            </select>
+                            @error('is_selesai')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Tombol Submit dan Kembali -->
+                    <div class="form-group row">
+                        <div class="col-11 offset-1">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <a href="{{ url('kompen') }}" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </form>

@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-        $user = UserModel::select('user_id', 'username', 'nama', 'level_id')
+        $user = UserModel::select('user_id', 'username', 'nama','jurusan','ni', 'level_id')
             ->with('level');
 
         if ($request->level_id){
@@ -34,7 +34,7 @@ class UserController extends Controller
             // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
             ->addIndexColumn()
             ->addColumn('aksi', function ($user) { // menambahkan kolom aksi
-                $btn = '<a href="' . url('/user/' . $user->user_id) . '" class="btn btn-info btnsm">Detail</a> ';
+                $btn = '<a href="' . url('/user/' . $user->user_id) . '" class="btn btn-info btn-sm">Detail</a> ';
                 $btn .= '<a href="' . url('/user/' . $user->user_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/user/' . $user->user_id) . '">'
                     . csrf_field() . method_field('DELETE') .
@@ -63,12 +63,16 @@ class UserController extends Controller
              // username harus diisi, berupa string, minimal 3 karakter, dan bernilai unik ditabel m_user komol username
             'username' =>'required|string|min:3|unique:m_user,username',
             'nama'     =>'required|string|max:100',
+            'jurusan'  => 'required|string|max:100',
+            'ni'       => 'required|string|max:18',
             'password' => 'required|min:5',
             'level_id' =>'required|integer'
         ]);
         UserModel::create([
             'username' => $request->username,
             'nama'     => $request->nama,
+            'jurusan'  => $request->jurusan,
+            'ni'       => $request->ni,
             'password' =>  bcrypt($request->password),
             'level_id' => $request->level_id
         ]);
@@ -112,6 +116,8 @@ class UserController extends Controller
             // dan bernilai unik di tabel m_user kolom username kecuali untuk user dengan id yang sedang diedit
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
             'nama' => 'required|string|max:100',
+            'jurusan'  => 'required|string|max:100',
+            'ni'       => 'required|string|max:18',
             'password' => 'nullable|min:5',
             'level_id' => 'required|integer'
         ]);
@@ -120,6 +126,8 @@ class UserController extends Controller
         $user->update([
             'username' => $request->username,
             'nama' => $request->nama,
+            'jurusan'  => $request->jurusan,
+            'ni'       => $request->ni,
             'password' => $request->password ? bcrypt($request->password) : $user->password,
             'level_id' => $request->level_id
         ]);

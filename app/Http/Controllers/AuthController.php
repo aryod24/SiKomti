@@ -46,8 +46,8 @@ class AuthController extends Controller
                 'level_id'  => 'required|integer',
                 'username'  => 'required|string|min:3|unique:m_user,username',
                 'nama'      => 'required|string|max:100',
-                'jurusan'   => 'required|string|max:100',
-                'ni'        => 'required|string|max:18',
+                'jurusan'   => 'nullable|string|max:100',
+                'ni'        => 'nullable|string|max:18',
                 'password'  => 'required|min:5'
             ];
             // use Illuminate\Support\Facades\Validator;

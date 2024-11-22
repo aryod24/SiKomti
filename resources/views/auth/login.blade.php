@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Login Pengguna</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 
     <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
@@ -21,60 +27,63 @@
         .login-page {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            background-color: #7da7df;
+            justify-content: center;  /* Memastikan elemen berada di tengah secara vertikal */
+            align-items: center;      /* Memastikan elemen berada di tengah secara horizontal */
+            height: 100vh;            /* Mengatur tinggi agar memenuhi viewport */
+            background: linear-gradient(to bottom, #5c78b7, #a1c2ea); /* Biru ke biru muda */
             text-align: center;
+            padding: 0 20px;
         }
 
+
         .login-title {
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .logo {
-            width: 150px;
-            height: 150px;
-            background-color: #ccc;
+            width: 120px;
+            height: 120px;
+            background-color: #cccccc00; /* Hapus ini jika tidak diperlukan */
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
-            font-size: 3rem;
-            color: #555;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
+            overflow: hidden; /* Agar gambar tidak keluar dari lingkaran */
         }
 
         .login-subtitle {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #ffffff;
             font-weight: bold;
             margin-bottom: 2rem;
         }
 
-        /* Username Field */
-        .username-field {
-            font-size: 1.5rem;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            font-weight: bold;
+        /* Input field styling */
+        .input-group {
             width: 100%;
             max-width: 400px;
-            margin-bottom: 0.5rem;
         }
 
-        /* Password Field */
-        .password-field {
-            font-size: 1.5rem;
+        .username-field, .password-field {
+            font-size: 1.2rem;
             padding: 1rem 1.5rem;
             border-radius: 10px;
             font-weight: bold;
             width: 100%;
-            max-width: 400px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            border: 2px solid #ccc;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+            height: 50px;
+        }
+
+        .username-field:focus, .password-field:focus {
+            border-color: #4e73df;
+            outline: none;
         }
 
         .error-message {
@@ -86,7 +95,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Remember Me */
         .remember-me-container {
             font-size: 1.2rem;
             display: flex;
@@ -96,9 +104,8 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Login Button */
         .btn-login {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             padding: 1rem;
             font-weight: bold;
             color: #fff;
@@ -110,22 +117,54 @@
             cursor: pointer;
             transition: 0.3s;
             margin-top: 1.5rem;
-            margin-bottom: 1rem; /* Space between button and register prompt */
+            margin-bottom: 1rem;
         }
 
-        /* Register Prompt */
         .register-prompt {
             font-size: 1.2rem;
             color: #fff;
             text-decoration: underline;
-            margin-top: 5rem; 
+            margin-top: 2rem;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 600px) {
+            .login-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .login-subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .username-field, .password-field {
+                font-size: 1rem;
+                padding: 0.8rem 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .btn-login {
+                font-size: 1.2rem;
+                padding: 0.8rem;
+            }
         }
     </style>
 </head>
 <body class="hold-transition login-page">
     <div class="login-page">
         <div class="login-title">Welcome to Sikomti</div>
-        <div class="logo">Logo</div>
+        <div class="logo">
+            <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        </div>
         <p class="login-subtitle">Silahkan Login Ke akun anda</p>
 
         <form action="{{ url('login') }}" method="POST" id="form-login">

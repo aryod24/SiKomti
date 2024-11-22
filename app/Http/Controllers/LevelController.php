@@ -72,17 +72,18 @@ class LevelController extends Controller
         return redirect('/level')->with('success', 'Data level berhasil disimpan');
     }
     // Menampilkan detail level
-    public function show(string $id)
+    public function show(string $level_id)
     {
-        $level = LevelModel::find($id);
-        $breadcrumb = (object) [
+        $level = levelmodel::find($level_id);
+
+        $breadcrumb = (object)[
             'title' => 'Detail Level',
-            'list'  => ['Home', 'Level', 'Detail']
+            'list' => ['Home', 'level', 'detail']
         ];
-        $page = (object) [
-            'title' => 'Detail level'
+        $page = (object)[
+            'title' => 'Detail Level'
         ];
-        $activeMenu = 'level'; // set menu yang sedang aktif
+        $activeMenu = 'level';
         return view('level.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
     // Menampilkan halaman form edit level
