@@ -16,10 +16,13 @@ Route::post('login', [AuthController::class, 'postlogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'store']);
+Route::get('register', [AuthController::class, 'register']);
+Route::post('register', [AuthController::class, 'store']);
 // Keep this route to point to the WelcomeController
 Route::get('/', [WelcomeController::class, 'index']);
 // Route::resource('level', LevelController::class);
 
+// Rute untuk Admin
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show'); // Menampilkan profil
     Route::get('/profile/update', [ProfileController::class, 'showUpdateProfileForm'])->name('profile.update'); // Form update profile
@@ -40,9 +43,20 @@ Route::group(['prefix' => 'user', 'middleware'=>'authorize:ADM'], function() {
     Route::get('/{id}/edit', [UserController::class, 'edit']);  // menampilkan halaman form edit user
     Route::put('/{id}', [UserController::class, 'update']);     // menyimpan perubahan data user
     Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // Menampilkan halaman form edit user Ajax
+    Route::post('/ajax', [UserController::class, 'store_ajax']); // Menampilkan data user baru Ajax
+    Route::get('/{id}', [UserController::class, 'show']);       // menampilkan detail user
+    Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
+    Route::get('/{id}/edit', [UserController::class, 'edit']);  // menampilkan halaman form edit user
+    Route::put('/{id}', [UserController::class, 'update']);     // menyimpan perubahan data user
+    Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // Menampilkan halaman form edit user Ajax
     Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']); // Menyimpan perubahan data user Ajax
     Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
     Route::delete('/{id}/delete_ajax', [UserController::class, 'delete_ajax']); // Untuk hapus data user Ajax
+    Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
+    Route::get('/import', [UserController::class, 'import']); // ajax form upload excel
+    Route::post('/import_ajax', [UserController::class, 'import_ajax']); // ajax import excel
+    Route::get('/export_excel',[usercontroller::class,'export_excel']); // ajax export excel
+    Route::get('/export_pdf',[usercontroller::class,'export_pdf']); //ajax export pdf
     Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
     Route::get('/import', [UserController::class, 'import']); // ajax form upload excel
     Route::post('/import_ajax', [UserController::class, 'import_ajax']); // ajax import excel
