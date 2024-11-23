@@ -41,6 +41,7 @@ class KompenController extends Controller
             'is_selesai',
             'id_kompetensi',
             'periode_kompen',
+            'user_id',
             'nama',
             'level_id' // Add level_id to select fields
         );
@@ -112,6 +113,7 @@ class KompenController extends Controller
             'id_kompetensi'  => $request->id_kompetensi,
             'periode_kompen' => $request->periode_kompen,
             'nama'           => auth()->user()->nama, 
+            'user_id'        => auth()->id(),
             'level_id'       => auth()->user()->level_id, 
         ]);
         
