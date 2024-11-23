@@ -28,6 +28,7 @@ class KompenModel extends Model
         'id_kompetensi',
         'periode_kompen',
         'nama', 
+        'user_id',
         'level_id', 
         'created_at',
         'updated_at'
@@ -62,7 +63,7 @@ class KompenModel extends Model
     {
         return $this->periode_kompen;
     }
-
+    public function progresKompen() { return $this->hasMany(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen'); } 
     // Cek apakah kompen ini sudah selesai
     public function isCompleted(): bool
     {

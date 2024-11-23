@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('nama')->nullable(); // No longer a foreign key
             $table->unsignedBigInteger('level_id')->nullable();
             $table->foreign('level_id')->references('level_id')->on('m_user');
+            $table->foreign('user_id')->references('user_id')->on('m_user');
 
             // Adding index for jam_kompen
             $table->index('jam_kompen');
