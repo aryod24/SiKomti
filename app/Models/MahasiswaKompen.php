@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MahasiswaKompen extends Model
 {
@@ -16,6 +17,13 @@ class MahasiswaKompen extends Model
     protected $fillable = [
         'ni',
         'UUID_Kompen',
+        'nama',
         'status_Acc',
     ];
+
+    // Relasi ke model LevelModel
+    public function level(): BelongsTo
+    {
+        return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
+    }
 }
