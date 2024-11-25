@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\KompenApiController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\MahasiswaKompenController;
-
+use App\Http\Controllers\Api\MahasiswaKompenApiController;
+use App\Http\Controllers\Api\MahasiswaAlphaController;
+use App\Http\Controllers\Api\ApplyApiController;
+use App\Http\Controllers\Api\ApplyBuktiController;
+use App\Http\Controllers\Api\HistoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,7 +49,47 @@ Route::group(['prefix'=>'users'], function(){
     Route::delete('/{user}', [UserController::class, 'destroy']);
 });
 
-Route::post('/kompen/request', [MahasiswaKompenController::class, 'createKompenRequest']);
-Route::put('/kompen/status/{id}', [MahasiswaKompenController::class, 'updateStatusAcc']);
+
+    // Route for creating a kompen request
+    Route::post('/kompen/request', [MahasiswaKompenApiController::class, 'createKompenRequest']);
+
+    // Route for updating the status of a kompen request
+    Route::put('/kompen/update-status/{id}', [MahasiswaKompenApiController::class, 'updateStatusAcc']);
+// Add this route to api.php
+Route::get('check-request', [MahasiswaKompenApiController::class, 'checkExistingRequest']);
+
+    // Route for getting all kompen requests for a specific NI
+    Route::get('/kompen/requests/{ni}', [MahasiswaKompenApiController::class, 'getKompenRequests']);
+
+    // Route for getting a kompen request by UUID_Kompen and user_id
+    Route::get('/kompen/request/{uuidKompen}', [MahasiswaKompenApiController::class, 'getKompenRequestByUuid']);
+
+    // Route for getting all kompen requests
+    Route::get('/requests', [MahasiswaKompenApiController::class, 'getAllKompenRequests']);
+
+Route::put('/update-status', [ApplyApiController::class, 'updateStatus']);
+Route::delete('/delete-request', [ApplyApiController::class, 'deleteRequest']);
 
 
+Route::put('/update-bukti', [ApplyBuktiController::class, 'updateBukti']);
+Route::delete('/delete-request', [ApplyBuktiController::class, 'deleteRequest']);
+Route::get('/view-bukti/{uuidKompen}', [ApplyBuktiController::class, 'viewBukti']);
+Route::put('/selesaikanKompen/{uuidKompen}', [ApplyBuktiController::class, 'selesaikanKompen']);
+Route::get('/view-progress-kompen/{ni}', [ApplyBuktiController::class, 'viewProgressKompen']);
+// Route for uploading bukti
+Route::post('/upload-bukti', [ApplyBuktiController::class, 'uploadBukti'])->name('uploadBukti');
+Route::get('/show-detail-bukti/{uuidKompen}', [ApplyBuktiController::class, 'showDetailBukti'])->name('showDetailBukti');
+Route::get('/showdetail/{uuidKompen}/{idProgres}', [ApplyBuktiController::class, 'showDownloadBukti']);
+Route::get('/history-kompen-dosen/{userId}', [HistoryController::class, 'historyKompenDosen']);
+Route::get('/history-kompen-mhs/{ni}', [HistoryController::class, 'historyKompenMhs']);
+
+
+Route::group(['prefix'=>'alpha'], function(){
+        Route::get('/', [MahasiswaAlphaController::class, 'index']); // Get all mahasiswa alpha
+        Route::post('/', [MahasiswaAlphaController::class, 'store']); // Create new mahasiswa alpha
+        Route::get('/{mahasiswaAlpha}', [MahasiswaAlphaController::class, 'show']); // Get a specific mahasiswa alpha
+        Route::get('/ni/{ni}', [MahasiswaAlphaController::class, 'showByNi']); // Get mahasiswa alpha by ni
+        Route::put('/{mahasiswaAlpha}', [MahasiswaAlphaController::class, 'update']); // Update a specific mahasiswa alpha
+        Route::delete('/{mahasiswaAlpha}', [MahasiswaAlphaController::class, 'destroy']); // Delete a specific mahasiswa alpha
+    });
+ 

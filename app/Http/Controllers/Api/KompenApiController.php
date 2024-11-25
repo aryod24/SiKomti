@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Validator;
 class KompenApiController extends Controller
 {
     // Mendapatkan daftar kompen
-    public function index()
+    public function index(Request $request)
     {
-        $kompens = KompenModel::all();
+        $userId = $request->query('user_id'); // Mengambil parameter user_id dari query string
+
+        if ($userId) {
+            $kompens = KompenModel::where('user_id', $userId)->get(); // Mendapatkan kompen berdasarkan user_id
+        } else {
+            $kompens = KompenModel::all(); // Mendapatkan semua kompen jika user_id tidak ada
+        }
+
         return response()->json(['status' => true, 'data' => $kompens], 200);
     }
+
 
     // Mendapatkan detail kompen berdasarkan UUID
     public function show($UUID_Kompen)
