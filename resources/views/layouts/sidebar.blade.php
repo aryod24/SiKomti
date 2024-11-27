@@ -20,12 +20,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/profile') }}" class="nav-link {{ $activeMenu == 'profile' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>Profile</p>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="{{ url('/user') }}" class="nav-link {{ $activeMenu == 'user' ? 'active' : '' }}">
                     <i class="nav-icon far fa-user"></i>
                     <p>Data User</p>
@@ -50,6 +44,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/jenistugas') }}" class="nav-link {{ $activeMenu == 'jenistugas' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>Jenis Tugas</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/kompen') }}" class="nav-link {{ $activeMenu == 'kompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>List Kompen</p>
@@ -67,19 +67,13 @@
                     <p>Rekap</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ url('/logout') }}" class="nav-link">
-                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                    <p>Logout</p>
-                </a>
-            </li>
         </ul>
     </nav>
 </div>
 <style>
     /* Custom CSS for Sidebar */
     .sidebar {
-        background: linear-gradient(90deg, #3B465D, #2C3E50);
+        background: linear-gradient(90deg, #5c759c, #2C3E50);
         font-family: 'Montserrat', sans-serif;
         font-weight: bold;
     }

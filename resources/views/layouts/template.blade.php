@@ -22,7 +22,7 @@
   <!-- Custom CSS -->
   <style>
     .main-sidebar {
-      background: linear-gradient(90deg, #3B465D, #2C3E50);
+      background: linear-gradient(90deg, #5c759c, #2C3E50);
       font-family: 'Montserrat', sans-serif;
       font-weight: bold;
     }
@@ -49,12 +49,17 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-      <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">SiKomti</span>
+        <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+        <span class="brand-text font-weight-light">SiKomti</span>
     </a>
-
     <!-- Sidebar -->
-    @include('layouts.sidebar')
+    @if(Auth::user()->level_id == 1)
+        @include('layouts.sidebar')
+    @elseif(Auth::user()->level_id == 2)
+        @include('layouts.sidebar_mhs')
+    @elseif(in_array(Auth::user()->level_id, [3, 4]))
+        @include('layouts.sidebar_dosen')
+    @endif
     <!-- /.sidebar -->
   </aside>
 
