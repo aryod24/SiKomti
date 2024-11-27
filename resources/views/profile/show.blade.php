@@ -4,6 +4,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <!-- Judul Profil -->
+            <div class="text-center mb-4">
+                <h2 class="font-weight-bold" style="color: #2C3E50;">Profile Anda</h2>
+            </div>
+
             <div class="card" style="background-color: #7c93b8; border-radius: 10px;">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -11,7 +16,7 @@
                         <div class="profile-picture text-center" style="flex: 1;">
                             <img src="{{ asset('images/' . auth()->user()->avatar) }}" alt="Profile Picture" 
                                 class="rounded-circle" 
-                                style="width: 120px; height: 120px; object-fit: cover; border: 2px solid #000;">
+                                style="width: 180px; height: 180px; object-fit: cover; border: 2px solid #000;">
                             <div class="mt-3">
                                 <a href="{{ route('profile.update.images') }}" class="btn btn-secondary btn-sm" style="background-color:#2C3E50; border-color: #2C3E50;">Ubah Foto</a>
                             </div>
@@ -53,4 +58,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection   

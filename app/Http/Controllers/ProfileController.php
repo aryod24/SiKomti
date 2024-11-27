@@ -14,7 +14,7 @@ class ProfileController extends Controller
     public function show()
     {
         $breadcrumb = (object) [
-            'title' => 'Profile Anda',
+            'title' => '',
             'list'  => ['']
         ];
 
