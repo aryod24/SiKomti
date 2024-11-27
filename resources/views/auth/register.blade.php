@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Login Pengguna</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register Pengguna</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+
     <style>
-        body, html {
+         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -42,7 +43,7 @@
             transform: translate(-50%, -50%); /* Pusatkan elemen */
             text-align: center;
         }
-    
+        
         .login-title {
             font-size: 2.5rem;
             font-weight: bold;
@@ -119,34 +120,43 @@
 </head>
 <body class="hold-transition login-page">
     <div class="login-box">
-        <div class="login-title">Welcome to Sikomti</div>
+        <div class="login-title">Register to Sikomti</div>
         <div class="logo">
             <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="logo-first">
             <img src="{{ asset('adminlte/dist/img/polinema.png') }}" alt="AdminLTE Logo" class="logo-second">
         </div>
-        <p class="login-subtitle">Silahkan Login Ke akun anda</p>
+        <p class="login-subtitle">Silahkan Daftar untuk memulai sesi Anda</p>
 
-        <form action="{{ url('login') }}" method="POST" id="form-login">
+        <form action="{{ url('register') }}" method="POST" id="form-register">
             @csrf
             <div class="input-group mb-3">
-                <input type="text" id="username" name="username" class="username-field" placeholder="Masukkan Username">
+                <select name="level_id" id="level_id" class="form-control" required>
+                    <option value="">- Pilih Level -</option>
+                    @foreach ($level as $l)
+                        <option value="{{ $l->level_id }}">{{ $l->level_nama }}</option>
+                    @endforeach
+                </select>
+                <label class="error-message" id="level-error"></label>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan Username" required>
                 <label class="error-message" id="username-error"></label>
             </div>
 
             <div class="input-group mb-3">
-                <input type="password" id="password" name="password" class="password-field" placeholder="Masukkan Password">
+                <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan Nama" required>
+                <label class="error-message" id="nama-error"></label>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan Password" required>
                 <label class="error-message" id="password-error"></label>
             </div>
 
-            <div class="remember-me-container">
-                <div class="icheck-primary">
-                    <input type="checkbox" id="remember"><label for="remember">Remember Me</label>
-                </div>
-            </div>
+            <button type="submit" class="btn-login">Sign Up</button>
 
-            <button type="submit" class="btn-login">Login</button>
-
-            <a href="{{ url('register') }}" class="register-prompt">Belum punya akun? Register</a>
+            <a href="{{ url('login') }}" class="register-prompt">Sudah punya akun? Login</a>
         </form>
 
         <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
@@ -157,33 +167,12 @@
         <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
         <script>
             $(document).ready(function() {
-                $("#form-login").validate({
+                $("#form-register").validate({
                     rules: {
-                        username: {
-                            required: true,
-                            minlength: 4,
-                            maxlength: 20
-                        },
-                        password: {
-                            required: true,
-                            minlength: 5,
-                            maxlength: 20
-                        }
-                    },
-                    messages: {
-                        username: {
-                            required: "Username harus diisi",
-                            minlength: "Username minimal 4 karakter",
-                            maxlength: "Username maksimal 20 karakter"
-                        },
-                        password: {
-                            required: "Password harus diisi",
-                            minlength: "Password minimal 5 karakter",
-                            maxlength: "Password maksimal 20 karakter"
-                        }
-                    },
-                    errorPlacement: function(error, element) {
-                        error.insertAfter(element).addClass('error-message');
+                        level_id: { required: true, number: true },
+                        username: { required: true, minlength: 3, maxlength: 20 },
+                        nama: { required: true, minlength: 3, maxlength: 100 },
+                        password: { required: true, minlength: 5, maxlength: 20 }
                     },
                     submitHandler: function(form) {
                         $.ajax({
@@ -200,6 +189,10 @@
                                         window.location = response.redirect;
                                     });
                                 } else {
+                                    $('.error-message').text('');
+                                    $.each(response.msgField, function(prefix, val) {
+                                        $('#' + prefix + '-error').text(val[0]);
+                                    });
                                     Swal.fire({
                                         icon: 'error',
                                         title: 'Terjadi Kesalahan',
