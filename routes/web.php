@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KompenController;
 use App\Http\Controllers\JenisTugasController;
 use App\Http\Controllers\KompetensiController;
+use App\Http\Controllers\DataMahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '[0-9]+');
@@ -120,4 +121,16 @@ Route::group(['prefix' => 'kompetensi', 'middleware' => 'authorize:ADM'], functi
     Route::get('/{id}/delete_ajax', [KompetensiController::class, 'confirm_ajax']); 
     Route::delete('/{id}/delete_ajax', [KompetensiController::class, 'delete_ajax']); 
     Route::delete('/{id}', [KompetensiController::class, 'destroy']);   
+});
+
+
+Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM'], function() {
+    Route::get('/', [DataMahasiswaController::class, 'index']);             
+    Route::post('/list', [DataMahasiswaController::class, 'list']);         
+    Route::get('/create', [DataMahasiswaController::class, 'create']);      
+    Route::post('/', [DataMahasiswaController::class, 'store']);             
+    Route::get('/{id_alpha}', [DataMahasiswaController::class, 'show']);         
+    Route::get('/{id_alpha}/edit', [DataMahasiswaController::class, 'edit']);    
+    Route::put('/{id_alpha}', [DataMahasiswaController::class, 'update']);      
+    Route::delete('/{id_alpha}', [DataMahasiswaController::class, 'destroy']);   
 });

@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/mahasiswa') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
+                <a href="{{ url('/datamahasiswa') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user-graduate"></i>
                     <p>Data Mahasiswa</p>
                 </a>
