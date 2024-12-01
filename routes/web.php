@@ -150,6 +150,9 @@ use App\Http\Controllers\ProgressMhsController;
 Route::prefix('progressmhs')->group(function () {
     Route::get('/', [ProgressMhsController::class, 'index'])->name('progressmhs.index');
     Route::get('/list/{ni}', [ProgressMhsController::class, 'list'])->name('progressmhs.list');
-    Route::get('/show-ajax/{id}', [ProgressMhsController::class, 'showAjaxReq'])->name('progressmhs.showAjaxReq');
-    
+    Route::get('/show-ajax/{id}', [ProgressMhsController::class, 'showAjaxReq'])->name('progressmhs.show-ajax');
+    Route::get('/create-bukti/{uuidKompen}', [ProgressMhsController::class, 'createBukti'])->name('progressmhs.create-bukti');
+    Route::post('/upload-bukti', [ProgressMhsController::class, 'uploadBukti'])->name('progressmhs.upload-bukti');
+    Route::get('/view-bukti/{uuidKompen}', [ProgressMhsController::class, 'viewBukti'])->name('progressmhs.view-bukti');
+    Route::get('/download-bukti/{uuidKompen}', [ProgressMhsController::class, 'downloadBukti'])->name('progressmhs.download-bukti');
 });

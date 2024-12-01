@@ -37,6 +37,14 @@
         </div>
     </div>
 </div>
+<!-- Add this after your existing detailModal -->
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Modal content will be loaded here -->
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('css')
@@ -85,6 +93,37 @@
                 }
             });
         }
+        function uploadBukti(uuidKompen) {
+    $.ajax({
+        url: '{{ route("progressmhs.create-bukti", ":uuid") }}'.replace(':uuid', uuidKompen),
+        type: 'GET',
+        success: function(response) {
+            $('#uploadModal .modal-content').html(response);
+            $('#uploadModal').modal('show');
+        },
+        error: function(xhr) {
+            alert('Error: ' + xhr.statusText);
+        }
+    });
+}
+
+function viewBukti(uuidKompen) {
+    $.ajax({
+        url: '{{ route("progressmhs.view-bukti", ":uuid") }}'.replace(':uuid', uuidKompen),
+        type: 'GET',
+        success: function(response) {
+            $('#modalContent').html(response);
+            $('#detailModal').modal('show');
+        },
+        error: function(xhr) {
+            alert('Error: ' + xhr.statusText);
+        }
+    });
+}
+
+function downloadBukti(uuidKompen) {
+    window.location.href = '{{ route("progressmhs.download-bukti", ":uuid") }}'.replace(':uuid', uuidKompen);
+}
 
         $(document).ready(function() {
             var dataProgress = $('#table_progress').DataTable({
