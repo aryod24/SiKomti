@@ -26,4 +26,14 @@ class MahasiswaKompen extends Model
     {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
+
+    // Relasi ke model KompenModel
+    public function kompen(): BelongsTo
+    {
+        return $this->belongsTo(KompenModel::class, 'UUID_Kompen', 'UUID_Kompen');
+    }
+    public function progress()
+{
+    return $this->hasOne(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen');
+}
 }

@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class KompenModel extends Model
 {
@@ -58,15 +58,27 @@ class KompenModel extends Model
         return $this->belongsTo(JenisTugas::class, 'jenis_tugas', 'id_tugas');
     }
 
+    // Relasi ke MahasiswaKompen
+    public function mahasiswaKompens(): HasMany
+    {
+        return $this->hasMany(MahasiswaKompen::class, 'UUID_Kompen', 'UUID_Kompen');
+    }
+
     // Getter untuk nama periode kompen
     public function getPeriodName(): string
     {
         return $this->periode_kompen;
     }
-    public function progresKompen() { return $this->hasMany(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen'); } 
+
     // Cek apakah kompen ini sudah selesai
     public function isCompleted(): bool
     {
         return $this->is_selesai == 1; // 1 berarti selesai
+    }
+
+    // Relasi ke ProgressModel
+    public function progresKompen(): HasMany
+    {
+        return $this->hasMany(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen');
     }
 }

@@ -146,3 +146,10 @@ Route::prefix('mhskompen')->group(function () {
     Route::get('/create-ajax/{UUID_Kompen}', [MhsKompenController::class, 'create_ajax'])->name('mhskompen.create-ajax');
     Route::post('/store-ajax', [MhsKompenController::class, 'store_ajax'])->name('mhskompen.store-ajax');
 });
+use App\Http\Controllers\ProgressMhsController;
+Route::prefix('progressmhs')->group(function () {
+    Route::get('/', [ProgressMhsController::class, 'index'])->name('progressmhs.index');
+    Route::get('/list/{ni}', [ProgressMhsController::class, 'list'])->name('progressmhs.list');
+    Route::get('/show-ajax/{id}', [ProgressMhsController::class, 'showAjaxReq'])->name('progressmhs.showAjaxReq');
+    
+});

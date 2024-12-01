@@ -32,7 +32,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/pengajuan') }}" class="nav-link {{ $activeMenu == 'pengajuan' ? 'active' : '' }}">
+                <a href="{{ url('/progressmhs') }}" class="nav-link {{ $activeMenu == 'pengajuan' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-file-alt"></i>
                     <p>Pengajuan</p>
                 </a>
