@@ -1,16 +1,12 @@
 @extends('layouts.template')
+
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
         </div>
         <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
+            <div id="alert-container"></div>
             <table class="table table-bordered table-striped table-hover table-sm" id="table_mhskompen">
                 <thead>
                     <tr>
@@ -27,7 +23,15 @@
             </table>
         </div>
     </div>
-    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="modalContent">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('css')
@@ -68,11 +72,53 @@
 
 @push('js')
     <script>
-        function modalAction(url = '') {
-            $('#myModal').load(url, function() {
-                $('#myModal').modal('show');
-            });
+        function showRequestModal(UUID_Kompen) {
+    $.ajax({
+        url: '{{ route("mhskompen.create-ajax", ":UUID_Kompen") }}'.replace(':UUID_Kompen', UUID_Kompen),
+        type: 'GET',
+        success: function(response) {
+            $('#modalContent').html(response);
+            $('#requestModal').modal('show');
+        },
+        error: function(xhr) {
+            showAlert('Error: ' + xhr.statusText, 'danger');
         }
+    });
+}
+function submitForm() {
+    $.ajax({
+        url: $('#requestForm').attr('action'),
+        type: 'POST',
+        data: $('#requestForm').serialize(),
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            showModalAlert(response.success, 'success');
+            setTimeout(function() {
+                $('#requestModal').modal('hide');
+                $('#table_mhskompen').DataTable().ajax.reload();
+            }, 2000);
+        },
+        error: function(xhr) {
+            if (xhr.status === 422) {
+                showModalAlert(xhr.responseJSON.error, 'danger');
+            } else {
+                showModalAlert('Error: ' + xhr.statusText, 'danger');
+            }
+        }
+    });
+}
+
+function showModalAlert(message, type) {
+    var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+        message +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>';
+    $('#modal-alert-container').html(alertHtml);
+}
 
         $(document).ready(function() {
             var dataMhsKompen = $('#table_mhskompen').DataTable({

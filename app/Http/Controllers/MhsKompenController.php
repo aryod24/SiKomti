@@ -23,23 +23,23 @@ class MhsKompenController extends Controller
     }
 
     public function list()
-{
-    $kompens = KompenModel::select('UUID_Kompen', 'nama_kompen', 'deskripsi', 'quota', 'jam_kompen', 'tanggal_mulai', 'tanggal_akhir', 'status_dibuka');
-
-    return DataTables::of($kompens)
-        ->addIndexColumn()
-        ->addColumn('aksi', function ($kompen) {
-            $btn = '<a href="' . route('mhskompen.show', $kompen->UUID_Kompen) . '" class="btn btn-info btn-sm">Detail</a> ';
-            if ($kompen->status_dibuka == 1) {
-                $btn .= '<a href="' . route('mhskompen.create', ['UUID_Kompen' => $kompen->UUID_Kompen]) . '" class="btn btn-success btn-sm">Request</a>';
-            } else {
-                $btn .= '<button class="btn btn-secondary btn-sm" disabled>Ditutup</button>';
-            }
-            return $btn;
-        })
-        ->rawColumns(['aksi'])
-        ->make(true);
-}
+    {
+        $kompens = KompenModel::select('UUID_Kompen', 'nama_kompen', 'deskripsi', 'quota', 'jam_kompen', 'tanggal_mulai', 'tanggal_akhir', 'status_dibuka');
+    
+        return DataTables::of($kompens)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($kompen) {
+                $btn = '<a href="' . route('mhskompen.show', $kompen->UUID_Kompen) . '" class="btn btn-info btn-sm">Detail</a> ';
+                if ($kompen->status_dibuka == 1) {
+                    $btn .= '<button onclick="showRequestModal(\'' . $kompen->UUID_Kompen . '\')" class="btn btn-success btn-sm">Request</button>';
+                } else {
+                    $btn .= '<button class="btn btn-secondary btn-sm" disabled>Ditutup</button>';
+                }
+                return $btn;
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
 
 
     public function show($UUID_Kompen)
@@ -115,5 +115,40 @@ class MhsKompenController extends Controller
             return redirect()->back()->with('error', 'Gagal mengajukan request kompen: ' . $e->getMessage());
         }
     }
+    public function create_ajax($UUID_Kompen)
+{
+    $kompen = KompenModel::where('UUID_Kompen', $UUID_Kompen)->firstOrFail();
+    return view('mhskompen.create_ajax', compact('kompen'))->render();
+}
+
+public function store_ajax(Request $request)
+{
+    $validatedData = $request->validate([
+        'ni' => 'required|string|max:18|exists:m_user,ni',
+        'nama' => 'required|string|max:100',
+        'UUID_Kompen' => 'required|string|size:36|exists:t_kompen,UUID_Kompen',
+    ]);
+
+    $existingRequest = MahasiswaKompen::where('ni', $validatedData['ni'])
+        ->where('UUID_Kompen', $validatedData['UUID_Kompen'])
+        ->first();
+
+    if ($existingRequest) {
+        return response()->json(['error' => 'Anda sudah mengajukan request untuk kompen ini.'], 422);
+    }
+
+    try {
+        MahasiswaKompen::create([
+            'ni' => $validatedData['ni'],
+            'nama' => $validatedData['nama'],
+            'UUID_Kompen' => $validatedData['UUID_Kompen'],
+            'status_Acc' => null,
+        ]);
+
+        return response()->json(['success' => 'Request kompen berhasil diajukan.']);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Gagal mengajukan request kompen: ' . $e->getMessage()], 500);
+    }
+}
     
 }

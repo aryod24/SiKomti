@@ -143,4 +143,6 @@ Route::prefix('mhskompen')->group(function () {
     Route::post('/', [MhsKompenController::class, 'store'])->name('mhskompen.store');
     Route::get('/mhskompen/{UUID_Kompen}/create', [MhsKompenController::class, 'create'])->name('mhskompen.create');
     Route::post('/mhskompen', [MhsKompenController::class, 'store'])->name('mhskompen.store');
+    Route::get('/create-ajax/{UUID_Kompen}', [MhsKompenController::class, 'create_ajax'])->name('mhskompen.create-ajax');
+    Route::post('/store-ajax', [MhsKompenController::class, 'store_ajax'])->name('mhskompen.store-ajax');
 });
