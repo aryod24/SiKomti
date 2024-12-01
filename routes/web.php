@@ -134,3 +134,13 @@ Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM'], fun
     Route::put('/{id_alpha}', [DataMahasiswaController::class, 'update']);      
     Route::delete('/{id_alpha}', [DataMahasiswaController::class, 'destroy']);   
 });
+use App\Http\Controllers\MhsKompenController;
+
+Route::prefix('mhskompen')->group(function () {
+    Route::get('/', [MhsKompenController::class, 'index'])->name('mhskompen.index');
+    Route::get('/list', [MhsKompenController::class, 'list'])->name('mhskompen.list');
+    Route::get('/{UUID_Kompen}', [MhsKompenController::class, 'show'])->name('mhskompen.show');
+    Route::post('/', [MhsKompenController::class, 'store'])->name('mhskompen.store');
+    Route::get('/mhskompen/{UUID_Kompen}/create', [MhsKompenController::class, 'create'])->name('mhskompen.create');
+    Route::post('/mhskompen', [MhsKompenController::class, 'store'])->name('mhskompen.store');
+});

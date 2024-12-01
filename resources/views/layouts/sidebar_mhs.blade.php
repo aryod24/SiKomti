@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/kompen') }}" class="nav-link {{ $activeMenu == 'kompen' ? 'active' : '' }}">
+                <a href="{{ url('/mhskompen') }}" class="nav-link {{ $activeMenu == 'kompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Kompen</p>
                 </a>
