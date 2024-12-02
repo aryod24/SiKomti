@@ -53,9 +53,11 @@ class ProgressMhsController extends Controller
                     return 'Ditolak';
                 }
             })
-            ->addColumn('aksi', function ($request) {
-                $buttons = '<button onclick="showDetail(\'' . $request->id_MahasiswaKompen . '\')" class="btn btn-info btn-sm mr-1">Detail</button>';
-                
+            ->addColumn('aksi_request', function ($request) {
+                return '<button onclick="showDetail(\'' . $request->id_MahasiswaKompen . '\')" class="btn btn-info btn-sm mr-1">Detail</button>';
+            })
+            ->addColumn('aksi_progress', function ($request) {
+                $buttons = '';
                 if ($request->status_Acc == 1) {
                     $buttons .= '<button onclick="uploadBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-primary btn-sm mr-1">Upload Bukti</button>';
                     
@@ -64,10 +66,9 @@ class ProgressMhsController extends Controller
                         $buttons .= '<button onclick="viewBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-success btn-sm">Lihat Bukti</button>';
                     }
                 }
-                
                 return $buttons;
             })
-            ->rawColumns(['aksi'])
+            ->rawColumns(['aksi_request', 'aksi_progress'])
             ->make(true);
     }
 

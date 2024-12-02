@@ -38,6 +38,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/progreskompen') }}" class="nav-link {{ $activeMenu == 'progreskompen' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-tasks"></i>
+                    <p>Progress</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/logout') }}" class="nav-link">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Logout</p>

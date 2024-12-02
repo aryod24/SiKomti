@@ -14,7 +14,8 @@
                         <th>Nama Kompen</th>
                         <th>Pembuat Tugas</th>
                         <th>Status</th>
-                        <th>Aksi</th>
+                        <th>Aksi Request</th>
+                        <th>Aksi Progress</th>
                     </tr>
                 </thead>
             </table>
@@ -94,36 +95,36 @@
             });
         }
         function uploadBukti(uuidKompen) {
-    $.ajax({
-        url: '{{ route("progressmhs.create-bukti", ":uuid") }}'.replace(':uuid', uuidKompen),
-        type: 'GET',
-        success: function(response) {
-            $('#uploadModal .modal-content').html(response);
-            $('#uploadModal').modal('show');
-        },
-        error: function(xhr) {
-            alert('Error: ' + xhr.statusText);
+            $.ajax({
+                url: '{{ route("progressmhs.create-bukti", ":uuid") }}'.replace(':uuid', uuidKompen),
+                type: 'GET',
+                success: function(response) {
+                    $('#uploadModal .modal-content').html(response);
+                    $('#uploadModal').modal('show');
+                },
+                error: function(xhr) {
+                    alert('Error: ' + xhr.statusText);
+                }
+            });
         }
-    });
-}
 
-function viewBukti(uuidKompen) {
-    $.ajax({
-        url: '{{ route("progressmhs.view-bukti", ":uuid") }}'.replace(':uuid', uuidKompen),
-        type: 'GET',
-        success: function(response) {
-            $('#modalContent').html(response);
-            $('#detailModal').modal('show');
-        },
-        error: function(xhr) {
-            alert('Error: ' + xhr.statusText);
+        function viewBukti(uuidKompen) {
+            $.ajax({
+                url: '{{ route("progressmhs.view-bukti", ":uuid") }}'.replace(':uuid', uuidKompen),
+                type: 'GET',
+                success: function(response) {
+                    $('#modalContent').html(response);
+                    $('#detailModal').modal('show');
+                },
+                error: function(xhr) {
+                    alert('Error: ' + xhr.statusText);
+                }
+            });
         }
-    });
-}
 
-function downloadBukti(uuidKompen) {
-    window.location.href = '{{ route("progressmhs.download-bukti", ":uuid") }}'.replace(':uuid', uuidKompen);
-}
+        function downloadBukti(uuidKompen) {
+            window.location.href = '{{ route("progressmhs.download-bukti", ":uuid") }}'.replace(':uuid', uuidKompen);
+        }
 
         $(document).ready(function() {
             var dataProgress = $('#table_progress').DataTable({
@@ -135,37 +136,43 @@ function downloadBukti(uuidKompen) {
                     "type": "GET"
                 },
                 columns: [
-                    {
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "nama_kompen",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "pembuat_tugas",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "status",
-                        className: "text-center",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "aksi",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    }
-                ]
+    {
+        data: "DT_RowIndex",
+        className: "text-center",
+        orderable: false,
+        searchable: false
+    },
+    {
+        data: "nama_kompen",
+        className: "",
+        orderable: true,
+        searchable: true
+    },
+    {
+        data: "pembuat_tugas",
+        className: "",
+        orderable: true,
+        searchable: true
+    },
+    {
+        data: "status",
+        className: "text-center",
+        orderable: true,
+        searchable: true
+    },
+    {
+        data: "aksi_request",
+        className: "text-center",
+        orderable: false,
+        searchable: false
+    },
+    {
+        data: "aksi_progress",
+        className: "text-center",
+        orderable: false,
+        searchable: false
+    }
+]
             });
         });
     </script>

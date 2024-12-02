@@ -29,6 +29,14 @@
                     <th>Tanggal Upload</th>
                     <td>{{ $progress->updated_at->format('d F Y H:i') }}</td>
                 </tr>
+                <tr>
+                    <th>Jam Kompen</th>
+                    <td>{{ $progress->jam_kompen }}</td>
+                </tr>
+                <tr>
+                    <th>Status Acc</th>
+                    <td>{{ $progress->status_acc }}</td>
+                </tr>
                 @if($progress->bukti_kompen)
                     <tr>
                         <th>Preview</th>

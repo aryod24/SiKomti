@@ -156,3 +156,15 @@ Route::prefix('progressmhs')->group(function () {
     Route::get('/view-bukti/{uuidKompen}', [ProgressMhsController::class, 'viewBukti'])->name('progressmhs.view-bukti');
     Route::get('/download-bukti/{uuidKompen}', [ProgressMhsController::class, 'downloadBukti'])->name('progressmhs.download-bukti');
 });
+use App\Http\Controllers\ProgressKompenController;
+
+Route::prefix('progreskompen')->group(function () {
+    Route::get('/', [ProgressKompenController::class, 'index'])->name('progreskompen.index');
+    
+    Route::get('/list', [ProgressKompenController::class, 'list'])->name('progreskompen.list');
+    
+    Route::get('/requests/{uuidKompen}', [ProgressKompenController::class, 'getKompenRequestByUuid'])->name('progreskompen.requests');
+    Route::post('/update_status', [ProgressKompenController::class, 'updateStatus'])->name('progreskompen.update_status');
+    Route::post('/delete_request', [ProgressKompenController::class, 'deleteRequest'])->name('progreskompen.delete_request');
+    
+});
