@@ -2,9 +2,9 @@
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h3 class="card-title">Daftar Kompen</h3>
+            <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
-                <button onclick="modalAction('{{ url('kompen/create') }}')" class="btn btn-sm btn-success mt-1">Tambah Kompen</button>
+                <button onclick="modalAction('{{ url('datamahasiswa/create') }}')" class="btn btn-sm btn-success mt-1">Tambah Data Mahasiswa Alpha</button>
             </div>
         </div>
         <div class="card-body">
@@ -14,13 +14,15 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_kompen">
+            <table class="table table-bordered table-striped table-hover table-sm" id="m_mahasiswa_alpha">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Kode Kompen</th> <!-- Tambahkan kolom Kode Kompen -->
-                        <th>Nama Kompen</th>
-                        <th>Quota</th>
+                        <th>NI</th>
+                        <th>Nama</th>
+                        <th>Semester</th>
+                        <th>Jam Alpha</th>
+                        <th>Jam Kompen</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -29,6 +31,7 @@
     </div>
     <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
 @endsection
+
 @push('css')
     <style>
         /* Styling untuk tabel */
@@ -71,6 +74,7 @@
         }
     </style>
 @endpush
+
 @push('js')
     <script>
         function modalAction(url = '') {
@@ -78,49 +82,23 @@
                 $('#myModal').modal('show');
             });
         }
-        var dataKompen;
         $(document).ready(function() {
-            var dataKompen = $('#table_kompen').DataTable({
-                // serverSide: true, jika ingin menggunakan server side processing
+            var mahasiswaAlpha = $('#m_mahasiswa_alpha').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('kompen/list') }}",
+                    "url": "{{ url('datamahasiswa/list') }}",
                     "dataType": "json",
                     "type": "POST",
-                    "data": function (d) {
-                        d.kompen_id = $('#kompen_id').val(); // Jika ada filter untuk kompen
-                    }
                 },
-                columns: [{
-                    // nomor urut dari laravel datatable addIndexColumn()
-                    data: "DT_RowIndex",
-                    className: "text-center",
-                    orderable: false,
-                    searchable: false
-                }, {
-                    data: "nama_kompen", // Kode Kompen
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "jenis_tugas", // Nama Kompen
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "quota", // Status Kompen
-                    className: "text-center",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "aksi", // Tombol Aksi
-                    className: "",
-                    orderable: false,
-                    searchable: false
-                }]
-            });
-            $('#kompen_id').on('change', function() {
-                dataKompen.ajax.reload();
+                columns: [
+                    {data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false},
+                    {data: "ni", orderable: true, searchable: true},
+                    {data: "nama", orderable: true, searchable: true},
+                    {data: "semester", orderable: true, searchable: true},
+                    {data: "jam_alpha", orderable: true, searchable: true},
+                    {data: "jam_kompen", orderable: true, searchable: true},
+                    {data: "aksi", className: "text-center", orderable: false, searchable: false}
+                ]
             });
         });
     </script>

@@ -1,31 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\LevelModel;
-
 class ProfileController extends Controller
 {
     public function show()
     {
         $breadcrumb = (object) [
-            'title' => '',
+            'title' => 'Profile Anda',
             'list'  => ['']
         ];
-
         $page = (object) [
             'title' => ''
         ];
-
         $activeMenu = 'profile';
-
         $level = LevelModel::all();
-
         return view('profile.show', [
             'breadcrumb' => $breadcrumb, 
             'page' => $page, 
@@ -33,12 +25,10 @@ class ProfileController extends Controller
             'activeMenu' => $activeMenu
         ]);
     }
-
     public function showUpdateProfileForm()
     {
         return view('profile.update'); // Halaman form update profile
     }
-
     public function update(Request $request)
     {
         $request->validate([
@@ -62,12 +52,10 @@ class ProfileController extends Controller
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
     
-
     public function showUpdateImagesForm()
     {
         return view('profile.updateImages'); // Halaman form upload foto
     }
-
     public function updateImages(Request $request)
     {
         //validasi memastikan dile upload tidak lebi 2 mb

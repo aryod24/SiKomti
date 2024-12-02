@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KompenController;
 use App\Http\Controllers\JenisTugasController;
 use App\Http\Controllers\KompetensiController;
+use App\Http\Controllers\DataMahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '[0-9]+');
@@ -68,7 +69,7 @@ Route::group(['prefix' => 'level', 'middleware'=>'authorize:ADM'], function() {
 });
 
 
-Route::group(['prefix' => 'kompen', 'middleware'=>'authorize:ADM,DSN'], function() {
+Route::group(['prefix' => 'kompen', 'middleware'=>'authorize:ADM,DSN,TDK'], function() {
     Route::get('/', [KompenController::class, 'index']);          // Menampilkan halaman awal kompen
     Route::post('/list', [KompenController::class, 'list']);      // Menampilkan data kompen dalam json untuk datatables
     Route::get('/create', [KompenController::class, 'create']);   // Menampilkan halaman form tambah kompen
@@ -120,4 +121,38 @@ Route::group(['prefix' => 'kompetensi', 'middleware' => 'authorize:ADM'], functi
     Route::get('/{id}/delete_ajax', [KompetensiController::class, 'confirm_ajax']); 
     Route::delete('/{id}/delete_ajax', [KompetensiController::class, 'delete_ajax']); 
     Route::delete('/{id}', [KompetensiController::class, 'destroy']);   
+});
+
+
+Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM'], function() {
+    Route::get('/', [DataMahasiswaController::class, 'index']);             
+    Route::post('/list', [DataMahasiswaController::class, 'list']);         
+    Route::get('/create', [DataMahasiswaController::class, 'create']);      
+    Route::post('/', [DataMahasiswaController::class, 'store']);             
+    Route::get('/{id_alpha}', [DataMahasiswaController::class, 'show']);         
+    Route::get('/{id_alpha}/edit', [DataMahasiswaController::class, 'edit']);    
+    Route::put('/{id_alpha}', [DataMahasiswaController::class, 'update']);      
+    Route::delete('/{id_alpha}', [DataMahasiswaController::class, 'destroy']);   
+});
+use App\Http\Controllers\MhsKompenController;
+
+Route::prefix('mhskompen')->group(function () {
+    Route::get('/', [MhsKompenController::class, 'index'])->name('mhskompen.index');
+    Route::get('/list', [MhsKompenController::class, 'list'])->name('mhskompen.list');
+    Route::get('/{UUID_Kompen}', [MhsKompenController::class, 'show'])->name('mhskompen.show');
+    Route::post('/', [MhsKompenController::class, 'store'])->name('mhskompen.store');
+    Route::get('/mhskompen/{UUID_Kompen}/create', [MhsKompenController::class, 'create'])->name('mhskompen.create');
+    Route::post('/mhskompen', [MhsKompenController::class, 'store'])->name('mhskompen.store');
+    Route::get('/create-ajax/{UUID_Kompen}', [MhsKompenController::class, 'create_ajax'])->name('mhskompen.create-ajax');
+    Route::post('/store-ajax', [MhsKompenController::class, 'store_ajax'])->name('mhskompen.store-ajax');
+});
+use App\Http\Controllers\ProgressMhsController;
+Route::prefix('progressmhs')->group(function () {
+    Route::get('/', [ProgressMhsController::class, 'index'])->name('progressmhs.index');
+    Route::get('/list/{ni}', [ProgressMhsController::class, 'list'])->name('progressmhs.list');
+    Route::get('/show-ajax/{id}', [ProgressMhsController::class, 'showAjaxReq'])->name('progressmhs.show-ajax');
+    Route::get('/create-bukti/{uuidKompen}', [ProgressMhsController::class, 'createBukti'])->name('progressmhs.create-bukti');
+    Route::post('/upload-bukti', [ProgressMhsController::class, 'uploadBukti'])->name('progressmhs.upload-bukti');
+    Route::get('/view-bukti/{uuidKompen}', [ProgressMhsController::class, 'viewBukti'])->name('progressmhs.view-bukti');
+    Route::get('/download-bukti/{uuidKompen}', [ProgressMhsController::class, 'downloadBukti'])->name('progressmhs.download-bukti');
 });

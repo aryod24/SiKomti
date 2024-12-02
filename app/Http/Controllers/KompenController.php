@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Models\JenisTugas;
 use App\Models\KompenModel;
+use App\Models\LevelModel;
+use App\Models\Kompetensi;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -18,13 +22,34 @@ class KompenController extends Controller
             'title' => 'Daftar kompen yang terdaftar dalam sistem'
         ];
         $activeMenu = 'kompen'; // set menu yang sedang aktif
+        $level = LevelModel::all();
         return view('kompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
     // Ambil data kompen dalam bentuk json untuk datatables
     public function list(Request $request)
     {
-        $kompens = KompenModel::select('UUID_Kompen', 'nama_kompen', 'deskripsi', 'jenis_tugas', 'quota', 'jam_kompen', 'status_dibuka', 'tanggal_mulai', 'tanggal_akhir', 'Is_Selesai', 'periode_kompen');
-        
+        $kompens = KompenModel::select(
+            'UUID_Kompen',
+            'nama_kompen',
+            'deskripsi',
+            'jenis_tugas',
+            'quota',
+            'jam_kompen',
+            'status_dibuka',
+            'tanggal_mulai',
+            'tanggal_akhir',
+            'is_selesai',
+            'id_kompetensi',
+            'periode_kompen',
+            'user_id',
+            'nama',
+            'level_id' // Add level_id to select fields
+        );
+    
+        if ($request->has('level_id') && $request->level_id != '') {
+            $kompens->where('level_id', $request->level_id); // Apply level_id filter if provided
+        }
+    
         // Return data untuk DataTables
         return DataTables::of($kompens)
             ->addIndexColumn() // menambahkan kolom index / nomor urut
@@ -33,13 +58,14 @@ class KompenController extends Controller
                 $btn = '<a href="' . url('/kompen/' . $kompen->UUID_Kompen) . '" class="btn btn-info btn-sm">Detail</a> ';
                 $btn .= '<a href="' . url('/kompen/' . $kompen->UUID_Kompen . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/kompen/' . $kompen->UUID_Kompen) . '">'
-                    . csrf_field() . method_field('DELETE') . 
-                    '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
+                    . csrf_field() . method_field('DELETE')
+                    . '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
                 return $btn;
             })
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi berisi HTML
             ->make(true);
     }
+    
     // Menampilkan halaman form tambah kompen
     public function create()
     {
@@ -51,7 +77,10 @@ class KompenController extends Controller
             'title' => 'Tambah kompen baru'
         ];
         $activeMenu = 'kompen'; // set menu yang sedang aktif
-        return view('kompen.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        $kompetensi = Kompetensi::all();
+        $jenisTugas = JenisTugas::all();
+        return view('kompen.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu, 'kompetensi' => $kompetensi,
+        'jenisTugas' => $jenisTugas ]);
     }
     // Menyimpan data kompen baru
     public function store(Request $request)
@@ -66,9 +95,10 @@ class KompenController extends Controller
             'tanggal_mulai'  => 'nullable|date',
             'tanggal_akhir'  => 'nullable|date',
             'is_selesai'     => 'nullable|boolean',
+            'id_kompetensi'  => 'nullable|integer',
             'periode_kompen' => 'nullable|string|max:50'
         ]);
-    
+
         KompenModel::create([
             'UUID_Kompen'    => Str::uuid(),
             'nama_kompen'    => $request->nama_kompen,
@@ -80,11 +110,19 @@ class KompenController extends Controller
             'tanggal_mulai'  => $request->tanggal_mulai,
             'tanggal_akhir'  => $request->tanggal_akhir,
             'is_selesai'     => $request->is_selesai,
+            'id_kompetensi'  => $request->id_kompetensi,
             'periode_kompen' => $request->periode_kompen,
+            'nama'           => auth()->user()->nama, 
+            'user_id'        => auth()->id(),
+            'level_id'       => auth()->user()->level_id, 
         ]);
+        
+        return redirect('/kompen')->with('success', 'Data kompen berhasil disimpan');
+        
     
         return redirect('/kompen')->with('success', 'Data kompen berhasil disimpan');
     }
+
     // Menampilkan detail kompen
     public function show(string $UUID_Kompen)
     {
@@ -97,7 +135,7 @@ class KompenController extends Controller
             'title' => 'Detail kompen'
         ];
         $activeMenu = 'kompen'; // set menu yang sedang aktif
-        return view('kompen.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kompen' => $kompen, 'activeMenu' => $activeMenu]);
+        return view('kompen.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kompen' => $kompen, 'activeMenu' => $activeMenu, ]);
     }
     // Menampilkan halaman form edit kompen
     public function edit(string $id)
@@ -111,7 +149,10 @@ class KompenController extends Controller
             'title' => 'Edit kompen'
         ];
         $activeMenu = 'kompen'; // set menu yang sedang aktif
-        return view('kompen.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kompen' => $kompen, 'activeMenu' => $activeMenu]);
+        $kompetensi = Kompetensi::all();
+        $jenisTugas = JenisTugas::all();
+        return view('kompen.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kompen' => $kompen, 'activeMenu' => $activeMenu, 'kompetensi' => $kompetensi,
+        'jenisTugas' => $jenisTugas ]);
     }
     // Menyimpan perubahan data kompen
     public function update(Request $request, string $id)
@@ -125,6 +166,8 @@ class KompenController extends Controller
             'status_dibuka' => 'nullable|boolean', // status dibuka bisa kosong atau boolean
             'tanggal_mulai' => 'nullable|date', // tanggal mulai bisa kosong atau tanggal
             'tanggal_akhir' => 'nullable|date', // tanggal akhir bisa kosong atau tanggal// status selesai bisa kosong atau boolean
+            'is_selesai'     => 'nullable|boolean',
+            'id_kompetensi'  => 'nullable|integer',
             'periode_kompen' => 'nullable|string|max:50', // periode kompen bisa kosong atau string
         ]);
         KompenModel::find($id)->update([
@@ -133,8 +176,11 @@ class KompenController extends Controller
             'jenis_tugas' => $request->jenis_tugas,
             'quota' => $request->quota,
             'jam_kompen' => $request->jam_kompen,
+            'status_dibuka'  => $request->status_dibuka,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_akhir' => $request->tanggal_akhir,
+            'is_selesai'     => $request->is_selesai,
+            'id_kompetensi'  => $request->id_kompetensi,
             'periode_kompen' => $request->periode_kompen,
         ]);
         
@@ -174,7 +220,9 @@ public function store_ajax(Request $request) {
             'jam_kompen'      => 'required|integer|min:1',                  // Jam kompen wajib diisi dan lebih dari 0                       // Status dibuka wajib diisi dan berupa boolean
             'tanggal_mulai'   => 'required|date',                           // Tanggal mulai wajib diisi dengan format tanggal
             'tanggal_akhir'   => 'required|date|after_or_equal:tanggal_mulai', // Tanggal akhir wajib diisi dan setelah tanggal mulai                       // Is selesai wajib diisi dan berupa boolean
-            'id_kompetensi'   => 'required|integer',                        // ID kompetensi wajib diisi dan berupa angka
+            'id_kompetensi'   => 'required|integer', 
+            'is_selesai'     => 'nullable|boolean',
+            'id_kompetensi'  => 'nullable|integer',                       // ID kompetensi wajib diisi dan berupa angka
             'periode_kompen'  => 'nullable|string|max:50',                  // Periode kompen boleh kosong
         ];
         // Menggunakan Validator untuk memvalidasi input
@@ -197,6 +245,7 @@ public function store_ajax(Request $request) {
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_akhir' => $request->tanggal_akhir,
             'id_kompetensi' => $request->id_kompetensi,
+            'is_selesai'    => $request->is_selesai,
             'periode_kompen'=> $request->periode_kompen,
         ]);
         // Jika berhasil, kirimkan response sukses
