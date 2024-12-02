@@ -8,7 +8,7 @@ use App\Models\ProgressModel;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 
-class ProgressKompenController extends Controller
+class PengajuanKompenController extends Controller
 {
     // Menampilkan halaman awal kompen
     public function index()
@@ -20,8 +20,8 @@ class ProgressKompenController extends Controller
         $page = (object) [
             'title' => 'Daftar kompen yang terdaftar dalam sistem'
         ];
-        $activeMenu = 'progeskompen'; // set menu yang sedang aktif
-        return view('progreskompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+        $activeMenu = 'pengajuankompen'; // set menu yang sedang aktif
+        return view('pengajuankompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
     // Ambil data kompen dalam bentuk json untuk datatables
@@ -55,10 +55,7 @@ class ProgressKompenController extends Controller
             ->addColumn('aksi_request', function ($kompen) {
                 return '<button onclick="showRequestModal(\'' . $kompen->UUID_Kompen . '\')" class="btn btn-info btn-sm">Request</button>';
             })
-            ->addColumn('aksi_progress', function ($kompen) {
-                return '<button onclick="progressKompen(\'' . $kompen->UUID_Kompen . '\')" class="btn btn-primary btn-sm">Progress</button>';
-            })
-            ->rawColumns(['aksi_request', 'aksi_progress']) // memberitahu bahwa kolom aksi berisi HTML
+            ->rawColumns(['aksi_request']) // memberitahu bahwa kolom aksi berisi HTML
             ->make(true);
     }
 

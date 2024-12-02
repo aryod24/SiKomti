@@ -156,15 +156,15 @@ Route::prefix('progressmhs')->group(function () {
     Route::get('/view-bukti/{uuidKompen}', [ProgressMhsController::class, 'viewBukti'])->name('progressmhs.view-bukti');
     Route::get('/download-bukti/{uuidKompen}', [ProgressMhsController::class, 'downloadBukti'])->name('progressmhs.download-bukti');
 });
-use App\Http\Controllers\ProgressKompenController;
+use App\Http\Controllers\PengajuanKompenController;
 
-Route::prefix('progreskompen')->group(function () {
-    Route::get('/', [ProgressKompenController::class, 'index'])->name('progreskompen.index');
+Route::prefix('pengajuankompen')->group(function () {
+    Route::get('/', [PengajuanKompenController::class, 'index'])->name('pengajuankompen.index');
     
-    Route::get('/list', [ProgressKompenController::class, 'list'])->name('progreskompen.list');
+    Route::get('/list', [PengajuanKompenController::class, 'list'])->name('pengajuankompen.list');
     
-    Route::get('/requests/{uuidKompen}', [ProgressKompenController::class, 'getKompenRequestByUuid'])->name('progreskompen.requests');
-    Route::post('/update_status', [ProgressKompenController::class, 'updateStatus'])->name('progreskompen.update_status');
-    Route::post('/delete_request', [ProgressKompenController::class, 'deleteRequest'])->name('progreskompen.delete_request');
+    Route::get('/requests/{uuidKompen}', [PengajuanKompenController::class, 'getKompenRequestByUuid'])->name('pengajuankompen.requests');
+    Route::post('/update_status', [PengajuanKompenController::class, 'updateStatus'])->name('pengajuankompen.update_status');
+    Route::post('/delete_request', [PengajuanKompenController::class, 'deleteRequest'])->name('pengajuankompen.delete_request');
     
 });

@@ -46,7 +46,7 @@
     </div>
 </div>
 
-@include('progreskompen.showreq')
+@include('pengajuankompen.showreq')
 
 <!-- Notification Modal -->
 <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -86,7 +86,7 @@ function showRequestModal(uuidKompen) {
 
 function getKompenRequestByUuid(uuidKompen) {
     $.ajax({
-        url: "{{ route('progreskompen.requests', '') }}/" + uuidKompen,
+        url: "{{ route('pengajuankompen.requests', '') }}/" + uuidKompen,
         method: 'GET',
         success: function(response) {
             if (response.data) {
@@ -123,7 +123,7 @@ function updateStatus(ni, uuidKompen, statusAcc) {
         status_Acc: statusAcc
     };
     $.ajax({
-        url: "{{ route('progreskompen.update_status') }}",
+        url: "{{ route('pengajuankompen.update_status') }}",
         method: 'POST',
         data: requestData,
         success: function(response) {
@@ -147,7 +147,7 @@ function deleteRequest(ni, uuidKompen) {
         UUID_Kompen: uuidKompen
     };
     $.ajax({
-        url: "{{ route('progreskompen.delete_request') }}",
+        url: "{{ route('pengajuankompen.delete_request') }}",
         method: 'POST',
         data: requestData,
         success: function(response) {
@@ -169,7 +169,7 @@ $(document).ready(function() {
     var dataKompen = $('#t_kompen').DataTable({
         serverSide: true,
         ajax: {
-            "url": "{{ route('progreskompen.list') }}",
+            "url": "{{ route('pengajuankompen.list') }}",
             "dataType": "json",
             "type": "GET",
             "data": function (d) {
@@ -201,7 +201,6 @@ $(document).ready(function() {
                     return `
                         <div class="action-buttons">
                             <button onclick="showRequestModal('${row.UUID_Kompen}')" class="btn btn-info btn-sm">Request</button> 
-                            <button onclick="progressKompen('${row.UUID_Kompen}')" class="btn btn-primary btn-sm">Progress</button>
                         </div>`;
                 }
             }

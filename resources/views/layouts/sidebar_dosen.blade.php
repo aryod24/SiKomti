@@ -38,9 +38,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/progreskompen') }}" class="nav-link {{ $activeMenu == 'progreskompen' ? 'active' : '' }}">
+                <a href="{{ url('/pengajuankompen') }}" class="nav-link {{ $activeMenu == 'pengajuankompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tasks"></i>
-                    <p>Progress</p>
+                    <p>Pengajuan</p>
                 </a>
             </li>
             <li class="nav-item">

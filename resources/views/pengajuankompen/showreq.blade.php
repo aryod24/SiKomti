@@ -1,6 +1,5 @@
-{{-- resources/views/kompen/showreq.blade.php --}}
-<div class="modal fade animate shake" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade animate shake" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Requests</h5>
