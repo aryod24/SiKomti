@@ -1,9 +1,14 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'upload-bukti'],
+    'paths' => [
+        'api/*',
+        'sanctum/csrf-cookie',
+        'upload-bukti',
+        'storage/*',  // Add this to allow access to files in storage
+    ],
     'allowed_methods' => ['*'],
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['*'],  // Allow all origins
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],

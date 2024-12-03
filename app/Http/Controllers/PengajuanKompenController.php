@@ -24,9 +24,9 @@ class PengajuanKompenController extends Controller
         return view('pengajuankompen.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data kompen dalam bentuk json untuk datatables
     public function list(Request $request)
     {
+        // Start building the query
         $kompens = KompenModel::select(
             'UUID_Kompen',
             'nama_kompen',
@@ -44,18 +44,30 @@ class PengajuanKompenController extends Controller
             'nama',
             'level_id' // Add level_id to select fields
         );
-
+    
+        // Check if the user is logged in as Dosen (level_id 3) or Tendik (level_id 4)
+        if (auth()->check()) {
+            $userLevel = auth()->user()->level_id; // Get the logged-in user's level_id
+            $userId = auth()->user()->user_id; // Get the logged-in user's ID
+    
+            if ($userLevel == 3 || $userLevel == 4) {
+                // Filter kompen based on user_id for level_id 3 and 4
+                $kompens->where('user_id', $userId);
+            }
+        }
+    
+        // Apply level_id filter if provided
         if ($request->has('level_id') && $request->level_id != '') {
             $kompens->where('level_id', $request->level_id); // Apply level_id filter if provided
         }
-
-        // Return data untuk DataTables
+    
+        // Return data for DataTables
         return DataTables::of($kompens)
-            ->addIndexColumn() // menambahkan kolom index / nomor urut
+            ->addIndexColumn() // Add index column
             ->addColumn('aksi_request', function ($kompen) {
                 return '<button onclick="showRequestModal(\'' . $kompen->UUID_Kompen . '\')" class="btn btn-info btn-sm">Request</button>';
             })
-            ->rawColumns(['aksi_request']) // memberitahu bahwa kolom aksi berisi HTML
+            ->rawColumns(['aksi_request']) // Indicate that the action column contains HTML
             ->make(true);
     }
 

@@ -102,10 +102,10 @@ class DataMahasiswaController extends Controller
     public function update(Request $request, $id_alpha)
     {
         $request->validate([
-            'ni' => 'required|string|max:20',
+            'ni' => 'nullable|string|max:20',
             'jam_alpha' => 'nullable|integer',
             'nama' => 'nullable|string|max:100',
-            'semester' => 'nullabke|integer',
+            'semester' => 'nullable|integer',
             'jam_kompen' => 'nullable|integer',
         ]);
 
