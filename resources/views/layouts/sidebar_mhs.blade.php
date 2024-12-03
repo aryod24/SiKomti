@@ -34,7 +34,7 @@
             <li class="nav-item">
                 <a href="{{ url('/progressmhs') }}" class="nav-link {{ $activeMenu == 'pengajuan' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-file-alt"></i>
-                    <p>Pengajuan</p>
+                    <p>Progress</p>
                 </a>
             </li>
             <li class="nav-item">
