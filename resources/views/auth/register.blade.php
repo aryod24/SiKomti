@@ -31,7 +31,7 @@
         }
 
         .login-box {
-            background: rgba(255, 246, 246, 0.473);
+            background: rgb(255, 246, 246);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -73,7 +73,15 @@
             object-fit: contain; /* Menjaga rasio gambar agar tidak terdistorsi */
             margin-left: 10px; /* Memberikan jarak antar logo */
         }
-    
+   
+        /* Gaya untuk logo ketiga */
+        .logo-three {
+            width: 100px;
+            height: 100px;
+            object-fit: contain; /* Menjaga rasio gambar agar tidak terdistorsi */
+            margin-left: 10px; /* Memberikan jarak antar logo */
+        }
+
         .login-subtitle {
             font-size: 1.2rem;
             color: #000000;
@@ -87,7 +95,7 @@
             border-radius: 10px;
             width: 100%;
             margin-bottom: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.5); /* Menambahkan border tipis dengan transparansi */
+            border: 1px solid rgba(0, 0, 0, 0.315); /* Menambahkan border tipis dengan transparansi */
             background: rgba(255, 255, 255, 0.7); /* Latar belakang input transparan putih */
             box-sizing: border-box;
         }
@@ -122,8 +130,9 @@
     <div class="login-box">
         <div class="login-title">Register to Sikomti</div>
         <div class="logo">
-            <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="logo-first">
-            <img src="{{ asset('adminlte/dist/img/polinema.png') }}" alt="AdminLTE Logo" class="logo-second">
+            <img src="{{ asset('adminlte/dist/img/polinema.png') }}" alt="AdminLTE Logo" class="logo-first">
+            <img src="{{ asset('adminlte/dist/img/Jti_polinema.svg.png') }}" alt="AdminLTE Logo" class="logo-second">
+            <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="logo-three">
         </div>
         <p class="login-subtitle">Silahkan Daftar untuk memulai sesi Anda</p>
 
