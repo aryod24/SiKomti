@@ -168,3 +168,27 @@ Route::prefix('pengajuankompen')->group(function () {
     Route::post('/delete_request', [PengajuanKompenController::class, 'deleteRequest'])->name('pengajuankompen.delete_request');
     
 });
+use App\Http\Controllers\ProgressKompenController;
+
+// Rute untuk menampilkan halaman awal kompen
+Route::get('/progresskompen', [ProgressKompenController::class, 'index'])->name('progresskompen.index');
+
+// Rute untuk mengambil data kompen dalam bentuk JSON untuk DataTables
+Route::get('/progresskompen/list', [ProgressKompenController::class, 'list'])->name('progresskompen.list');
+
+// Rute untuk mengupdate bukti
+Route::post('/progresskompen/update-bukti', [ProgressKompenController::class, 'updateBukti'])->name('progresskompen.update_bukti');
+
+// Rute untuk melihat bukti berdasarkan UUID_Kompen
+Route::get('/progresskompen/view-bukti/{uuidKompen}', [ProgressKompenController::class, 'viewBukti'])->name('progresskompen.view_bukti');
+
+// Rute untuk menyelesaikan kompen berdasarkan UUID_Kompen
+Route::post('/progresskompen/selesaikan/{uuidKompen}', [ProgressKompenController::class, 'selesaikanKompen'])->name('progresskompen.selesaikan');
+
+// Rute untuk menampilkan detail bukti berdasarkan UUID_Kompen
+Route::get('/progresskompen/detail-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDetailBukti'])->name('progresskompen.detail_bukti');
+
+// Rute untuk mendownload bukti berdasarkan UUID_Kompen dan id_progres
+Route::get('/progresskompen/download-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDownloadBukti'])->name('progresskompen.download_bukti');
+
+Route::get('/progresskompen/{uuidKompen}/show', [ProgressKompenController::class, 'show'])->name('progresskompen.show');

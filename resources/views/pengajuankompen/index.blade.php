@@ -12,22 +12,25 @@
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Filter:</label>
-                    <div class="col-3">
-                        <select class="form-control" id="level_id" name="level_id">
-                            <option value="">- Semua -</option>
-                            <option value="1">Admin</option>
-                            <option value="3">Dosen</option>
-                            <option value="4">Tendik</option>
-                        </select>
+            {{-- Cek jika level_id bukan 3 atau 4 --}}
+            @if (!in_array(auth()->user()->level_id, [3, 4]))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-1 control-label col-form-label">Filter:</label>
+                        <div class="col-3">
+                            <select class="form-control" id="level_id" name="level_id">
+                                <option value="">- Semua -</option>
+                                <option value="1">Admin</option>
+                                <option value="3">Dosen</option>
+                                <option value="4">Tendik</option>
+                            </select>
+                        </div>
+                        <small class="form-text text-muted">Level Pengguna</small>
                     </div>
-                    <small class="form-text text-muted">Level Pengguna</small>
                 </div>
             </div>
-        </div>
+            @endif
 
         <table class="table table-bordered table-striped table-hover table-sm" id="t_kompen">
             <thead>
