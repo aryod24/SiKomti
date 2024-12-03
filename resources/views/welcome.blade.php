@@ -99,6 +99,20 @@
             </div>
         </div>
 
+        <!-- Data Chart section moved below the info boxes -->
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Chart</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection
@@ -108,61 +122,62 @@
 <link rel="stylesheet" href="{{ asset('path/to/adminlte.min.css') }}">
 @endsection
 
-@section('js')
+@push('js')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     console.log("Chart.js loaded");
-    
-    // Assuming you have these variables available from your backend
-    var jumlahKompen = {{ $jumlahKompen }}; // Total compensations
-    var jumlahKompenSelesai = {{ $jumlahKompenSelesai }}; // Completed compensations
-    
-    // Create a canvas context for the chart
-    var ctx = document.getElementById('myChart').getContext('2d');
-    
-    // Create the line chart
-    var myChart = new Chart(ctx, {
-        type: 'line', // Change to 'line' for a line chart
-        data: {
-            labels: ['Kompen'], // Label for the x-axis, only one value for both lines
-            datasets: [
-                {
-                    label: 'Jumlah Kompen Selesai', // First line for completed compensations
-                    data: [jumlahKompenSelesai], // Data point for completed compensations
-                    backgroundColor: 'rgba(28, 200, 138, 0.2)', // Light green background color
-                    borderColor: 'rgba(28, 200, 138, 1)', // Green border color
-                    borderWidth: 2,
-                    fill: false, // No fill for the line
-                },
-                {
-                    label: 'Jumlah Kompen', // Second line for total compensations
-                    data: [jumlahKompen], // Data point for total compensations
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Light blue background color
-                    borderColor: 'rgba(54, 162, 235, 1)', // Blue border color
-                    borderWidth: 2,
-                    fill: false, // No fill for the line
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Jumlah'
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Status Kompen'
-                    }
-                }
-            }
-        }
-    });
+     // Assuming you have these variables available from your backend
+  var jumlahKompen = {{ $jumlahKompen }}; // Total compensations
+  var jumlahKompenSelesai = {{ $jumlahKompenSelesai }}; // Completed compensations
+  
+  // Create a canvas context for the chart
+  var ctx = document.getElementById('myChart').getContext('2d');
+  
+  // Create the bar chart with two bars
+  var myChart = new Chart(ctx, {
+      type: 'bar', // Bar chart type
+      data: {
+          labels: ['Kompen'], // Label for the x-axis, only one value for both bars
+          datasets: [
+              {
+                  label: 'Jumlah Kompen Selesai', // First bar for completed compensations
+                  data: [jumlahKompenSelesai], // Data point for completed compensations
+                  backgroundColor: 'rgba(28, 200, 138, 0.2)', // Light green background color
+                  borderColor: 'rgba(28, 200, 138, 1)', // Green border color
+                  borderWidth: 2,
+              },
+              {
+                  label: 'Jumlah Kompen', // Second bar for total compensations
+                  data: [jumlahKompen], // Data point for total compensations
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)', // Light blue background color
+                  borderColor: 'rgba(54, 162, 235, 1)', // Blue border color
+                  borderWidth: 2,
+              }
+          ]
+      },
+      options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+              y: {
+                  beginAtZero: true,
+                  title: {
+                      display: true,
+                      text: 'Jumlah'
+                  },
+                  ticks: {
+                      stepSize: 1, // Set the step size to ensure no fractional numbers are displayed
+                      precision: 0 // This ensures that no decimals are shown
+                  }
+              },
+              x: {
+                  title: {
+                      display: true,
+                      text: 'Status Kompen'
+                  }
+              }
+          }
+      }
+  });
 </script>
-@endsection
+@endpush
