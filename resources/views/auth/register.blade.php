@@ -11,13 +11,7 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 
     <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-        body, html {
+         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -26,70 +20,76 @@
 
         .login-page {
             display: flex;
-            flex-direction: column;
-            justify-content: center;  /* Memastikan elemen berada di tengah secara vertikal */
-            align-items: center;      /* Memastikan elemen berada di tengah secara horizontal */
-            height: 100vh;            /* Mengatur tinggi agar memenuhi viewport */
-            background: linear-gradient(to bottom, #5c78b7, #a1c2ea); /* Biru ke biru muda */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('{{ asset("images/polinema.png") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .login-box {
+            background: rgba(255, 246, 246, 0.473);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            position: fixed; /* Tetap pada posisi */
+            top: 50%; /* Posisi vertikal */
+            left: 50%; /* Posisi horizontal */
+            transform: translate(-50%, -50%); /* Pusatkan elemen */
             text-align: center;
-            padding: 0 20px;
         }
-
+        
         .login-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
-            color: #fff;
-            margin-bottom: 2rem;
+            color: #000000; /* Warna teks putih */
+            margin-bottom: 1.5rem;
         }
-
+    
         .logo {
-            width: 120px;
-            height: 120px;
-            background-color: #cccccc00; /* Hapus ini jika tidak diperlukan */
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 50%;
-            margin-bottom: 3rem;
-            overflow: hidden; /* Agar gambar tidak keluar dari lingkaran */
+            margin-bottom: 1rem;
         }
 
+        /* Gaya untuk logo pertama */
+        .logo-first {
+            width: 100px;
+            height: 100px;
+            object-fit: contain; /* Menjaga rasio gambar agar tidak terdistorsi */
+            margin-right: 10px; /* Memberikan jarak antar logo */
+        }
+
+        /* Gaya untuk logo kedua */
+        .logo-second {
+            width: 100px;
+            height: 100px;
+            object-fit: contain; /* Menjaga rasio gambar agar tidak terdistorsi */
+            margin-left: 10px; /* Memberikan jarak antar logo */
+        }
+    
         .login-subtitle {
-            font-size: 1.5rem;
-            color: #ffffff;
+            font-size: 1.2rem;
+            color: #000000;
             font-weight: bold;
             margin-bottom: 1.5rem;
         }
-
-        .input-group {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .form-control {
-            font-size: 1.2rem;
-            padding: 1rem 1.5rem;
+    
+        .input-group input {
+            font-size: 1.1rem;
+            padding: 0.8rem;
             border-radius: 10px;
-            font-weight: bold;
-            width: 100%;
-            margin-bottom: 0.5rem;
-            border: 2px solid #ccc;
-            transition: border-color 0.3s ease;
-            height: 45px;
-        }
-
-        .form-control:focus {
-            border-color: #4e73df;
-            outline: none;
-        }
-
-        .error-message {
-            color: #ff6b6b;
-            font-size: 1rem;
-            text-align: center;
-            max-width: 400px;
             width: 100%;
             margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Menambahkan border tipis dengan transparansi */
+            background: rgba(255, 255, 255, 0.7); /* Latar belakang input transparan putih */
+            box-sizing: border-box;
         }
 
         .btn-login {
@@ -97,36 +97,33 @@
             padding: 1rem;
             font-weight: bold;
             color: #fff;
-            width: 100%;
-            max-width: 400px;
-            background: linear-gradient(135deg, #71789e, #415481);
+            background: linear-gradient(135deg, #556b8a, #354261);
             border: none;
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
+            width: 100%;
         }
-
+    
+        .btn-login:hover {
+            background: linear-gradient(135deg, #43506e, #273244);
+        }
+    
         .register-prompt {
-            font-size: 1.1rem;
-            color: #fff;
+            font-size: 1rem;
+            color: #000000;
             text-decoration: underline;
-            margin-top: 3rem;
-        }
-
-        /* Menyesuaikan ukuran font dan box untuk elemen select */
-        select.form-control {
-            font-size: 1rem; /* Ukuran font lebih kecil */
-            height: 50px; /* Menyesuaikan tinggi box */
-            padding: 0.75rem 1rem; /* Padding lebih kecil untuk box */
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body class="hold-transition login-page">
-    <div class="login-page">
+    <div class="login-box">
         <div class="login-title">Register to Sikomti</div>
         <div class="logo">
-            <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="logo-first">
+            <img src="{{ asset('adminlte/dist/img/polinema.png') }}" alt="AdminLTE Logo" class="logo-second">
         </div>
         <p class="login-subtitle">Silahkan Daftar untuk memulai sesi Anda</p>
 
@@ -159,7 +156,7 @@
 
             <button type="submit" class="btn-login">Sign Up</button>
 
-            <a href="{{ url('login') }}" class="register-prompt">Sudah punya akun?</a>
+            <a href="{{ url('login') }}" class="register-prompt">Sudah punya akun? Login</a>
         </form>
 
         <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
