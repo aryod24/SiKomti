@@ -44,7 +44,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/hasil') }}" class="nav-link {{ $activeMenu == 'hasil' ? 'active' : '' }}">
+                <a href="{{ url('/history-kompen') }}" class="nav-link {{ $activeMenu == 'history_kompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-check-circle"></i>
                     <p>Hasil</p>
                 </a>

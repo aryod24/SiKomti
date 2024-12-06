@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/datamahasiswa') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
+                <a href="{{ url('/datamahasiswa') }}" class="nav-link {{ $activeMenu == 'datamahasiswa' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user-graduate"></i>
                     <p>Data Mahasiswa</p>
                 </a>
@@ -74,7 +74,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/hasil') }}" class="nav-link {{ $activeMenu == 'rekap' ? 'active' : '' }}">
+                <a href="{{ url('/history-kompen') }}" class="nav-link {{ $activeMenu == 'history_kompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
                     <p>Hasil</p>
                 </a>
@@ -109,4 +109,3 @@
         color: #ffffff;
     }
 </style>
-

@@ -192,3 +192,20 @@ Route::get('/progresskompen/detail-bukti/{uuidKompen}', [ProgressKompenControlle
 Route::get('/progresskompen/download-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDownloadBukti'])->name('progresskompen.download_bukti');
 
 Route::get('/progresskompen/{uuidKompen}/show', [ProgressKompenController::class, 'show'])->name('progresskompen.show');
+
+use App\Http\Controllers\HistoryKompenController;
+
+
+Route::prefix('history-kompen')->group(function () {
+    // Halaman utama riwayat kompensasi
+    Route::get('/', [HistoryKompenController::class, 'index'])->name('history.index');
+    // API untuk DataTables (list riwayat kompensasi)
+    Route::get('/list', [HistoryKompenController::class, 'list'])->name('history.list');
+});
+
+use App\Http\Controllers\HistoryMhsController;
+
+    Route::get('/historymhs', [HistoryMhsController::class, 'indexMhs'])->name('historymhs.index');
+    Route::get('/historykompenmhs', [HistoryMhsController::class, 'historyKompenMhs'])->name('historymhs.kompen');
+    Route::get('/historymhs/export-pdf', [HistoryMhsController::class, 'exportPdf'])->name('historymhs.exportPdf');
+    

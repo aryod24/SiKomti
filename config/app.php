@@ -165,9 +165,13 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+
     ])->toArray(),
 
     /*
@@ -182,6 +186,10 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+
+    'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
