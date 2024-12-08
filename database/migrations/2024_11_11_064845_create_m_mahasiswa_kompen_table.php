@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('m_mahasiswa_kompen', function (Blueprint $table) {
             $table->id('id_MahasiswaKompen')->autoIncrement();
+            $table->string('nama', 100)->nullable();
             $table->string('ni', 18)->nullable();
             $table->char('UUID_Kompen', 36)->nullable();
             $table->boolean('status_Acc')->nullable();

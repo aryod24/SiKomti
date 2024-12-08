@@ -18,6 +18,7 @@ class MahasiswaAlphaSeeder extends Seeder
             DB::table('m_mahasiswa_alpha')->insert([
                 'ni' => $nim,
                 'jam_alpha' => rand(1, 10), // Random alpha hours
+                'nama' => 'Aryo Wahyu',
                 'semester' => 'Semester ' . $semester,
                 'jam_kompen' => null, // jam_kompen is null
                 'created_at' => now(),

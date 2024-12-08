@@ -21,6 +21,7 @@ class ProgresKompenSeeder extends Seeder
                 'bukti_kompen' => 'bukti1.jpg',
                 'UUID_Kompen' => 'a6c654e7-c8d0-47cf-9fb3-2c6da5108e57',
                 'ni' => '2241760074',
+                'nama' => 'Aryods',
                 'jam_kompen' => 20,
                 'status_acc' => null,
                 'created_at' => now(),

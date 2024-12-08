@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('bukti_kompen', 255)->nullable();
             $table->char('UUID_Kompen', 36)->nullable();
             $table->string('ni', 18)->nullable();
+            $table->string('nama', 100)->nullable();
             $table->integer('jam_kompen')->nullable(); // Added jam_kompen column
             $table->boolean('status_acc')->nullable(); // Added status_acc column
             $table->timestamps();

@@ -15,7 +15,7 @@ class KompenSeeder extends Seeder
     {
         DB::table('t_kompen')->insert([
             [
-                'UUID_Kompen' => Str::uuid(),
+                'UUID_Kompen' => 'a6c654e7-c8d0-47cf-9fb3-2c6da5108e57',
                 'nama_kompen' => 'Kompen 1',
                 'deskripsi' => 'Deskripsi Kompen 1',
                 'jenis_tugas' => null,
@@ -29,6 +29,7 @@ class KompenSeeder extends Seeder
                 'periode_kompen' => null,
                 'nama' => 'Administrator', // This should match the `nama` in `m_user` table
                 'level_id' => 1,
+                'user_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],

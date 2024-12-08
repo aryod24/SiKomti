@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('m_mahasiswa_alpha', function (Blueprint $table) {
             $table->id('id_alpha');
             $table->string('ni', 18)->nullable();
+            $table->string('nama', 100)->nullable();
             $table->integer('jam_alpha')->nullable();
             $table->string('semester', 10); // Added semester field
             $table->integer('jam_kompen')->nullable(); // Added jam_kompen field
