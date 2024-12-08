@@ -47,6 +47,7 @@ class KompenSeeder extends Seeder
                 'id_kompetensi' => null,
                 'periode_kompen' => null,
                 'nama' => 'Administrator',  // This should match the `nama` in `m_user` table
+                'user_id' => 1,
                 'level_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
