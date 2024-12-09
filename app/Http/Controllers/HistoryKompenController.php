@@ -73,7 +73,6 @@ class HistoryKompenController extends Controller
             ->addColumn('aksi', function ($kompen) {
                 // Add action buttons for detail and download (if applicable)
                 $btn = '<a href="' . url('/history-kompen/' . $kompen->UUID_Kompen) . '" class="btn btn-info btn-sm">Detail</a> ';
-                $btn .= '<a href="' . url('/history-kompen/' . $kompen->UUID_Kompen . '/download') . '" class="btn btn-success btn-sm">Download</a>';
                 return $btn;
             })
             ->rawColumns(['aksi']) // Indicate that the action column contains HTML
