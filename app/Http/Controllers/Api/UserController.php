@@ -1,9 +1,12 @@
 <?php
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
 use App\Models\UserModel;
+use App\Models\LevelModel; // Assuming you have a LevelModel
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+
 class UserController extends Controller
 {
     public function index()
@@ -11,7 +14,7 @@ class UserController extends Controller
         // Load all users along with their level relationship
         return UserModel::with('level')->get();
     }
-    
+
     public function store(Request $request)
     {
         // Validate request data
@@ -19,23 +22,27 @@ class UserController extends Controller
             'username' => 'required|string|min:3|unique:m_user,username',
             'nama'     => 'required|string|max:100',                     
             'password' => 'required|min:5', 
-            'jurusan' => 'required|min:5',
+            'jurusan'  => 'required|min:5',
             'ni'       => 'required|string|max:18',                           
             'level_id' => 'required|integer',
         ]);
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
+
         // Create user
         $user = UserModel::create($request->all());
         
         return response()->json($user->load('level'), 201);
     }
+
     public function show(UserModel $user)
     {
         // Load level relationship for the user
         return response()->json($user->load('level'));
     }
+
     public function update(Request $request, UserModel $user)
     {
         // Validate request data
@@ -57,7 +64,7 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
     
-        // Perbarui hanya jika data ada dalam request
+        // Update only if data is present in the request
         if ($request->has('username')) {
             $user->username = $request->username;
         }
@@ -86,7 +93,6 @@ class UserController extends Controller
             'message' => 'Data user berhasil diperbarui'
         ], 200);
     }
-    
 
     public function destroy(UserModel $user)
     {
@@ -96,4 +102,9 @@ class UserController extends Controller
             'message' => 'Data Terhapus',
         ]);
     }
+    public function getLevels()
+{
+    return LevelModel::all();
+}
+
 }

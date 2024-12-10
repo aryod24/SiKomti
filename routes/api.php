@@ -40,6 +40,9 @@ Route::prefix('kompen')->group(function () {
     Route::delete('/{UUID_Kompen}', [KompenApiController::class, 'destroy']); // DELETE: /api/kompen/{UUID_Kompen} - Menghapus data kompen
 });
 
+Route::get('/kompetensi', [KompenApiController::class, 'getKompetensi']);        // GET: /api/kompetensi - Mendapatkan data kompetensi
+Route::get('/jenis-tugas', [KompenApiController::class, 'getJenisTugas']);       // GET: /api/jenis-tugas - Mendapatkan data jenis tugas
+
 
 Route::group(['prefix'=>'users'], function(){
     Route::get('/', [UserController::class, 'index']);
@@ -48,6 +51,9 @@ Route::group(['prefix'=>'users'], function(){
     Route::put('/{user}', [UserController::class, 'update']);
     Route::delete('/{user}', [UserController::class, 'destroy']);
 });
+
+Route::get('levels', [UserController::class, 'getLevels']);
+
 
 
     // Route for creating a kompen request
