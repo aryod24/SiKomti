@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-light" style="background: linear-gradient(90deg, #7c93b8, #3B465D); padding: 1rem;">
+<nav class="main-header navbar navbar-expand navbar-light" style="background: linear-gradient(90deg, #2C3E50, #3B465D); padding: 1rem;">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
       <li class="nav-item">

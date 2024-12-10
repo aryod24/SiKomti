@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background: linear-gradient(90deg, #5c759c, #2C3E50);
+            background: linear-gradient(90deg, #ffffff, #ffffff);
             color: white;
         }
         .container {
