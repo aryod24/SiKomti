@@ -32,14 +32,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/datamahasiswa') }}" class="nav-link {{ $activeMenu == 'mahasiswa' ? 'active' : '' }}">
+                <a href="{{ url('/datamahasiswa') }}" class="nav-link {{ $activeMenu == 'datamahasiswa' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-user-graduate"></i>
                     <p>Data Mahasiswa</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/kompetensi') }}" class="nav-link {{ $activeMenu == 'kompetensi' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-book"></i>
+                    <i class="nav-icon fas fa-cogs"></i>
                     <p>Bidang Kompetensi</p>
                 </a>
             </li>
@@ -51,22 +51,28 @@
             </li>
             <li class="nav-item">
                 <a href="{{ url('/kompen') }}" class="nav-link {{ $activeMenu == 'kompen' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-tasks"></i>
+                    <i class="nav-icon fas fa-list"></i>
                     <p>List Kompen</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/progres') }}" class="nav-link {{ $activeMenu == 'progres' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-chart-line"></i>
+                <a href="{{ url('/pengajuankompen') }}" class="nav-link {{ $activeMenu == 'pengajuankompen' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-file-upload"></i>
+                    <p>Pengajuan</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/progresskompen') }}" class="nav-link {{ $activeMenu == 'progresskompen' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-spinner"></i>
                     <p>Progres</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/rekap') }}" class="nav-link {{ $activeMenu == 'rekap' ? 'active' : '' }}">
-                    <i class="nav-icon fas fa-file-alt"></i>
-                    <p>Rekap</p>
+                <a href="{{ url('/history-kompen') }}" class="nav-link {{ $activeMenu == 'history_kompen' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-chart-bar"></i>
+                    <p>Hasil</p>
                 </a>
-            </li>
+            </li>           
         </ul>
     </nav>
 </div>

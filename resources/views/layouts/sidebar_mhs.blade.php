@@ -20,19 +20,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/mhskompen') }}" class="nav-link {{ $activeMenu == 'kompen' ? 'active' : '' }}">
+                <a href="{{ url('/mhskompen') }}" class="nav-link {{ $activeMenu == 'mhskompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Kompen</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/progressmhs') }}" class="nav-link {{ $activeMenu == 'pengajuan' ? 'active' : '' }}">
+                <a href="{{ url('/progressmhs') }}" class="nav-link {{ $activeMenu == 'progressmhs' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-file-alt"></i>
-                    <p>Pengajuan</p>
+                    <p>Progress</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/hasil') }}" class="nav-link {{ $activeMenu == 'hasil' ? 'active' : '' }}">
+                <a href="{{ url('/historymhs') }}" class="nav-link {{ $activeMenu == 'history_mahasiswa' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-chart-line"></i>
                     <p>Hasil</p>
                 </a>
