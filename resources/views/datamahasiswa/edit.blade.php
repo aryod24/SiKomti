@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label class="col-2 control-label col-form-label">Jam Kompen</label>
                         <div class="col-10">
-                            <input type="number" class="form-control" name="jam_kompen" value="{{ old('jam_kompen', $mahasiswaAlpha->jam_kompen) }}" required>
+                            <input type="number" class="form-control" name="jam_kompen" value="{{ old('jam_kompen', $mahasiswaAlpha->jam_kompen) }}" nullable>
                             @error('jam_kompen')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror

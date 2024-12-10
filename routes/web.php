@@ -156,3 +156,56 @@ Route::prefix('progressmhs')->group(function () {
     Route::get('/view-bukti/{uuidKompen}', [ProgressMhsController::class, 'viewBukti'])->name('progressmhs.view-bukti');
     Route::get('/download-bukti/{uuidKompen}', [ProgressMhsController::class, 'downloadBukti'])->name('progressmhs.download-bukti');
 });
+use App\Http\Controllers\PengajuanKompenController;
+
+Route::prefix('pengajuankompen')->group(function () {
+    Route::get('/', [PengajuanKompenController::class, 'index'])->name('pengajuankompen.index');
+    
+    Route::get('/list', [PengajuanKompenController::class, 'list'])->name('pengajuankompen.list');
+    
+    Route::get('/requests/{uuidKompen}', [PengajuanKompenController::class, 'getKompenRequestByUuid'])->name('pengajuankompen.requests');
+    Route::post('/update_status', [PengajuanKompenController::class, 'updateStatus'])->name('pengajuankompen.update_status');
+    Route::post('/delete_request', [PengajuanKompenController::class, 'deleteRequest'])->name('pengajuankompen.delete_request');
+    
+});
+use App\Http\Controllers\ProgressKompenController;
+
+// Rute untuk menampilkan halaman awal kompen
+Route::get('/progresskompen', [ProgressKompenController::class, 'index'])->name('progresskompen.index');
+
+// Rute untuk mengambil data kompen dalam bentuk JSON untuk DataTables
+Route::get('/progresskompen/list', [ProgressKompenController::class, 'list'])->name('progresskompen.list');
+
+// Rute untuk mengupdate bukti
+Route::post('/progresskompen/update-bukti', [ProgressKompenController::class, 'updateBukti'])->name('progresskompen.update_bukti');
+
+// Rute untuk melihat bukti berdasarkan UUID_Kompen
+Route::get('/progresskompen/view-bukti/{uuidKompen}', [ProgressKompenController::class, 'viewBukti'])->name('progresskompen.view_bukti');
+
+// Rute untuk menyelesaikan kompen berdasarkan UUID_Kompen
+Route::post('/progresskompen/selesaikan/{uuidKompen}', [ProgressKompenController::class, 'selesaikanKompen'])->name('progresskompen.selesaikan');
+
+// Rute untuk menampilkan detail bukti berdasarkan UUID_Kompen
+Route::get('/progresskompen/detail-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDetailBukti'])->name('progresskompen.detail_bukti');
+
+// Rute untuk mendownload bukti berdasarkan UUID_Kompen dan id_progres
+Route::get('/progresskompen/download-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDownloadBukti'])->name('progresskompen.download_bukti');
+
+Route::get('/progresskompen/{uuidKompen}/show', [ProgressKompenController::class, 'show'])->name('progresskompen.show');
+
+use App\Http\Controllers\HistoryKompenController;
+
+
+Route::prefix('history-kompen')->group(function () {
+    // Halaman utama riwayat kompensasi
+    Route::get('/', [HistoryKompenController::class, 'index'])->name('history.index');
+    // API untuk DataTables (list riwayat kompensasi)
+    Route::get('/list', [HistoryKompenController::class, 'list'])->name('history.list');
+});
+
+use App\Http\Controllers\HistoryMhsController;
+
+    Route::get('/historymhs', [HistoryMhsController::class, 'indexMhs'])->name('historymhs.index');
+    Route::get('/historykompenmhs', [HistoryMhsController::class, 'historyKompenMhs'])->name('historymhs.kompen');
+    Route::get('/historymhs/export-pdf', [HistoryMhsController::class, 'exportPdf'])->name('historymhs.exportPdf');
+    
