@@ -31,46 +31,48 @@ class ProgressMhsController extends Controller
     }
 
     public function list($ni)
-    {
-        $kompenRequests = MahasiswaKompen::with(['kompen', 'progress'])
-            ->where('ni', $ni)
-            ->select('m_mahasiswa_kompen.*');
-    
-        return DataTables::of($kompenRequests)
-            ->addIndexColumn()
-            ->addColumn('nama_kompen', function ($request) {
-                return $request->kompen->nama_kompen;
-            })
-            ->addColumn('pembuat_tugas', function ($request) {
-                return $request->kompen->nama;
-            })
-            ->addColumn('status', function ($request) {
-                if ($request->status_Acc === null) {
-                    return 'Menunggu';
-                } elseif ($request->status_Acc == 1) {
-                    return 'Disetujui';
-                } else {
-                    return 'Ditolak';
+{
+    $kompenRequests = MahasiswaKompen::with(['kompen', 'progress'])
+        ->where('ni', $ni)
+        ->select('m_mahasiswa_kompen.*');
+
+    return DataTables::of($kompenRequests)
+        ->addIndexColumn()
+        ->addColumn('nama_kompen', function ($request) {
+            return $request->kompen->nama_kompen;
+        })
+        ->addColumn('pembuat_tugas', function ($request) {
+            return $request->kompen->nama;
+        })
+        ->addColumn('status', function ($request) {
+            if ($request->status_Acc === null) {
+                return 'Menunggu';
+            } elseif ($request->status_Acc == 1) {
+                return 'Disetujui';
+            } else {
+                return 'Ditolak';
+            }
+        })
+        ->addColumn('aksi_request', function ($request) {
+            return '<button onclick="showDetail(\'' . $request->id_MahasiswaKompen . '\')" class="btn btn-info btn-sm mr-1">Detail</button>';
+        })
+        ->addColumn('aksi_progress', function ($request) {
+            $buttons = '';
+            if ($request->status_Acc == 1) {
+                $buttons .= '<button onclick="uploadBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-primary btn-sm mr-1">Upload Bukti</button>';
+                
+                $progress = $request->progress()->first();
+                if ($progress && $progress->bukti_kompen) {
+                    $buttons .= '<button onclick="viewBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-success btn-sm">Lihat Bukti</button>';
                 }
-            })
-            ->addColumn('aksi_request', function ($request) {
-                return '<button onclick="showDetail(\'' . $request->id_MahasiswaKompen . '\')" class="btn btn-info btn-sm mr-1">Detail</button>';
-            })
-            ->addColumn('aksi_progress', function ($request) {
-                $buttons = '';
-                if ($request->status_Acc == 1) {
-                    $buttons .= '<button onclick="uploadBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-primary btn-sm mr-1">Upload Bukti</button>';
-                    
-                    $progress = $request->progress()->first();
-                    if ($progress && $progress->bukti_kompen) {
-                        $buttons .= '<button onclick="viewBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-success btn-sm">Lihat Bukti</button>';
-                    }
-                }
-                return $buttons;
-            })
-            ->rawColumns(['aksi_request', 'aksi_progress'])
-            ->make(true);
-    }
+            }
+            return $buttons;
+        })
+        ->rawColumns(['aksi_request', 'aksi_progress'])
+        ->with('emptyTable', 'No data available')
+        ->make(true);
+}
+
 
     public function showAjaxReq($id)
     {

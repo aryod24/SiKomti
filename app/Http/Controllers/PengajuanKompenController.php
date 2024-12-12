@@ -111,8 +111,11 @@ class PengajuanKompenController extends Controller
                     'nama' => $mahasiswaKompen->nama,
                     'jam_kompen' => $kompen->jam_kompen,
                     'status_acc' => null,
+                    'kelas' => $mahasiswaKompen->kelas, // Adding kelas field
+                    'semester' => $mahasiswaKompen->semester, // Adding semester field
                 ]
             );
+            
     
             return response()->json(['message' => 'Status updated and progress created successfully.'], 200);
         }

@@ -39,35 +39,42 @@ class AuthController extends Controller
             ->with('level', $level);
     }
     public function store(Request $request)
-    {
-        // cek apakah request berupa ajax
-        if ($request->ajax() || $request->wantsJson()) {
-            $rules = [
-                'level_id'  => 'required|integer',
-                'username'  => 'required|string|min:3|unique:m_user,username',
-                'nama'      => 'required|string|max:100',
-                'jurusan'   => 'nullable|string|max:100',
-                'ni'        => 'nullable|string|max:18',
-                'password'  => 'required|min:5'
-            ];
-            // use Illuminate\Support\Facades\Validator;
-            $validator = Validator::make($request->all(), $rules);
-            if ($validator->fails()) {
-                return response()->json([
-                    'status'    => false, // response status, false: error/gagal, true: berhasil
-                    'message'   => 'Validasi Gagal',
-                    'msgField'  => $validator->errors(), // pesan error validasi
-                ]);
-            }
-            UserModel::create($request->all());
+{
+    // cek apakah request berupa ajax
+    if ($request->ajax() || $request->wantsJson()) {
+        $rules = [
+            'level_id'  => 'required|integer',
+            'username'  => 'required|string|min:3|unique:m_user,username',
+            'nama'      => 'required|string|max:100',
+            'jurusan'   => 'nullable|string|max:100',
+            'ni'        => 'nullable|string|max:18',
+            'password'  => 'required|min:5',
+            'kelas'     => 'nullable|string|max:100', // Adding kelas as nullable
+            'semester'  => 'nullable|string|max:100'  // Adding semester as nullable
+        ];
+        
+        // use Illuminate\Support\Facades\Validator;
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
             return response()->json([
-                'status'    => true,
-                'message'   => 'Data user berhasil disimpan',
-                'redirect' => url('/')
+                'status'    => false, // response status, false: error/gagal, true: berhasil
+                'message'   => 'Validasi Gagal',
+                'msgField'  => $validator->errors(), // pesan error validasi
             ]);
         }
-        return redirect('/');
+
+        UserModel::create($request->all());
+        
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Data user berhasil disimpan',
+            'redirect' => url('/')
+        ]);
     }
+
+    return redirect('/');
+}
+
     public function logout(Request $request)
     {
         Auth::logout();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KompenModel;
 use App\Models\ProgressModel;
+use App\Models\MahasiswaAlpha;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 
@@ -71,24 +72,49 @@ class ProgressKompenController extends Controller
             ->make(true);
     }
     public function updateBukti(Request $request)
-    {
-        $id_progres = $request->input('id_progres');
-        $status_acc = $request->input('status_acc');
+{
+    $id_progres = $request->input('id_progres');
+    $status_acc = $request->input('status_acc');
 
-        $progress = ProgressModel::findOrFail($id_progres);
+    // Temukan data progres berdasarkan ID
+    $progress = ProgressModel::findOrFail($id_progres);
 
-        // Update the status_acc field
-        $progress->status_acc = $status_acc;
-        $progress->save();
+    // Dapatkan semester dari data progres
+    $semesterText = $progress->semester; // Asumsi ada field "semester" di tabel ProgressModel
+    preg_match('/\d+/', $semesterText, $matches); // Ekstrak angka dari teks seperti 'Semester 2'
+    $semester = isset($matches[0]) ? (int)$matches[0] : null;
 
-        if ($status_acc == 1) {
-            return response()->json(['message' => 'Request approved successfully.'], 200);
-        } elseif ($status_acc == 0) {
-            return response()->json(['message' => 'Request rejected successfully.'], 200);
-        }
-
-        return response()->json(['message' => 'Invalid status.'], 400);
+    if (is_null($semester)) {
+        return response()->json(['message' => 'Invalid semester data.'], 400);
     }
+
+    // Cari mahasiswa di model MahasiswaAlpha berdasarkan NI dan semester
+    $mahasiswa = MahasiswaAlpha::where('ni', $progress->ni)
+                                ->where('semester', $semester)
+                                ->first();
+
+    if (!$mahasiswa) {
+        return response()->json(['message' => 'Mahasiswa not found for the given semester.'], 404);
+    }
+
+    // Update jam_kompen di model MahasiswaAlpha jika status_acc disetujui
+    if ($status_acc == 1) {
+        $mahasiswa->jam_kompen += $progress->jam_kompen; // Asumsi ada field jam_kompen di ProgressModel
+        $mahasiswa->save();
+    }
+
+    // Update status_acc pada tabel ProgressModel
+    $progress->status_acc = $status_acc;
+    $progress->save();
+
+    if ($status_acc == 1) {
+        return response()->json(['message' => 'Request approved successfully.'], 200);
+    } elseif ($status_acc == 0) {
+        return response()->json(['message' => 'Request rejected successfully.'], 200);
+    }
+
+    return response()->json(['message' => 'Invalid status.'], 400);
+}
 
     public function viewBukti($uuidKompen)
     {

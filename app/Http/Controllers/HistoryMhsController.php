@@ -27,7 +27,7 @@ class HistoryMhsController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($row) {
                 return '<a href="#" class="btn btn-info btn-sm">Detail</a>
-                        <a href="' . route('historymhs.exportPdf', $row->id) . '" class="btn btn-success btn-sm">Export PDF</a>';
+                        <a href="' . route('historymhs.exportPdf', $row->UUID_Kompen) . '" class="btn btn-success btn-sm">Export PDF</a>';
             })
             ->rawColumns(['aksi'])
             ->make(true);
@@ -47,18 +47,21 @@ class HistoryMhsController extends Controller
         return view('historymhs.kompen_mahasiswa', compact('breadcrumb', 'page', 'activeMenu'));
     }
 
-    public function exportPdf()
+    public function exportPdf($UUID_Kompen)
     {
-        // Assume $progress is predefined or fetched differently, not by ID
-        $progress = ProgressModel::first(); // Example: Fetch the first progress entry
+        $progress = ProgressModel::where('UUID_Kompen', $UUID_Kompen)->firstOrFail();
         
-        // Check if progress is found
-        if (!$progress) {
-            return response()->json(['error' => 'Progress not found'], 404);
-        }
-    
         // Generate QR code for single entry
-        $qrCode = QrCode::size(150)->generate('UUID_Kompen: ' . $progress->UUID_Kompen);
+        $qrCode = QrCode::size(150)->generate(
+            'Anda telah menyelesaikan kompen ' . $progress->kompen->nama_kompen . ' dengan UUID: ' . $progress->UUID_Kompen . "\n" .
+            'Oleh: ' . $progress->kompen->user->nama . "\n" .
+            'Jam Kompen berjumlah: ' . $progress->kompen->jam_kompen . "\n" .
+            'Detail Mahasiswa:' . "\n" .
+            'Nama: ' . $progress->nama . "\n" .
+            'NIM: ' . $progress->ni . "\n" .
+            'Kelas: ' . $progress->kelas . "\n" .
+            'Semester: ' . $progress->semester
+        );        
         
         // Load view and generate PDF
         $pdf = Pdf::loadView('historymhs.export_pdf', compact('progress', 'qrCode'));

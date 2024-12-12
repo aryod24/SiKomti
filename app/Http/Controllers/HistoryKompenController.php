@@ -78,4 +78,32 @@ class HistoryKompenController extends Controller
             ->rawColumns(['aksi']) // Indicate that the action column contains HTML
             ->make(true);
     }
+
+
+    public function show($UUID_Kompen)
+{
+    $kompen = KompenModel::with(['user', 'level', 'jenisTugas', 'kompetensi', 'progresKompen' => function($query) {
+        $query->where('status_acc', 1);
+    }])->find($UUID_Kompen);
+
+    if (!$kompen) {
+        abort(404, 'Data kompen tidak ditemukan');
+    }
+
+    $breadcrumb = (object) [
+        'title' => 'Detail Kompen',
+        'list' => ['Home', 'History Kompen', 'Detail']
+    ];
+    $page = (object) [
+        'title' => 'Detail Kompen'
+    ];
+    $activeMenu = 'history_kompen'; // set menu yang sedang aktif
+
+    return view('history_kompen.show', [
+        'breadcrumb' => $breadcrumb,
+        'page' => $page,
+        'kompen' => $kompen,
+        'activeMenu' => $activeMenu,
+    ]);
+}
 }

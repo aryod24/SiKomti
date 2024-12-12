@@ -142,17 +142,25 @@ class KompenController extends Controller
     // Menampilkan detail kompen
     public function show(string $UUID_Kompen)
     {
-        $kompen = KompenModel::find($UUID_Kompen);
+        $kompen = KompenModel::with(['jenisTugas', 'kompetensi'])->find($UUID_Kompen);
+        
         $breadcrumb = (object) [
             'title' => 'Detail Kompen',
-            'list'  => ['Home', 'Kompen', 'Detail']
+            'list' => ['Home', 'Kompen', 'Detail']
         ];
         $page = (object) [
             'title' => 'Detail kompen'
         ];
         $activeMenu = 'kompen'; // set menu yang sedang aktif
-        return view('kompen.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kompen' => $kompen, 'activeMenu' => $activeMenu, ]);
+    
+        return view('kompen.show', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'kompen' => $kompen,
+            'activeMenu' => $activeMenu,
+        ]);
     }
+    
     // Menampilkan halaman form edit kompen
     public function edit(string $id)
     {

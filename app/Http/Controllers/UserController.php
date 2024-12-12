@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-        $user = UserModel::select('user_id', 'username', 'nama','jurusan','ni', 'level_id')
+        $user = UserModel::select('user_id', 'username', 'nama','jurusan','ni','kelas', 'semester', 'level_id')
             ->with('level');
 
         if ($request->level_id){
@@ -65,6 +65,8 @@ class UserController extends Controller
             'nama'     =>'required|string|max:100',
             'jurusan'  => 'nullable|string|max:100',
             'ni'       => 'nullable|string|max:18',
+            'kelas'    => 'nullable|string|max:100', // Adding kelas as nullable
+            'semester' => 'nullable|string|max:100',  // Adding semester as nullable
             'password' => 'required|min:5',
             'level_id' =>'required|integer'
         ]);
@@ -73,7 +75,8 @@ class UserController extends Controller
             'nama'     => $request->nama,
             'jurusan'  => $request->jurusan,
             'ni'       => $request->ni,
-            'password' =>  bcrypt($request->password),
+            'kelas'    => $request->kelas,
+            'semester' => $request->semester,
             'level_id' => $request->level_id
         ]);
 
@@ -118,6 +121,8 @@ class UserController extends Controller
             'nama' => 'nullable|string|max:100',
             'jurusan'  => 'nullable|string|max:100',
             'ni'       => 'nullable|string|max:18',
+            'kelas'    => 'nullable|string|max:100', // Adding kelas as nullable
+            'semester' => 'nullable|string|max:100',  // Adding semester as nullable
             'password' => 'nullable|min:5',
             'level_id' => 'nullable|integer'
         ]);
@@ -129,6 +134,8 @@ class UserController extends Controller
             'jurusan'  => $request->jurusan,
             'ni'       => $request->ni,
             'password' => $request->password ? bcrypt($request->password) : $user->password,
+            'kelas'    => $request->kelas,
+            'semester' => $request->semester,
             'level_id' => $request->level_id
         ]);
         return redirect('/user')->with('success', 'Data user berhasil diubah');
