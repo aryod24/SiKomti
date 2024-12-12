@@ -14,27 +14,24 @@
             margin: 0 auto;
             padding: 20px;
         }
-        .header {
-            display: flex;
-            align-items: flex-start;
+        .header-table {
+            width: 100%;
             margin-bottom: 20px;
         }
         .logo {
             width: 100px;
             height: 100px;
-            margin-right: 20px;
         }
         .header-text {
-            flex: 1;
             text-align: center;
         }
         .header-text h3 {
-            font-size: 16px;
+            font-size: 14px;
             margin: 5px 0;
             font-weight: bold;
         }
         .header-text p {
-            font-size: 11px;
+            font-size: 13px;
             margin: 3px 0;
         }
         .divider {
@@ -48,7 +45,7 @@
             margin: 30px 0;
         }
         .content {
-            margin-left: 20px;
+            margin-left: 0px;
         }
         .content-row {
             margin-bottom: 8px;
@@ -62,25 +59,21 @@
             width: 20px;
             display: inline-block;
         }
-        .signatures-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            padding: 0 20px;
+        .signature-table {
+            width: 100%;
+            margin-top: 10px;
+            border-spacing: 0 20px; /* Menambahkan jarak antar baris tabel */
         }
-        .signature-left {
-            width: 250px;
-            text-align: left;
-        }
-        .signature-right {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            width: 250px;
+        .signature-table td {
+            text-align: center; /* Semua teks di tengah secara horizontal */
+            vertical-align: top; /* Semua teks di atas secara vertikal */
+            padding: 5px; /* Memberikan jarak dalam sel */
+            width: 33.33%; /* Membagi lebar kolom tabel secara simetris */
         }
         .qr-code {
             width: 120px;
             height: 120px;
+            margin: 0 auto;
         }
         .qr-code img {
             width: 100%;
@@ -90,25 +83,33 @@
         .signature-text {
             margin: 0;
             line-height: 1.8;
+            text-align: left; /* Rata kiri untuk teks dalam kolom */
         }
         .footer-note {
-            margin-top: 50px;
+            margin-top: 10px;
             font-size: 11px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <img src="logo.png" alt="Logo Polinema" class="logo">
-            <div class="header-text">
-                <h3>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI</h3>
-                <h3>POLITEKNIK NEGERI MALANG</h3>
-                <h3>PROGRAM STUDI TEKNIK INFORMATIKA</h3>
-                <p>Jl. Soekarno Hatta No.9 Malang 65141</p>
-                <p>Telp. 0341404424 Fax. 0341404420, http://www.poltek-malang.ac.id</p>
-            </div>
-        </div>
+        <!-- Header menggunakan tabel -->
+        <table class="header-table">
+            <tr>
+                <!-- Kolom pertama untuk logo -->
+                <td style="width: 100px; padding-right: 20px;">
+                    <img class="logo" src="adminlte/dist/img/polinema.png" alt="Logo Polinema">
+                </td>
+                <!-- Kolom kedua untuk teks header -->
+                <td class="header-text">
+                    <h3>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET DAN TEKNOLOGI</h3>
+                    <h3>POLITEKNIK NEGERI MALANG</h3>
+                    <h3>PROGRAM STUDI TEKNIK INFORMATIKA</h3>
+                    <p>Jl. Soekarno Hatta No.9 Malang 65141</p>
+                    <p>Telp. 0341404424 Fax. 0341404420, http://www.poltek-malang.ac.id</p>
+                </td>
+            </tr>
+        </table>
 
         <div class="divider"></div>
 
@@ -153,7 +154,7 @@
             <div class="content-row">
                 <span class="label">Pekerjaan</span>
                 <span class="colon">:</span>
-                <span>{{ $progress->kompen->nama }}</span>
+                <span>{{ $progress->kompen->nama_kompen }}</span>
             </div>
             <div class="content-row">
                 <span class="label">Jumlah Jam</span>
@@ -162,24 +163,29 @@
             </div>
         </div>
 
-        <div class="signatures-container">
-            <div class="signature-left">
-                <p class="signature-text">Mengetahui,</p>
-                <p class="signature-text">Ka. Program Studi</p>
-                <br><br><br>
-                <p class="signature-text">(Hendra Pradibta, SE., M.Sc.)</p>
-                <p class="signature-text">NIP. 198305212006041003</p>
-            </div>
-            <div class="signature-right">
-                <div class="qr-code">
-                    <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code">
-                </div>
-                <p class="signature-text">Malang, ........................</p>
-                <p class="signature-text">Yang memberikan rekomendasi,</p>
-                <p class="signature-text">(.....................................)</p>
-                <p class="signature-text">NIP.</p>
-            </div>
-        </div>
+        <table class="signature-table">
+            <tr>
+                <td>
+                    <p class="signature-text">Mengetahui,</p>
+                    <p class="signature-text">Ka. Program Studi</p>
+                    <br><br><br>
+                    <p class="signature-text">(Hendra Pradibta, SE., M.Sc.)</p>
+                    <p class="signature-text">NIP. 198305212006041003</p>
+                </td>
+                <td>
+                    <div class="qr-code">
+                        <img src="data:image/png;base64,{{ base64_encode($qrCode) }}" alt="QR Code">
+                    </div>
+                </td>
+                <td>
+                    <p class="signature-text">Malang, ........................</p>
+                    <p class="signature-text">Yang memberikan rekomendasi,</p>
+                    <br><br><br>
+                    <p class="signature-text">(.....................................)</p>
+                    <p class="signature-text">NIP.</p>
+                </td>
+            </tr>
+        </table>
 
         <div class="footer-note">
             <p>FRM.RIF.01.07.03</p>

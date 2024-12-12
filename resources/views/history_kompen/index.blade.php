@@ -16,13 +16,15 @@
         @if (!in_array(auth()->user()->level_id, [3, 4]))
         <div class="row mb-3">
             <div class="col-md-3">
-                <label for="filterLevel">Filter Level</label>
-                <select id="filterLevel" class="form-control">
-                    <option value="">- Semua -</option>
-                    <option value="1">Admin</option>
-                    <option value="3">Dosen</option>
-                    <option value="4">Tendik</option>
-                </select>
+                <div class="form-inline">
+                    <label for="filterLevel" class="mr-2">Filter Level</label>
+                    <select id="filterLevel" class="form-control">
+                        <option value="">- Semua -</option>
+                        <option value="1">Admin</option>
+                        <option value="3">Dosen</option>
+                        <option value="4">Tendik</option>
+                    </select>
+                </div>
             </div>
         </div>
         @endif
