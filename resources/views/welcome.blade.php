@@ -8,11 +8,11 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <!-- Left side: Small boxes -->
-            <div class="col-lg-6">
+            <!-- Small boxes section -->
+            <div class="col-lg-12">
                 <div class="row">
                     <!-- Menampilkan Jumlah Kompen -->
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $jumlahKompen }}</h3>
@@ -25,7 +25,7 @@
                     </div>
 
                     <!-- Menampilkan Jumlah User -->
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-6">
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ $jumlahUser }}</h3>
@@ -38,7 +38,7 @@
                     </div>
 
                     <!-- Menampilkan Jumlah Kompen Selesai -->
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-6">
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ $jumlahKompenSelesai }}</h3>
@@ -51,7 +51,7 @@
                     </div>
 
                     <!-- Menampilkan Jumlah Bidang Kompetensi -->
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-6">
                         <div class="small-box bg-warning">
                             <div class="inner">
                                 <h3>{{ $jumlahKompentensi }}</h3>
@@ -64,7 +64,7 @@
                     </div>
 
                     <!-- Menampilkan Jumlah Mahasiswa Kompen -->
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-6">
                         <div class="small-box bg-danger">
                             <div class="inner">
                                 <h3>{{ $jumlahMahasiswaKompen }}</h3>
@@ -77,7 +77,7 @@
                     </div>
 
                     <!-- Menampilkan Jumlah Jenis Kompen -->
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-6">
                         <div class="small-box bg-secondary">
                             <div class="inner">
                                 <h3>{{ $jumlahJenisKompen }}</h3>
@@ -90,15 +90,15 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Right side: Data Chart -->
-            <div class="col-lg-6">
+            
+            <!-- Data Chart section -->
+            <div class="col-lg-12 mt-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Data Chart</h3>
+                        <h3 class="card-title">Data Kompen</h3>
                     </div>
                     <div class="card-body">
-                        <canvas id="myChart" width="700" height="300"></canvas>
+                        <canvas id="myChart" width="1200" height="500"></canvas> <!-- Adjusted size for larger chart -->
                     </div>
                 </div>
             </div>
