@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class MahasiswaKompen extends Model
 {
@@ -19,6 +20,8 @@ class MahasiswaKompen extends Model
         'UUID_Kompen',
         'nama',
         'status_Acc',
+        'kelas', // Adding kelas field
+        'semester', // Adding semester field
     ];
 
     // Relasi ke model LevelModel
@@ -32,8 +35,16 @@ class MahasiswaKompen extends Model
     {
         return $this->belongsTo(KompenModel::class, 'UUID_Kompen', 'UUID_Kompen');
     }
-    public function progress()
-{
-    return $this->hasOne(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen');
-}
+
+    // Relasi ke model ProgressModel
+    public function progress(): HasOne
+    {
+        return $this->hasOne(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen');
+    }
+
+    // Relasi ke model UserModel
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(UserModel::class, 'ni', 'ni');
+    }
 }

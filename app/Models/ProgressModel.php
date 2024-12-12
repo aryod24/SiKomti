@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\KompenModel;
+use App\Models\MahasiswaAlpha;
 
 class ProgressModel extends Model
 {
@@ -23,6 +24,8 @@ class ProgressModel extends Model
         'nama',
         'jam_kompen',
         'status_acc',
+        'kelas', // Adding kelas field
+        'semester', // Adding semester field
     ];
 
     public function kompen()
@@ -32,7 +35,12 @@ class ProgressModel extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'ni', 'ni');
+        return $this->belongsTo(UserModel::class, 'ni', 'ni');
+    }
+
+    public function mahasiswaAlpha()
+    {
+        return $this->belongsTo(MahasiswaAlpha::class, 'ni', 'ni')->where('semester', $this->semester);
     }
 
     public function getJamKompenAttribute()
