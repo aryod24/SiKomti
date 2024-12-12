@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('ni', 18)->nullable();
             $table->char('UUID_Kompen', 36)->nullable();
             $table->boolean('status_Acc')->nullable();
+            $table->string('kelas')->nullable(); // Adding kelas column
+            $table->string('semester')->nullable(); // Adding semester column
             $table->timestamps();
 
             // Pastikan kolom ni diindeks sebelum menambahkan foreign key

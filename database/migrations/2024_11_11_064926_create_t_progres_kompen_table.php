@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('nama', 100)->nullable();
             $table->integer('jam_kompen')->nullable(); // Added jam_kompen column
             $table->boolean('status_acc')->nullable(); // Added status_acc column
+            $table->string('kelas')->nullable(); // Adding kelas column
+            $table->string('semester')->nullable(); // Adding semester column
             $table->timestamps();
 
             $table->foreign('UUID_Kompen')->references('UUID_Kompen')->on('t_kompen')->onDelete('set null');

@@ -16,36 +16,83 @@ class UserSeeder extends Seeder
         DB::table('m_user')->insert([
             [
                 'username' => 'admin',
-                'password' => Hash::make('12345'),
+                'password' => Hash::make('12345'), 
                 'nama' => 'Administrator',
-                'jurusan' => null, // Jurusan null untuk admin
-                'ni' => null, // NI null untuk admin
-                'level_id' => 1
+                'jurusan' => null, 
+                'ni' => null, 
+                'level_id' => 1,
+                'created_at' => now(),
+                'updated_at' => '2024-12-03 18:09:07',
+                'avatar' => '1733274547.jpg',
+                'kelas' => null, 
+                'semester' => null 
             ],
             [
                 'username' => 'mahasiswa',
-                'password' => Hash::make('12345'),
+                'password' => Hash::make('12345'), 
                 'nama' => 'Mahasiswa',
-                'jurusan' => 'Informatika', // Jurusan untuk mahasiswa
+                'jurusan' => 'Informatika', 
                 'ni' => '2241760074',
-                'level_id' => 2
+                'level_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'avatar' => null,
+                'kelas' => 'Kelas A', 
+                'semester' => 'Semester 1' 
             ],
             [
                 'username' => 'dosen',
-                'password' => Hash::make('12345'),
+                'password' => Hash::make('12345'), 
                 'nama' => 'Dosen',
-                'jurusan' => 'Sistem Informasi', // Jurusan untuk dosen
+                'jurusan' => 'Sistem Informasi', 
                 'ni' => '22471199238',
-                'level_id' => 3
+                'level_id' => 3,
+                'created_at' => now(),
+                'updated_at' => '2024-12-03 08:02:37',
+                'avatar' => '1733232510.png',
+                'kelas' => null, 
+                'semester' => null 
             ],
             [
                 'username' => 'tendik',
-                'password' => Hash::make('12345'),
+                'password' => Hash::make('12345'), 
                 'nama' => 'Tendik',
-                'jurusan' => null, // Jurusan null untuk tendik
-                'ni' => null, // NI null untuk tendik
-                'level_id' => 4
+                'jurusan' => null, 
+                'ni' => null, 
+                'level_id' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+                'avatar' => null,
+                'kelas' => null, 
+                'semester' => null 
             ],
+            [
+                'username' => 'aryods',
+                'password' => Hash::make('12345'), 
+                'nama' => 'Aryo Wahyu N',
+                'jurusan' => 'Teknik Infor', 
+                'ni' => '2241760077',
+                'level_id' => 2,
+                'created_at' => '2024-11-22 00:38:07',
+                'updated_at' => '2024-11-23 23:47:26',
+                'avatar' => null,
+                'kelas' => 'Kelas B', 
+                'semester' => 'Semester 2' 
+            ],
+            [
+                'username' => 'aryow',
+                'password' => Hash::make('12345'), 
+                'nama' => 'Aryo Wahyu',
+                'jurusan' => 'Sistem Info', 
+                'ni' => '2241760099',
+                'level_id' => 2,
+                'created_at' => '2024-11-23 07:23:31',
+                'updated_at' => '2024-11-23 07:23:31',
+                'avatar' => null,
+                'kelas' => 'Kelas C', 
+                'semester' => 'Semester 3' 
+            ]
+            // Add more entries as needed
         ]);
     }
 }

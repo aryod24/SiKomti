@@ -25,6 +25,10 @@ return new class extends Migration
 
             // Adding avatar column
             $table->string('avatar')->nullable();
+
+            // Adding kelas and semester columns
+            $table->string('kelas')->nullable();
+            $table->string('semester')->nullable();
         });
 
         // Menambahkan indeks pada kolom ni

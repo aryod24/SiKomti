@@ -24,14 +24,15 @@ return new class extends Migration
             $table->boolean('Is_Selesai')->nullable();
             $table->unsignedBigInteger('id_kompetensi')->nullable();
             $table->string('periode_kompen', 50)->nullable();
-            $table->unsignedBigInteger('user_id')->nullable(); // Ensure this column is added
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
+            $table->string('nama')->nullable(); // Adding the nama field
             $table->timestamps();
 
             $table->primary('UUID_Kompen');
             $table->foreign('jenis_tugas')->references('id_tugas')->on('m_jenis_tugas')->onDelete('set null');
             $table->foreign('id_kompetensi')->references('id_kompetensi')->on('m_bidang_kompetensi')->onDelete('set null');
-            $table->foreign('user_id')->references('user_id')->on('m_user'); // Add the foreign key constraint here
+            $table->foreign('user_id')->references('user_id')->on('m_user');
             $table->foreign('level_id')->references('level_id')->on('m_user')->onDelete('set null');
 
             // Adding index for jam_kompen

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ni', 18)->nullable();
             $table->string('nama', 100)->nullable();
             $table->integer('jam_alpha')->nullable();
-            $table->string('semester', 10); // Added semester field
+            $table->integer('semester'); // Changed semester field to integer
             $table->integer('jam_kompen')->nullable(); // Added jam_kompen field
             $table->timestamps();
 
