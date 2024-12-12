@@ -201,11 +201,13 @@ Route::prefix('history-kompen')->group(function () {
     Route::get('/', [HistoryKompenController::class, 'index'])->name('history.index');
     // API untuk DataTables (list riwayat kompensasi)
     Route::get('/list', [HistoryKompenController::class, 'list'])->name('history.list');
+    // Route untuk menampilkan detail kompen
+    Route::get('/{UUID_Kompen}', [HistoryKompenController::class, 'show'])->name('history.show');
 });
+
 
 use App\Http\Controllers\HistoryMhsController;
 
-    Route::get('/historymhs', [HistoryMhsController::class, 'indexMhs'])->name('historymhs.index');
-    Route::get('/historykompenmhs', [HistoryMhsController::class, 'historyKompenMhs'])->name('historymhs.kompen');
-    Route::get('/historymhs/export-pdf', [HistoryMhsController::class, 'exportPdf'])->name('historymhs.exportPdf');
-    
+Route::get('/historymhs', [HistoryMhsController::class, 'indexMhs'])->name('historymhs.index');
+Route::get('/historykompenmhs', [HistoryMhsController::class, 'historyKompenMhs'])->name('historymhs.kompen');
+Route::get('/historymhs/export-pdf/{UUID_Kompen}', [HistoryMhsController::class, 'exportPdf'])->name('historymhs.exportPdf');
