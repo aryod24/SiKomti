@@ -122,15 +122,22 @@
                 </div>
                 
                 <!-- Periode Kompen -->
+                @if (auth()->check() && auth()->user()->level_id == 1)
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Periode Kompen</label>
                     <div class="col-11">
-                        <input type="text" class="form-control" id="periode_kompen" name="periode_kompen" value="{{ old('periode_kompen') }}">
+                        <select class="form-control" id="periode_kompen" name="periode_kompen">
+                            <option value="">- Pilih Periode -</option>
+                            @for ($year = 2021; $year <= 2024; $year++)
+                                <option value="{{ $year }}" {{ old('periode_kompen') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endfor
+                        </select>
                         @error('periode_kompen')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>
+                @endif
                 
                 <!-- Status Selesai -->
                 <div class="form-group row">
