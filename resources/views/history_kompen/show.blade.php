@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <th class="text-start">Jenis Tugas</th>
-                            <td class="text-start">{{ $kompen->jenisTugas->nama ?? 'Tidak Diketahui' }}</td>
+                            <td class="text-start">{{ $kompen->jenisTugas->jenis_tugas ?? 'Tidak Diketahui' }}</td>
                         </tr>
                         <tr>
                             <th class="text-start">Quota</th>
@@ -53,7 +53,7 @@
                         </tr>
                         <tr>
                             <th class="text-start">Kompetensi</th>
-                            <td class="text-start">{{ $kompen->kompetensi->nama ?? 'Tidak Diketahui' }}</td>
+                            <td class="text-start">{{ $kompen->kompetensi->nama_kompetensi ?? 'Tidak Diketahui' }}</td>
                         </tr>
                         <tr>
                             <th class="text-start">Periode Kompen</th>

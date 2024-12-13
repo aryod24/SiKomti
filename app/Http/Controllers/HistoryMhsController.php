@@ -53,7 +53,7 @@ class HistoryMhsController extends Controller
         
         // Generate QR code for single entry
         $qrCode = QrCode::size(150)->generate(
-            'Anda telah menyelesaikan kompen ' . $progress->kompen->nama_kompen . ' dengan UUID: ' . $progress->UUID_Kompen . "\n" .
+            'Anda telah menyelesaikan ' . $progress->kompen->nama_kompen . ' dengan UUID: ' . $progress->UUID_Kompen . "\n" .
             'Oleh: ' . $progress->kompen->user->nama . "\n" .
             'Jam Kompen berjumlah: ' . $progress->kompen->jam_kompen . "\n" .
             'Detail Mahasiswa:' . "\n" .
