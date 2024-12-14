@@ -1,48 +1,60 @@
 @extends('layouts.template')
 
 @section('content')
-<div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">Daftar Kompen</h3>
-    </div>
-    <div class="card-body">
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group row">
-                    <label class="col-1 control-label col-form-label">Filter:</label>
-                    <div class="col-3">
-                        <select class="form-control" id="level_id" name="level_id">
-                            <option value="">- Semua -</option>
-                            <option value="1">Admin</option>
-                            <option value="3">Dosen</option>
-                            <option value="4">Tendik</option>
-                        </select>
+<div class="container-fluid" style="background-color: #f5f5f5;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-12">
+            <div class="card shadow-lg" style="border-radius: 10px; overflow: hidden; height: 100%; padding: 0;">
+                <!-- Header Card -->
+                <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+                    <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Pengajuan Kompen</h3>
+                </div>
+                <!-- Body Card -->
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+                    {{-- Cek jika level_id bukan 3 atau 4 --}}
+                    @if (!in_array(auth()->user()->level_id, [3, 4]))
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-1 control-label col-form-label">Filter:</label>
+                                <div class="col-3">
+                                    <select class="form-control" id="level_id" name="level_id">
+                                        <option value="">- Semua -</option>
+                                        <option value="1">Admin</option>
+                                        <option value="3">Dosen</option>
+                                        <option value="4">Tendik</option>
+                                    </select>
+                                </div>
+                                <small class="form-text text-muted">Level Pengguna</small>
+                            </div>
+                        </div>
                     </div>
-                    <small class="form-text text-muted">Level Pengguna</small>
+                    @endif
+
+                    <!-- Tabel -->
+                    <table class="table table-bordered table-striped table-hover table-sm" id="t_kompen">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kompen</th>
+                                <th>Deskripsi</th>
+                                <th>Jenis Tugas</th>
+                                <th>Pembuat Tugas</th>
+                                <th>Quota</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
-
-        <table class="table table-bordered table-striped table-hover table-sm" id="t_kompen">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Kompen</th>
-                    <th>Deskripsi</th>
-                    <th>Jenis Tugas</th>
-                    <th>Pembuat Tugas</th>
-                    <th>Quota</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-        </table>
     </div>
 </div>
 
@@ -69,44 +81,46 @@
 @endsection
 
 @push('css')
-<style>
-    .action-buttons {
-        display: flex;
-        gap: 5px;
-    }
-    .table {
-            border-radius: 0.5rem;
-            border-collapse: separate;
-            overflow: hidden;
-            background-color: #ffffff;
-            border: 1px solid #dee2e6;
-        }
+    <style>
+        /* Warna header tabel tetap biru dengan teks putih */
         .table thead {
-            background-color: #8fa0c0a4;
-            color: rgb(0, 0, 0);
+            background-color: #6b83a8; /* Warna header tabel */
+            color: #ffffff; /* Warna teks header */
         }
-        .table th, .table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #dee2e6;
-            background-color: #ffffff;
-        }
+
+        /* Semua baris tabel (ganjil dan genap) berwarna putih */
         .table tbody tr {
-            background-color: #ffffff;
-            transition: background-color 0.3s;
+            background-color: #ffffff !important; /* Latar belakang putih untuk semua baris */
         }
-        .table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+
+        /* Hover efek untuk baris */
         .table tbody tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f1f1f1; /* Latar belakang saat baris di-hover */
         }
-        .table th {
-            background-color: #6b83a8 !important;
-            color: #ffffff !important;
+
+        /* Border antar sel tabel */
+        .table td, .table th {
+            border: 1px solid #dddddd; /* Warna garis pembatas */
+        }
+
+        /* Judul Card di tengah */
+        .card-header h3.card-title {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center; /* Judul berada di tengah */
+            text-transform: none; /* Teks tidak sepenuhnya kapital */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Tombol aksi di tengah kolom */
+        .table td:last-child {
+            text-align: center; /* Menempatkan tombol di tengah */
         }
     </style>
-</style>
 @endpush
 
 @push('js')

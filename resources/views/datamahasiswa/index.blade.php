@@ -1,78 +1,97 @@
 @extends('layouts.template')
+
 @section('content')
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-            <h3 class="card-title">{{ $page->title }}</h3>
-            <div class="card-tools">
-                <button onclick="modalAction('{{ url('datamahasiswa/create') }}')" class="btn btn-sm btn-success mt-1">Tambah Data Mahasiswa Alpha</button>
+<div class="container-fluid" style="background-color: #f5f5f5;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-12">
+            <div class="card shadow-lg" style="border-radius: 10px; overflow: hidden; height: 100%; padding: 0;">
+                <!-- Header Card -->
+                <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+                    <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Data Mahasiswa</h3>
+                </div>
+                <!-- Body Card -->
+                <div class="card-body" style="text-align: right;">
+                    <button onclick="modalAction('{{ url('datamahasiswa/create') }}')" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Tambah Data Mahasiswa Alpha
+                    </button>
+                </div>
+                <!-- Tabel -->
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <!-- Tabel -->
+                    <table class="table table-bordered table-striped table-hover table-sm" id="m_mahasiswa_alpha">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NI</th>
+                                <th>Nama</th>
+                                <th>Semester</th>
+                                <th>Jam Alpha</th>
+                                <th>Jam Kompen</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-            <table class="table table-bordered table-striped table-hover table-sm" id="m_mahasiswa_alpha">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>NI</th>
-                        <th>Nama</th>
-                        <th>Semester</th>
-                        <th>Jam Alpha</th>
-                        <th>Jam Kompen</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
     </div>
-    <div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" databackdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade animate shake" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-width="75%" aria-hidden="true"></div>
+
 @endsection
 
 @push('css')
-    <style>
-        /* Styling untuk tabel */
-        .table {
-            border-radius: 0.5rem;
-            border-collapse: separate;
-            overflow: hidden;
-            background-color: #ffffff;
-            border: 1px solid #dee2e6;
-        }
+<style>
+/* Styling untuk tabel */
+.table {
+    border-radius: 0.5rem;
+    border-collapse: separate;
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+}
 
-        .table thead {
-            background-color: #8fa0c0a4;
-            color: rgb(0, 0, 0);
-        }
+.table thead {
+    background-color: #6b83a8;
+    color: #ffffff;
+}
 
-        .table th, .table td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #dee2e6;
-            background-color: #ffffff;
-        }
+.table th, .table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+    background-color: #ffffff; /* Pastikan setiap sel berwarna putih */
+}
 
-        .table tbody tr {
-            background-color: #ffffff;
-            transition: background-color 0.3s;
-        }
+.table tbody tr {
+    background-color: #ffffff; /* Pastikan baris tabel memiliki latar belakang putih */
+}
 
-        .table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+.table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* Pastikan baris genap tetap putih */
+}
 
-        .table tbody tr:hover {
-            background-color: #f1f1f1;
-        }
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Highlight saat hover */
+}
 
-        .table th {
-            background-color: #6b83a8 !important;
-            color: #ffffff !important;
-        }
-    </style>
+.table th {
+    background-color: #6b83a8 !important;
+    color: #ffffff !important;
+}
+</style>
 @endpush
 
 @push('js')
