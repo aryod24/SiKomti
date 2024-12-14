@@ -1,37 +1,46 @@
 @extends('layouts.template')
 
 @section('content')
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-            <h3 class="card-title">{{ $page->title }}</h3>
-        </div>
-        <div class="card-body">
-            <div id="alert-container"></div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_mhskompen">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama Kompen</th>
-                        <th>Deskripsi</th>
-                        <th>Quota</th>
-                        <th>Jam Kompen</th>
-                        <th>Tanggal Mulai</th>
-                        <th>Tanggal Akhir</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" id="modalContent">
-                <!-- Modal content will be loaded here -->
+<div class="container-fluid" style="background-color: #f5f5f5;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-12">
+            <div class="card shadow-lg" style="border-radius: 10px; overflow: hidden; height: 100%; padding: 0;">
+                <!-- Header Card -->
+                <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+                    <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;"> Daftar Kompen</h3>
+                </div>
+                <!-- Body Card -->
+                <div class="card-body">
+                    <div id="alert-container"></div>
+                    <!-- Tabel -->
+                    <table class="table table-bordered table-striped table-hover table-sm" id="table_mhskompen">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Kompen</th>
+                                <th>Deskripsi</th>
+                                <th>Quota</th>
+                                <th>Jam Kompen</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Akhir</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="modalContent">
+            <!-- Modal content will be loaded here -->
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('css')
@@ -43,29 +52,48 @@
             background-color: #ffffff;
             border: 1px solid #dee2e6;
         }
+
         .table thead {
-            background-color: #8fa0c0a4;
-            color: rgb(0, 0, 0);
+            background-color: #6b83a8;
+            color: #ffffff;
         }
+
         .table th, .table td {
             padding: 10px;
             text-align: left;
             border: 1px solid #dee2e6;
             background-color: #ffffff;
         }
+
         .table tbody tr {
             background-color: #ffffff;
             transition: background-color 0.3s;
         }
+
         .table tbody tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
         .table tbody tr:hover {
             background-color: #f1f1f1;
         }
+
         .table th {
             background-color: #6b83a8 !important;
             color: #ffffff !important;
+        }
+
+        /* Judul Card di tengah */
+        .card-header h3.card-title {
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: none;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
     </style>
 @endpush

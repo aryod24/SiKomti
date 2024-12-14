@@ -1,29 +1,44 @@
 @extends('layouts.template')
 
 @section('content')
-<div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">{{ $breadcrumb->title }}</h3>
-    </div>
-    <div class="card-body">
-        <table class="table table-bordered table-striped table-hover" id="t_kompen_mahasiswa">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Kompen</th>
-                    <th>Deskripsi</th>
-                    <th>Status</th>
-                    <th>Dosen Pembuat</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-        </table>
+<div class="container-fluid" style="background-color: #f5f5f5;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-12">
+            <div class="card shadow-lg" style="border-radius: 10px; overflow: hidden; height: 100%; padding: 0;">
+                <!-- Header Card -->
+                <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+                    <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">History Kompen</h3>
+                </div>
+                <!-- Body Card -->
+                <div class="card-body" style="text-align: right;">
+                    <!-- Action buttons (Optional, if needed) -->
+                    <!-- <a class="btn btn-primary" href="{{ url('kompen/create') }}">
+                        <i class="fas fa-plus"></i> Tambah Kompen
+                    </a> -->
+                </div>
+                <!-- Tabel -->
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-hover" id="t_kompen_mahasiswa">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kompen</th>
+                                <th>Deskripsi</th>
+                                <th>Status</th>
+                                <th>Dosen Pembuat</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
+
 @push('css')
     <style>
-        /* Styling untuk tabel */
         .table {
             border-radius: 0.5rem;
             border-collapse: separate;
@@ -41,20 +56,22 @@
             padding: 10px;
             text-align: left;
             border: 1px solid #dee2e6;
-            background-color: #ffffff;
         }
 
         .table tbody tr {
-            background-color: #ffffff;
             transition: background-color 0.3s;
         }
 
+        .table tbody tr:nth-child(odd) {
+            background-color: #ffffff; /* Baris ganjil berwarna putih */
+        }
+
         .table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; /* Baris genap berwarna abu-abu muda */
         }
 
         .table tbody tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f1f1f1; /* Latar belakang saat baris di-hover */
         }
 
         .table th {
@@ -78,8 +95,8 @@ $(document).ready(function() {
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'kompen.nama_kompen', name: 'kompen.nama_kompen' },
             { data: 'kompen.deskripsi', name: 'kompen.deskripsi' },
-            { data: 'kompen.Is_Selesai', name: 'is_selesai', render: data => data == 1 ? 'Selesai' : 'Belum Selesai' },
-            { data: 'kompen.nama', name: 'kompen.nama', defaultContent: '-' },
+            { data: 'status_acc', name: 'status_acc', render: data => data == 1 ? 'Selesai' : 'Belum Selesai' },
+            { data: 'kompen.user.nama', name: 'kompen.user.nama', defaultContent: '-' },
             { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
         ]
     });
