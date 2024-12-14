@@ -20,6 +20,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/profile') }}" class="nav-link {{ $activeMenu == 'profile' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Profile</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/mhskompen') }}" class="nav-link {{ $activeMenu == 'mhskompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Kompen</p>
@@ -37,9 +43,16 @@
                     <p>Hasil</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ url('/logout') }}" class="nav-link">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
         </ul>
     </nav>
 </div>
+
 <style>
     /* Custom CSS for Sidebar */
     .sidebar {
