@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Selamat datang di SiKomti</h3>
+    <div class="card-header text-center">
+        <h3 class="card-title" style="color: #415f8d; font-size: 36px; font-weight: bold;">Selamat datang di SiKomti</h3>
     </div>
     <div class="card-body">
         <!-- Section for the boxes -->
         <div class="row">
-            <!-- Loop for boxes -->
+            <!-- Box 1: Kompen -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="small-box bg-info">
+                <div class="small-box" style="background: linear-gradient(to right, #4e73df, #224abe); color: #fff;">
                     <div class="inner">
                         <h3>{{ $jumlahKompen }}</h3>
                         <p>Jumlah Kompen</p>
@@ -20,9 +20,10 @@
                     </div>
                 </div>
             </div>
-
+        
+            <!-- Box 2: User -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="small-box bg-success">
+                <div class="small-box" style="background: linear-gradient(to right, #1cc88a, #17a673); color: #fff;">
                     <div class="inner">
                         <h3>{{ $jumlahUser }}</h3>
                         <p>Jumlah User</p>
@@ -32,9 +33,10 @@
                     </div>
                 </div>
             </div>
-
+        
+            <!-- Box 3: Kompen Selesai -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="small-box bg-success">
+                <div class="small-box" style="background: linear-gradient(to right, #36b9cc, #2c9faf); color: #fff;">
                     <div class="inner">
                         <h3>{{ $jumlahKompenSelesai }}</h3>
                         <p>Jumlah Kompen Selesai</p>
@@ -44,9 +46,10 @@
                     </div>
                 </div>
             </div>
-
+        
+            <!-- Box 4: Kompetensi -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="small-box bg-warning">
+                <div class="small-box" style="background: linear-gradient(to right, #f6c23e, #d6a121); color: #fff;">
                     <div class="inner">
                         <h3>{{ $jumlahKompentensi }}</h3>
                         <p>Jumlah Bidang Kompetensi</p>
@@ -56,9 +59,10 @@
                     </div>
                 </div>
             </div>
-
+        
+            <!-- Box 5: Mahasiswa Kompen -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="small-box bg-danger">
+                <div class="small-box" style="background: linear-gradient(to right, #e74a3b, #c0392b); color: #fff;">
                     <div class="inner">
                         <h3>{{ $jumlahMahasiswaKompen }}</h3>
                         <p>Jumlah Mahasiswa Kompen</p>
@@ -68,9 +72,10 @@
                     </div>
                 </div>
             </div>
-
+        
+            <!-- Box 6: Jenis Kompen -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="small-box bg-secondary">
+                <div class="small-box" style="background: linear-gradient(to right, #858796, #636870); color: #fff;">
                     <div class="inner">
                         <h3>{{ $jumlahJenisKompen }}</h3>
                         <p>Jumlah Jenis Kompen</p>
@@ -80,7 +85,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
 
         <!-- Section for the chart -->
         <div class="row mt-4">
@@ -90,7 +95,7 @@
                         <h3 class="card-title">Data Chart</h3>
                     </div>
                     <div class="card-body">
-                        <canvas id="myChart" width="700" height="300"></canvas>
+                        <canvas id="myChart" width="700" height="400"></canvas>
                     </div>
                 </div>
             </div>
