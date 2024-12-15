@@ -16,7 +16,7 @@ class KompenSeeder extends Seeder
         DB::table('t_kompen')->insert([
             [
                 'UUID_Kompen' => '0b4639b8-b726-4471-8d1e-7cf334290e73',
-                'nama_kompen' => 'Kompen E',
+                'nama_kompen' => 'Kompen A',
                 'deskripsi' => 'Kompen Dosen Ditutup',
                 'jenis_tugas' => 3,
                 'quota' => 2,
@@ -35,8 +35,8 @@ class KompenSeeder extends Seeder
             ],
             [
                 'UUID_Kompen' => '2371e6e5-d5ba-4cc7-a329-86bab786457f',
-                'nama_kompen' => 'aaaa',
-                'deskripsi' => 'aaaa',
+                'nama_kompen' => 'Kompen B',
+                'deskripsi' => 'Kompen Dosen B',
                 'jenis_tugas' => 2,
                 'quota' => 2,
                 'jam_kompen' => 10,
@@ -54,7 +54,7 @@ class KompenSeeder extends Seeder
             ],
             [
                 'UUID_Kompen' => '5a4adcf0-ea21-4b5b-b022-2d196f518f79',
-                'nama_kompen' => 'Kompen D',
+                'nama_kompen' => 'Kompen C',
                 'deskripsi' => 'Kompen Dosen Dibuka',
                 'jenis_tugas' => 3,
                 'quota' => 2,
@@ -73,8 +73,8 @@ class KompenSeeder extends Seeder
             ],
             [
                 'UUID_Kompen' => 'a6c654e7-c8d0-47cf-9fb3-2c6da5108e57',
-                'nama_kompen' => 'Kompen 1',
-                'deskripsi' => 'Deskripsi Kompen 1',
+                'nama_kompen' => 'Kompen D',
+                'deskripsi' => 'Kompen D Admin',
                 'jenis_tugas' => 1,
                 'quota' => 10,
                 'jam_kompen' => 20,
@@ -92,8 +92,8 @@ class KompenSeeder extends Seeder
             ],
             [
                 'UUID_Kompen' => 'e503d618-0f49-4c29-b343-4399113c0e99',
-                'nama_kompen' => 'Kompen 2',
-                'deskripsi' => 'Deskripsi Kompen 2',
+                'nama_kompen' => 'Kompen E',
+                'deskripsi' => 'Kompen E Admin',
                 'jenis_tugas' => 2,
                 'quota' => 15,
                 'jam_kompen' => 25,

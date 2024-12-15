@@ -22,7 +22,8 @@ class BidangKompetensiSeeder extends Seeder
             ['nama_kompetensi' => 'Keamanan Informasi'],
             ['nama_kompetensi' => 'Pengolahan Data'],
             ['nama_kompetensi' => 'Pemrograman Mobile'],
-            ['nama_kompetensi' => 'Kecerdasan Buatan']
+            ['nama_kompetensi' => 'Kecerdasan Buatan'],
+            ['nama_kompetensi' => 'Lainnya']
         ]);
     }
 }

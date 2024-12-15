@@ -122,7 +122,7 @@ function showProgressModal(uuidKompen) {
                             <td>${index + 1}</td>
                             <td>${bukti.nama}</td>
                             <td>${bukti.nama_progres}</td>
-                            <td>${bukti.status_acc == 1 ? 'Approved' : 'Rejected'}</td>
+                            <td>${bukti.status_acc == 1 ? 'Approved' : bukti.status_acc == 0 ? 'Rejected' : 'Menunggu'}</td>
                             <td>${bukti.bukti_kompen}</td>
                             <td>
                                 <button class='btn btn-success btn-sm' onclick='updateStatus(${bukti.id_progres}, 1)'>Approve</button> 

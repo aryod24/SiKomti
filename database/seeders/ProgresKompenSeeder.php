@@ -22,8 +22,8 @@ class ProgresKompenSeeder extends Seeder
                 'nama' => 'Aryods',
                 'jam_kompen' => 15,
                 'status_acc' => 1,
-                'kelas' => null, // Adding kelas as null
-                'semester' => null, // Adding semester as null
+                'kelas' => 'SIB 3A', 
+                'semester' => 'Semester 5', 
                 'created_at' => '2024-11-23 22:07:24',
                 'updated_at' => '2024-12-03 07:07:35',
             ],
@@ -36,8 +36,8 @@ class ProgresKompenSeeder extends Seeder
                 'nama' => 'Aryo Wahyu N',
                 'jam_kompen' => 2,
                 'status_acc' => 0,
-                'kelas' => null, // Adding kelas as null
-                'semester' => null, // Adding semester as null
+                'kelas' => 'SIB 3A', 
+                'semester' => 'Semester 5', 
                 'created_at' => '2024-11-24 21:45:17',
                 'updated_at' => '2024-12-01 19:10:44',
             ],
@@ -50,8 +50,8 @@ class ProgresKompenSeeder extends Seeder
                 'nama' => 'Mahasiswa',
                 'jam_kompen' => 25,
                 'status_acc' => null,
-                'kelas' => null, // Adding kelas as null
-                'semester' => null, // Adding semester as null
+                'kelas' => 'SIB 3A', 
+                'semester' => 'Semester 5', 
                 'created_at' => '2024-12-02 06:15:01',
                 'updated_at' => '2024-12-02 06:15:01',
             ],
@@ -64,8 +64,8 @@ class ProgresKompenSeeder extends Seeder
                 'nama' => 'Test data',
                 'jam_kompen' => 15,
                 'status_acc' => 1,
-                'kelas' => null, // Adding kelas as null
-                'semester' => null, // Adding semester as null
+                'kelas' => 'SIB 3A', 
+                'semester' => 'Semester 5', 
                 'created_at' => '2024-12-02 06:21:04',
                 'updated_at' => '2024-12-03 07:05:34',
             ],

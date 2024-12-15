@@ -15,7 +15,8 @@ class JenisTugasSeeder extends Seeder
         DB::table('m_jenis_tugas')->insert([
             ['jenis_tugas' => 'Penelitian'],
             ['jenis_tugas' => 'Pengabdian'],
-            ['jenis_tugas' => 'Teknis']
+            ['jenis_tugas' => 'Teknis'],
+            ['jenis_tugas' => 'Lainnya']
         ]);
     }
 }
