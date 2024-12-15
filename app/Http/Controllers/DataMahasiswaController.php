@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Barryvdh\DomPDF\Facade\Pdf;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 
 class DataMahasiswaController extends Controller
@@ -184,22 +186,26 @@ class DataMahasiswaController extends Controller
         }
         
     }
+ 
     public function export_excel()
     {
+        // Retrieve all data to be exported
         $data = MahasiswaAlpha::all();
-        
+    
+        // Load Excel library
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'ID');
-        $sheet->setCellValue('B1', 'NI');
+        $sheet = $spreadsheet->getActiveSheet();  // Get active sheet
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'NIM');
         $sheet->setCellValue('C1', 'Nama');
         $sheet->setCellValue('D1', 'Semester');
         $sheet->setCellValue('E1', 'Jam Alpha');
         $sheet->setCellValue('F1', 'Jam Kompen');
-        $sheet->getStyle('A1:F1')->getFont()->setBold(true);
-        
-        $row = 2;
-        foreach ($data as $value) {
+        $sheet->getStyle('A1:F1')->getFont()->setBold(true);  // Bold header
+    
+        $no = 1;  // Data row number starts from 1
+        $row = 2;  // Data starts from the second row
+        foreach ($data as $key => $value) {
             $sheet->setCellValue('A'.$row, $value->id_alpha);
             $sheet->setCellValue('B'.$row, $value->ni);
             $sheet->setCellValue('C'.$row, $value->nama);
@@ -207,33 +213,41 @@ class DataMahasiswaController extends Controller
             $sheet->setCellValue('E'.$row, $value->jam_alpha);
             $sheet->setCellValue('F'.$row, $value->jam_kompen);
             $row++;
+            $no++;
         }
-        
         foreach (range('A', 'F') as $columnID) {
-            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+            $sheet->getColumnDimension($columnID)->setAutoSize(true); // Set auto size for columns
         }
-        
-        $sheet->setTitle('Data Mahasiswa Alpha');
+    
+        $sheet->setTitle('Data Mahasiswa Alpha'); // Set sheet title
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $filename = 'Data Mahasiswa Alpha ' . now()->format('Y-m-d H:i:s') . '.xlsx';
-        
+        $filename = 'Data Mahasiswa Alpha ' . date('Y-m-d H:i:s') . '.xlsx';
+    
+        // Clear output buffer to avoid any extra content in the file
+        if (ob_get_contents()) ob_end_clean();
+    
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+    
         $writer->save('php://output');
         exit;
     }
     
-    
-    public function export_pdf()
-    {
-        $data = MahasiswaAlpha::all();
-        
-        // Ensure that the 'datamahasiswa.pdf' view exists and is structured correctly
-        $pdf = PDF::loadView('datamahasiswa.pdf', ['data' => $data]);
-        
-        // Make sure the file name includes a timestamp for uniqueness
-        return $pdf->download('Data Mahasiswa Alpha ' . now()->format('Y-m-d H:i:s') . '.pdf');
-    }
+
+public function export_pdf()
+{
+    $data = MahasiswaAlpha::all();
+
+    // Ensure the 'datamahasiswa.pdf' view exists
+    $pdf = PDF::loadView('datamahasiswa.pdf', ['data' => $data]);
+
+    // Return PDF response to prompt file download
+    return $pdf->download('Data Mahasiswa Alpha ' . now()->format('Y-m-d H:i:s') . '.pdf');
 }
-    
+}

@@ -6,6 +6,8 @@
             <div class="card-tools">
                 <button onclick="modalAction('{{ url('datamahasiswa/create') }}')" class="btn btn-sm btn-success mt-1">Tambah Data Mahasiswa Alpha</button>
                 <button class="btn btn-sm btn-primary mt-1" id="import-btn">Import Data Mahasiswa Alpha</button>
+                <a href="{{ route('datamahasiswa.export.excel') }}" class="btn btn-sm btn-success mt-1">Export Excel</a>
+                <a href="{{ route('datamahasiswa.export.pdf') }}" class="btn btn-sm btn-danger mt-1">Export PDF</a>
             </div>
         </div>
         <div class="card-body">
@@ -21,7 +23,10 @@
                     <label for="file_mahasiswa">Upload File (Excel):</label>
                     <input type="file" name="file_mahasiswa" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Import</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Import</button>
+                    <a href="{{ url('/template/alpha.xlsx') }}" class="btn btn-info" id="template-btn" style="display: none;">Download Template Excel</a>
+                </div>
             </form>
             <table class="table table-bordered table-striped table-hover table-sm" id="m_mahasiswa_alpha">
                 <thead>
@@ -41,9 +46,39 @@
 @endsection
 
 @push('css')
-    <style>
-        /* Tambahkan CSS sesuai kebutuhan */
-    </style>
+<style>
+    .table {
+        border-radius: 0.5rem;
+        border-collapse: separate;
+        overflow: hidden;
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+    }
+    .table thead {
+        background-color: #8fa0c0a4;
+        color: rgb(0, 0, 0);
+    }
+    .table th, .table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #dee2e6;
+        background-color: #ffffff;
+    }
+    .table tbody tr {
+        background-color: #ffffff;
+        transition: background-color 0.3s;
+    }
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .table th {
+        background-color: #6b83a8 !important;
+        color: #ffffff !important;
+    }
+</style>
 @endpush
 
 @push('js')
@@ -67,9 +102,15 @@
                 ]
             });
 
-            // Tampilkan form import saat tombol diklik
+            // Tampilkan form import dan tombol template saat tombol "Import" diklik
             $('#import-btn').click(function() {
                 $('#import-form').toggle();
+                $('#template-btn').toggle();
+            });
+
+            // Tampilkan template saat tombol diklik
+            $('#template-btn').click(function() {
+                window.location.href = "{{ url('public/template/alpha.xlsx') }}";
             });
         });
     </script>
