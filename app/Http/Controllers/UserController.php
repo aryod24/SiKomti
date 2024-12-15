@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\LevelModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -157,5 +160,124 @@ class UserController extends Controller
             // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/user')->with('error', 'Data user gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
+    }
+    public function importMahasiswa(Request $request)
+    {
+        $rules = [
+            'file_mahasiswa' => ['required', 'mimes:xlsx,xls', 'max:1024'], // Allow both .xlsx and .xls
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        $file = $request->file('file_mahasiswa');
+        $reader = IOFactory::createReader('Xlsx');
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($file->getRealPath());
+        $sheet = $spreadsheet->getActiveSheet();
+        $data = $sheet->toArray(null, false, true, true);
+    
+        // Logging the data for debugging
+        Log::info('Imported Data:', $data);
+    
+        $insert = [];
+    
+        if (count($data) > 1) {
+            foreach ($data as $baris => $value) {
+                if ($baris > 1) {
+                    // Insert data, trimming extra spaces
+                    $insert[] = [
+                        'level_id' => 2, // level_id for mahasiswa
+                        'username' => trim($value['A']),
+                        'nama' => trim($value['B']),
+                        'jurusan' => trim($value['C']),
+                        'ni' => trim($value['D']),
+                        'password' => bcrypt(trim($value['E'])),
+                        'kelas' => trim($value['F']),
+                        'semester' => trim($value['G']),
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+            }
+    
+            // Check if the insert array is populated
+            Log::info('Data to be inserted:', $insert);
+    
+            // Insert data into the database
+            if (count($insert) > 0) {
+                try {
+                    UserModel::insertOrIgnore($insert);
+                } catch (\Exception $e) {
+                    Log::error('Error inserting data: ', ['error' => $e->getMessage()]);
+                }
+            }
+    
+            return redirect('/user')->with('success', 'Data mahasiswa berhasil diimport');
+        }
+    
+        return redirect()->back()->with('error', 'Tidak ada data yang diimport');
+    }
+    
+    public function importDosenTendik(Request $request)
+    {
+        $rules = [
+            'file_dosen_tendik' => ['required', 'mimes:xlsx,xls', 'max:1024'], // Allow both .xlsx and .xls
+        ];
+    
+        $validator = Validator::make($request->all(), $rules);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        $file = $request->file('file_dosen_tendik');
+        $reader = IOFactory::createReader('Xlsx');
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($file->getRealPath());
+        $sheet = $spreadsheet->getActiveSheet();
+        $data = $sheet->toArray(null, false, true, true);
+    
+        // Logging the data for debugging
+        Log::info('Imported Data:', $data);
+    
+        $insert = [];
+    
+        if (count($data) > 1) {
+            foreach ($data as $baris => $value) {
+                if ($baris > 1) {
+                    // Insert data, allowing jurusan to be null
+                    $insert[] = [
+                        'level_id' => trim($value['A']), // level_id for dosen or tendik
+                        'username' => trim($value['B']),
+                        'nama' => trim($value['C']),
+                        'jurusan' => trim($value['D']) !== '' ? trim($value['D']) : null, // Allow jurusan to be null
+                        'ni' => trim($value['E']),
+                        'password' => bcrypt(trim($value['F'])),
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+            }
+    
+            // Check if the insert array is populated
+            Log::info('Data to be inserted:', $insert);
+    
+            // Insert data into the database
+            if (count($insert) > 0) {
+                try {
+                    UserModel::insertOrIgnore($insert);
+                } catch (\Exception $e) {
+                    Log::error('Error inserting data: ', ['error' => $e->getMessage()]);
+                }
+            }
+    
+            return redirect('/user')->with('success', 'Data dosen/tendik berhasil diimport');
+        }
+    
+        return redirect()->back()->with('error', 'Tidak ada data yang diimport');
     }
 }

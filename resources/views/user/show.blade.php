@@ -30,9 +30,27 @@
                         <td>{{ $user->nama }}</td>
                     </tr>
                     <tr>
+                        <th>Jurusan</th>
+                        <td>{{ $user->jurusan }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nomor Induk</th>
+                        <td>{{ $user->ni }}</td>
+                    </tr>
+                    <tr>
                         <th>Password</th>
                         <td>****</td>
                     </tr>
+                    @if ($user->level_id == 2)
+                        <tr>
+                            <th>Kelas</th>
+                            <td>{{ $user->kelas }}</td>
+                        </tr>
+                        <tr>
+                            <th>Semester</th>
+                            <td>{{ $user->semester }}</td>
+                        </tr>
+                    @endif
                 </table>
             @endempty
         <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>

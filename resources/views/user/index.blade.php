@@ -6,6 +6,8 @@
         <h3 class="card-title">{{ $page->title }}</h3>
         <div class="card-tools">
             <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">Tambah</a>
+            <button class="btn btn-sm btn-success mt-1" id="import-mahasiswa-btn">Import Mahasiswa</button>
+            <button class="btn btn-sm btn-info mt-1" id="import-dosen-tendik-btn">Import Dosen/Tendik</button>
         </div>
     </div>
     <div class="card-body">
@@ -19,6 +21,33 @@
                 {{ session('error') }}
             </div>
         @endif
+
+        <!-- Form Import Mahasiswa -->
+        <form id="import-mahasiswa-form" action="{{ url('user/import/mahasiswa') }}" method="POST" enctype="multipart/form-data" style="display: none;">
+            @csrf
+            <div class="form-group">
+                <label for="file_mahasiswa">Upload File (Excel):</label>
+                <input type="file" name="file_mahasiswa" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Import</button>
+                <a href="{{ url('/template/usermhs.xlsx') }}" class="btn btn-info">Download Template Excel</a>
+            </div>
+        </form>
+
+        <!-- Form Import Dosen/Tendik -->
+        <form id="import-dosen-tendik-form" action="{{ url('user/import/dosen-tendik') }}" method="POST" enctype="multipart/form-data" style="display: none;">
+            @csrf
+            <div class="form-group">
+                <label for="file_dosen_tendik">Upload File (Excel):</label>
+                <input type="file" name="file_dosen_tendik" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Import</button>
+                <a href="{{ url('/template/dosen_tendik.xlsx') }}" class="btn btn-info">Download Template Excel</a>
+            </div>
+        </form>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group row">
@@ -95,57 +124,65 @@
             background-color: #6b83a8 !important; /* Warna latar belakang header biru */
             color: #ffffff !important; /* Warna teks header putih */
         }
-
     </style>
 @endpush
 @push('js')
     <script>
         $(document).ready(function() {
             var dataUser = $('#table_user').DataTable({
-                // serverSide: true, jika ingin menggunakan server side processing
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('user/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function (d) {
+                    url: "{{ url('user/list') }}",
+                    dataType: "json",
+                    type: "POST",
+                    data: function (d) {
                         d.level_id = $('#level_id').val();
                     }
                 },
-                columns: [{
-                    // nomor urut dari laravel datatable addIndexColumn()
-                    // nomor urut dari laravel datatable addIndexColumn()
-                    data: "DT_RowIndex",
-                    className: "text-center",
-                    orderable: false,
-                    searchable: false
-                }, {
-                    data: "username",
-                    className: "",
-                    // orderable: true, jika ingin kolom ini bisa diurutkan
-                    orderable: true,
-                    // searchable: true, jika ingin kolom ini bisa dicari
-                    searchable: true
-                }, {
-                    data: "nama",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    // mengambil data level hasil dari ORM berelasi
-                    data: "level.level_nama",
-                    className: "",
-                    orderable: false,
-                    searchable: false
-                }, {
-                    data: "aksi",
-                    className: "",
-                    orderable: false,
-                    searchable: false
-                }]
+                columns: [
+                    {
+                        data: "DT_RowIndex",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "username",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "nama",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "level.level_nama",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "aksi",
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
             });
+
             $('#level_id').on('change', function() {
                 dataUser.ajax.reload();
+            });
+
+            // Tampilkan form import mahasiswa saat tombol diklik
+            $('#import-mahasiswa-btn').click(function() {
+                $('#import-mahasiswa-form').toggle();
+                $('#import-dosen-tendik-form').hide(); // Sembunyikan form dosen/tendik jika terlihat
+            });
+
+            // Tampilkan form import dosen/tendik saat tombol diklik
+            $('#import-dosen-tendik-btn').click(function() {
+                $('#import-dosen-tendik-form').toggle();
+                $('#import-mahasiswa-form').hide(); // Sembunyikan form mahasiswa jika terlihat
             });
         });
     </script>

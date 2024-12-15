@@ -1,21 +1,23 @@
 @extends('layouts.template')
 @section('content')
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-            <h3 class="card-title">{{ $page->title }}</h3>
-            <div class="card-tools"></div>
-        </div>
-        <div class="card-body">
-            @empty($user)
-                <div class="alert alert-danger alert-dismissible">
-                    <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
-                    Data yang Anda cari tidak ditemukan.
-                </div>
-                <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
-            @else
-                <form method="POST" action="{{ url('/user/' . $user->user_id) }}" class="formhorizontal">
-                    @csrf
-                    {!! method_field('PUT') !!} <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
+<div class="card card-outline card-primary">
+    <div class="card-header">
+        <h3 class="card-title">{{ $page->title }}</h3>
+        <div class="card-tools"></div>
+    </div>
+    <div class="card-body">
+        @empty($user)
+            <div class="alert alert-danger alert-dismissible">
+                <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
+                Data yang Anda cari tidak ditemukan.
+            </div>
+            <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+        @else
+            <form method="POST" action="{{ url('/user/' . $user->user_id) }}" class="form-horizontal">
+                @csrf
+                @method('PUT')
+                
+                @if(in_array($user->level_id, [1, 3, 4]))
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Level</label>
                         <div class="col-11">
@@ -23,7 +25,8 @@
                                 <option value="">- Pilih Level -</option>
                                 @foreach ($level as $item)
                                     <option value="{{ $item->level_id }}" @if ($item->level_id == $user->level_id) selected @endif>
-                                        {{ $item->level_nama }}</option>
+                                        {{ $item->level_nama }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('level_id')
@@ -31,50 +34,91 @@
                             @enderror
                         </div>
                     </div>
+                @endif
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Username</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="username" name="username" value="{{ old('username', $user->username) }}" required>
+                        @error('username')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Nama</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama', $user->nama) }}" required>
+                        @error('nama')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Password</label>
+                    <div class="col-11">
+                        <input type="password" class="form-control" id="password" name="password">
+                        @error('password')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @else
+                            <small class="form-text text-muted">Abaikan (jangan diisi) jika tidak ingin mengganti password user.</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Jurusan</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ old('jurusan', $user->jurusan) }}">
+                        @error('jurusan')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Nomor Induk</label>
+                    <div class="col-11">
+                        <input type="text" class="form-control" id="ni" name="ni" value="{{ old('ni', $user->ni) }}" required>
+                        @error('ni')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+
+                @if($user->level_id == 2)
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Username</label>
+                        <label class="col-1 control-label col-form-label">Kelas</label>
                         <div class="col-11">
-                            <input type="text" class="form-control" id="username" name="username"
-                                value="{{ old('username', $user->username) }}" required>
-                            @error('username')
+                            <input type="text" class="form-control" id="kelas" name="kelas" value="{{ old('kelas', $user->kelas) }}" required>
+                            @error('kelas')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
+
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Nama</label>
+                        <label class="col-1 control-label col-form-label">Semester</label>
                         <div class="col-11">
-                            <input type="text" class="form-control" id="nama" name="nama"
-                                value="{{ old('nama', $user->nama) }}" required>
-                            @error('nama')
+                            <input type="text" class="form-control" id="semester" name="semester" value="{{ old('semester', $user->semester) }}" required>
+                            @error('semester')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Password</label>
-                        <div class="col-11">
-                            <input type="password" class="form-control" id="password" name="password">
-                            @error('password')
-                                <small class="form-text text-danger">{{ $message }}</small>
-                            @else
-                                <small class="form-text text-muted">Abaikan (jangan diisi) jika tidak ingin
-                                    mengganti password user.</small>
-                            @enderror
-                        </div>
+                @endif
+
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label"></label>
+                    <div class="col-11">
+                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                        <a class="btn btn-sm btn-default ml-1" href="{{ url('user') }}">Kembali</a>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-1 control-label col-form-label"></label>
-                        <div class="col-11">
-                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                            <a class="btn btn-sm btn-default ml-1" href="{{ url('user') }}">Kembali</a>
-                        </div>
-                    </div>
-                </form>
-            @endempty
-        </div>
+                </div>
+            </form>
+        @endempty
     </div>
+</div>
 @endsection
-@push('css')
-@endpush
-@push('js')
