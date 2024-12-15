@@ -1,26 +1,32 @@
 @extends('layouts.template')
-
 @section('content')
 <div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">{{ $breadcrumb->title }}</h3>
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Hasil Kompen</h3>     
     </div>
     <div class="card-body">
-        <table class="table table-bordered table-striped table-hover" id="t_kompen_mahasiswa">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Kompen</th>
-                    <th>Deskripsi</th>
-                    <th>Status</th>
-                    <th>Dosen Pembuat</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-        </table>
+        <div class="card-tools mb-3 text-right">  
+                <!-- Body Card -->
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-hover" id="t_kompen_mahasiswa">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kompen</th>
+                                <th>Deskripsi</th>
+                                <th>Status</th>
+                                <th>Dosen Pembuat</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
+
 @push('css')
 <style>
     .table {
@@ -54,6 +60,14 @@
         background-color: #6b83a8 !important;
         color: #ffffff !important;
     }
+
+    /* Align "Show entries" and pagination to the left */
+    .dataTables_length,
+    .dataTables_info {
+        float: left !important;
+        margin-bottom: 10px;
+    }
+
 </style>
 @endpush
 

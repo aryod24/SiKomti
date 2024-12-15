@@ -1,9 +1,8 @@
 @extends('layouts.template')
-
 @section('content')
 <div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">Daftar Kompen</h3>
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Progress Kompen</h3>     
     </div>
     <div class="card-body">
         @if (session('success'))

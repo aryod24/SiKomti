@@ -1,9 +1,11 @@
 @extends('layouts.template')
 @section('content')
 <div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">{{ $page->title }}</h3>
-        <div class="card-tools">
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Daftar Level</h3>     
+    </div>
+    <div class="card-body">
+        <div class="card-tools mb-3 text-right">  
             <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a>
         </div>
     </div>

@@ -1,11 +1,10 @@
 @extends('layouts.template')
-
 @section('content')
-    <div class="card card-outline card-primary">
-        <div class="card-header">
-            <h3 class="card-title">{{ $page->title }}</h3>
-        </div>
-        <div class="card-body">
+<div class="card card-outline card-primary">
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Progress Kompen</h3>     
+    </div>
+    <div class="card-body">
             <div id="alert-container"></div>
             <table class="table table-bordered table-striped table-hover table-sm" id="table_progress">
                 <thead>

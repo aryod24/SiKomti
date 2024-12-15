@@ -1,15 +1,11 @@
 @extends('layouts.template')
-
 @section('content')
-<div class="container-fluid" style="background-color: #f5f5f5;">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-12">
-            <div class="card shadow-lg" style="border-radius: 10px; overflow: hidden; height: 100%; padding: 0;">
-                <!-- Header Card -->
-                <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
-                    <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Data Mahasiswa</h3>
-                </div>
-                <!-- Body Card -->
+<div class="card card-outline card-primary">
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Data Mahasiswa Alpha</h3>     
+    </div>
+    <div class="card-body">
+        <div class="card-tools mb-3 text-right">  
                 <div class="card-body" style="text-align: right;">
                     <button onclick="modalAction('{{ url('datamahasiswa/create') }}')" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Tambah Data Mahasiswa Alpha
@@ -114,6 +110,12 @@
     background-color: #6b83a8 !important;
     color: #ffffff !important;
 }
+/* Align 'Show entries' dropdown to the left */
+.dataTables_length {
+    float: left;
+    margin-bottom: 10px;
+}
+
 </style>
 @endpush
 

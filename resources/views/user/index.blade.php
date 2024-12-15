@@ -1,9 +1,11 @@
 @extends('layouts.template')
-
 @section('content')
 <div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">{{ $page->title }}</h3>
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Daftar User</h3>     
+    </div>
+    <div class="card-body">
+        <div class="card-tools mb-3 text-right">  
         <div class="card-tools">
             <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">Tambah</a>
             <button class="btn btn-sm btn-success mt-1" id="import-mahasiswa-btn">Import Mahasiswa</button>

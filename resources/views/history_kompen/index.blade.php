@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">{{ $breadcrumb->title }}</h3>
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">History Kompen</h3>
     </div>
     <div class="card-body">
         @if (session('success'))
@@ -12,6 +12,7 @@
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
+
         {{-- Cek jika level_id bukan 3 atau 4 --}}
         @if (!in_array(auth()->user()->level_id, [3, 4]))
         <div class="row mb-3">
@@ -28,6 +29,8 @@
             </div>
         </div>
         @endif
+
+        <!-- Tabel -->
         <table class="table table-bordered table-striped table-hover table-sm" id="t_history_kompen">
             <thead>
                 <tr>
@@ -41,8 +44,8 @@
                 </tr>
             </thead>
         </table>
-    </div>
-</div>
+    </div> <!-- End of card-body -->
+</div> <!-- End of card -->
 @endsection
 
 @push('css')
@@ -54,29 +57,40 @@
         background-color: #ffffff;
         border: 1px solid #dee2e6;
     }
+
     .table thead {
         background-color: #8fa0c0a4;
         color: rgb(0, 0, 0);
     }
+
     .table th, .table td {
         padding: 10px;
         text-align: left;
         border: 1px solid #dee2e6;
         background-color: #ffffff;
     }
+
     .table tbody tr {
         background-color: #ffffff;
         transition: background-color 0.3s;
     }
+
     .table tbody tr:nth-child(even) {
         background-color: #f9f9f9;
     }
+
     .table tbody tr:hover {
         background-color: #f1f1f1;
     }
+
     .table th {
         background-color: #6b83a8 !important;
         color: #ffffff !important;
+    }
+
+    .dataTables_length {
+        float: left;
+        margin-bottom: 10px;
     }
 </style>
 @endpush
