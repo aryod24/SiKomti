@@ -48,8 +48,12 @@
 @endsection
 
 @push('css')
-    <style>
-        .table {
+<style>
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+    }
+    .table {
             border-radius: 0.5rem;
             border-collapse: separate;
             overflow: hidden;
@@ -64,9 +68,14 @@
             padding: 10px;
             text-align: left;
             border: 1px solid #dee2e6;
+            background-color: #ffffff;
         }
         .table tbody tr {
+            background-color: #ffffff;
             transition: background-color 0.3s;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
         .table tbody tr:hover {
             background-color: #f1f1f1;
@@ -76,6 +85,7 @@
             color: #ffffff !important;
         }
     </style>
+</style>
 @endpush
 
 @push('js')
