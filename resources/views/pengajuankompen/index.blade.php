@@ -145,7 +145,7 @@ function getKompenRequestByUuid(uuidKompen) {
             }
         },
         error: function() {
-            $('#request-body').html('<tr><td colspan="4" class="text-center">Gagal memuat data.</td></tr>');
+            $('#request-body').html('<tr><td colspan="4" class="text-center">Belum ada Request.</td></tr>');
         }
     });
 }

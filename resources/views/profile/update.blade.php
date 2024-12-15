@@ -73,12 +73,22 @@
                     </div>
                     <div class="form-group">
                         <label for="jurusan">Jurusan</label>
-                        <input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ auth()->user()->jurusan }}" required>
+                        <input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ auth()->user()->jurusan }}">
                     </div>
                     <div class="form-group">
-                        <label for="jurusan">NIM/NIK/NIP</label>
+                        <label for="ni">NIM/NIK/NIP</label>
                         <input type="text" class="form-control" id="ni" name="ni" value="{{ auth()->user()->ni }}" required>
                     </div>
+                    @if (auth()->user()->level_id == 2)
+                        <div class="form-group">
+                            <label for="kelas">Kelas</label>
+                            <input type="text" class="form-control" id="kelas" name="kelas" value="{{ auth()->user()->kelas }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <input type="text" class="form-control" id="semester" name="semester" value="{{ auth()->user()->semester }}">
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label for="password">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
                         <input type="password" class="form-control" id="password" name="password">
@@ -102,4 +112,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-‎resources/views/profile/updateImages.blade.php
