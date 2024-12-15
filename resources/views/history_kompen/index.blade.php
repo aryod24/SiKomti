@@ -34,9 +34,8 @@
                     <th>No</th>
                     <th>Nama Kompen</th>
                     <th>Deskripsi</th>
-                    <th>Jenis Tugas</th>
+                    <th>Pembuat Tugas</th>
                     <th>Quota</th>
-                    <th>Periode</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -99,9 +98,8 @@ $(document).ready(function() {
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'nama_kompen', name: 'nama_kompen' },
             { data: 'deskripsi', name: 'deskripsi' },
-            { data: 'jenis_tugas', name: 'jenis_tugas' },
+            { data: 'nama', name: 'nama' },
             { data: 'quota', name: 'quota' },
-            { data: 'periode_kompen', name: 'periode_kompen' },
             { data: 'is_selesai', name: 'is_selesai', render: function(data) {
                 return data == 1 ? 'Selesai' : 'Belum Selesai';
             }},
