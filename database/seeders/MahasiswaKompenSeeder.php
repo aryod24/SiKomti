@@ -20,8 +20,8 @@ class MahasiswaKompenSeeder extends Seeder
                 'nama' => null,
                 'UUID_Kompen' => 'a6c654e7-c8d0-47cf-9fb3-2c6da5108e57',
                 'status_Acc' => 1,
-                'kelas' => null, // Adding kelas as null
-                'semester' => null, // Adding semester as null
+                'kelas' => 'SIB 3A', // Adding kelas as null
+                'semester' => 'Semester 5', // Adding semester as null
                 'created_at' => now(),
                 'updated_at' => '2024-12-02 06:35:32'
             ],

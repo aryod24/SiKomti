@@ -37,8 +37,8 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
                 'avatar' => null,
-                'kelas' => 'Kelas A', 
-                'semester' => 'Semester 1' 
+                'kelas' => 'SIB 3A', 
+                'semester' => 'Semester 5' 
             ],
             [
                 'username' => 'dosen',
@@ -76,8 +76,8 @@ class UserSeeder extends Seeder
                 'created_at' => '2024-11-22 00:38:07',
                 'updated_at' => '2024-11-23 23:47:26',
                 'avatar' => null,
-                'kelas' => 'Kelas B', 
-                'semester' => 'Semester 2' 
+                'kelas' => 'SIB 3A', 
+                'semester' => 'Semester 5' 
             ],
             [
                 'username' => 'aryow',
@@ -89,8 +89,8 @@ class UserSeeder extends Seeder
                 'created_at' => '2024-11-23 07:23:31',
                 'updated_at' => '2024-11-23 07:23:31',
                 'avatar' => null,
-                'kelas' => 'Kelas C', 
-                'semester' => 'Semester 3' 
+                'kelas' => 'SIB 3A', 
+                'semester' => 'Semester 5' 
             ]
             // Add more entries as needed
         ]);
