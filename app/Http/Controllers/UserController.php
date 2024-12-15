@@ -58,21 +58,29 @@ class UserController extends Controller
         ];
         $level = LevelModel::all(); // Ambil data level untuk ditampilkan di form
         $activeMenu = 'user'; // Set menu yang sedang aktif
-        return view('user.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
+        return view('user.create', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'level' => $level,
+            'activeMenu' => $activeMenu
+        ]);
     }
+    
     // Menyimpan data user baru
     public function store(Request $request) {
+        // Validasi data input
         $request->validate([
-             // username harus diisi, berupa string, minimal 3 karakter, dan bernilai unik ditabel m_user komol username
-            'username' =>'required|string|min:3|unique:m_user,username',
-            'nama'     =>'required|string|max:100',
+            'username' => 'required|string|min:3|unique:m_user,username',
+            'nama'     => 'required|string|max:100',
             'jurusan'  => 'nullable|string|max:100',
             'ni'       => 'nullable|string|max:18',
-            'kelas'    => 'nullable|string|max:100', // Adding kelas as nullable
-            'semester' => 'nullable|string|max:100',  // Adding semester as nullable
-            'password' => 'required|min:5',
-            'level_id' =>'required|integer'
+            'kelas'    => 'nullable|string|max:100', // Kelas bersifat opsional
+            'semester' => 'nullable|string|max:100', // Semester bersifat opsional
+            'password' => 'required|string|min:5', // Password harus diisi
+            'level_id' => 'required|integer'
         ]);
+    
+        // Simpan data user ke dalam database dengan enkripsi password
         UserModel::create([
             'username' => $request->username,
             'nama'     => $request->nama,
@@ -80,11 +88,14 @@ class UserController extends Controller
             'ni'       => $request->ni,
             'kelas'    => $request->kelas,
             'semester' => $request->semester,
+            'password' => bcrypt($request->password), // Enkripsi password sebelum disimpan
             'level_id' => $request->level_id
         ]);
-
-        return redirect('/user')-> with('success', 'Data user berhasil dsimpan');
-     }
+    
+        // Redirect dengan pesan sukses
+        return redirect('/user')->with('success', 'Data user berhasil disimpan');
+    }
+    
      // Menampilkan halaman detail user
     public function show(string $id){
         $user = usermodel::with('level')->find($id);
