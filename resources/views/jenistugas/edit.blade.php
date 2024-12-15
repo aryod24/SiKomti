@@ -18,7 +18,7 @@
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Nama Jenis Tugas</label>
                         <div class="col-11">
-                            <input type="text" class="form-control" name="nama_jenis_tugas" value="{{ old('nama_jenis_tugas', $jenisTugas->jenis_tugas) }}" required>
+                            <input type="text" class="form-control" name="jenis_tugas" value="{{ old('jenis_tugas', $jenisTugas->jenis_tugas) }}" required>
                             @error('jenis_tugas')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror
