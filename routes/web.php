@@ -133,6 +133,7 @@ Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM'], fun
     Route::get('/{id_alpha}/edit', [DataMahasiswaController::class, 'edit']);    
     Route::put('/{id_alpha}', [DataMahasiswaController::class, 'update']);      
     Route::delete('/{id_alpha}', [DataMahasiswaController::class, 'destroy']);   
+    Route::post('/import_ajax', [DataMahasiswaController::class, 'import_ajax']);
 });
 use App\Http\Controllers\MhsKompenController;
 
