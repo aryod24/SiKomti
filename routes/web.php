@@ -102,7 +102,7 @@ Route::group(['prefix' => 'kompetensi', 'middleware' => 'authorize:ADM'], functi
 });
 
 
-Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM'], function() {
+Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM,DSN,TDK'], function() {
     Route::get('/', [DataMahasiswaController::class, 'index']);             
     Route::post('/list', [DataMahasiswaController::class, 'list']);         
     Route::get('/create', [DataMahasiswaController::class, 'create']);      
