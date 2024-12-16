@@ -61,6 +61,20 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- QR Code Display -->
+                <div class="qr-code my-4">
+                    <h5>Kode QR Kompensasi:</h5>
+                    <div class="text-center">{!! $qrCode !!}</div>
+                </div>
+
+                <!-- QR Code Reader -->
+                <div class="qr-code-reader my-4">
+                    <h5>Scan QR Code:</h5>
+                    <div id="reader" style="width: 300px; margin: auto;"></div>
+                    <div id="qr-result" class="mt-3 text-center"></div>
+                </div>
+
                 <h5 class="mt-4">Mahasiswa Kompen</h5>
                 <table class="table table-bordered table-hover table-sm mt-3">
                     <thead style="background-color: #6b83a8; color: white;">
@@ -108,7 +122,31 @@
 </style>
 @endpush
 @push('js')
+<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
 <script>
-    // Tambahkan skrip JavaScript tambahan jika diperlukan
+    document.addEventListener('DOMContentLoaded', () => {
+        const qrResultElement = document.getElementById('qr-result');
+        const html5QrCode = new Html5Qrcode("reader");
+
+        // Konfigurasi dan memulai pembaca QR Code
+        html5QrCode.start(
+            { facingMode: "environment" }, // Kamera belakang
+            {
+                fps: 10, // Frame per detik
+                qrbox: 250, // Ukuran kotak pembaca
+            },
+            (decodedText) => {
+                // Saat QR Code berhasil dibaca
+                qrResultElement.innerHTML = `<p class="text-success">Hasil QR Code: ${decodedText}</p>`;
+                html5QrCode.stop(); // Hentikan pembaca setelah membaca
+            },
+            (errorMessage) => {
+                // Kesalahan atau QR Code tidak terbaca
+                console.log("Peringatan:", errorMessage);
+            }
+        ).catch((err) => {
+            console.error("Kesalahan saat memulai pembaca QR Code:", err);
+        });
+    });
 </script>
 @endpush
