@@ -134,9 +134,10 @@
                         <div class="col-11">
                             <select class="form-control" name="periode_kompen">
                                 <option value="">- Pilih Periode -</option>
-                                @for ($year = 2021; $year <= 2024; $year++)
-                                    <option value="{{ $year }}" {{ old('periode_kompen', $kompen->periode_kompen) == $year ? 'selected' : '' }}>{{ $year }}</option>
-                                @endfor
+                                <option value="2023-Ganjil" {{ old('periode_kompen', $kompen->periode_kompen) == '2023-Ganjil' ? 'selected' : '' }}>2023 - Ganjil</option>
+                                <option value="2023-Genap" {{ old('periode_kompen', $kompen->periode_kompen) == '2023-Genap' ? 'selected' : '' }}>2023 - Genap</option>
+                                <option value="2024-Ganjil" {{ old('periode_kompen', $kompen->periode_kompen) == '2024-Ganjil' ? 'selected' : '' }}>2024 - Ganjil</option>
+                                <option value="2024-Genap" {{ old('periode_kompen', $kompen->periode_kompen) == '2024-Genap' ? 'selected' : '' }}>2024 - Genap</option>
                             </select>
                             @error('periode_kompen')
                                 <small class="form-text text-danger">{{ $message }}</small>
