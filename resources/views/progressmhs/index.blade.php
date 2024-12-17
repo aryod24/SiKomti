@@ -1,4 +1,5 @@
 @extends('layouts.template')
+<<<<<<< HEAD
 
 @section('content')
 <div class="container-fluid" style="background-color: #f5f5f5;">
@@ -30,6 +31,29 @@
         </div>
     </div>
 </div>
+=======
+@section('content')
+<div class="card card-outline card-primary">
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Progress Kompen</h3>     
+    </div>
+    <div class="card-body">
+            <div id="alert-container"></div>
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_progress">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Kompen</th>
+                        <th>Pembuat Tugas</th>
+                        <th>Status</th>
+                        <th>Aksi Request</th>
+                        <th>Aksi Progress</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
     <!-- Modal -->
     <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
@@ -58,24 +82,40 @@
 @endsection
 
 @push('css')
+<<<<<<< HEAD
     <style>
         .table {
+=======
+<style>
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+    }
+    .table {
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             border-radius: 0.5rem;
             border-collapse: separate;
             overflow: hidden;
             background-color: #ffffff;
             border: 1px solid #dee2e6;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         .table thead {
             background-color: #8fa0c0a4;
             color: rgb(0, 0, 0);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         .table th, .table td {
             padding: 10px;
             text-align: left;
             border: 1px solid #dee2e6;
+<<<<<<< HEAD
         }
 
         .table tbody tr {
@@ -94,12 +134,31 @@
             background-color: #f1f1f1; /* Latar belakang saat baris di-hover */
         }
 
+=======
+            background-color: #ffffff;
+        }
+        .table tbody tr {
+            background-color: #ffffff;
+            transition: background-color 0.3s;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         .table th {
             background-color: #6b83a8 !important;
             color: #ffffff !important;
         }
+<<<<<<< HEAD
 
     </style>
+=======
+    </style>
+</style>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 @endpush
 
 @push('js')

@@ -1,4 +1,5 @@
 @extends('layouts.template')
+<<<<<<< HEAD
 
 @section('content')
 <div class="container-fluid" style="background-color: #f5f5f5;">
@@ -10,10 +11,45 @@
                     <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Data Mahasiswa</h3>
                 </div>
                 <!-- Body Card -->
+=======
+@section('content')
+<div class="card card-outline card-primary">
+    <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
+        <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Data Mahasiswa Alpha</h3>     
+    </div>
+    <div class="card-body">
+        <div class="card-tools mb-3 text-right">  
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                 <div class="card-body" style="text-align: right;">
                     <button onclick="modalAction('{{ url('datamahasiswa/create') }}')" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Tambah Data Mahasiswa Alpha
                     </button>
+<<<<<<< HEAD
+=======
+                    <button class="btn btn-primary mt-1" id="import-btn">
+                        <i class="fas fa-upload"></i> Import Data Mahasiswa Alpha
+                    </button>
+                    <a href="{{ route('datamahasiswa.export.excel') }}" class="btn btn-success mt-1">
+                        <i class="fas fa-file-excel"></i> Export Excel
+                    </a>
+                    <a href="{{ route('datamahasiswa.export.pdf') }}" class="btn btn-danger mt-1">
+                        <i class="fas fa-file-pdf"></i> Export PDF
+                    </a>
+                </div>
+                <!-- Form Import -->
+                <div class="card-body" id="import-form" style="display: none;">
+                    <form action="{{ url('datamahasiswa/import_ajax') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label for="file_mahasiswa">Upload File (Excel):</label>
+                            <input type="file" name="file_mahasiswa" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Import</button>
+                            <a href="{{ url('/template/alpha.xlsx') }}" class="btn btn-info" id="template-btn" style="display: none;">Download Template Excel</a>
+                        </div>
+                    </form>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                 </div>
                 <!-- Tabel -->
                 <div class="card-body">
@@ -91,6 +127,15 @@
     background-color: #6b83a8 !important;
     color: #ffffff !important;
 }
+<<<<<<< HEAD
+=======
+/* Align 'Show entries' dropdown to the left */
+.dataTables_length {
+    float: left;
+    margin-bottom: 10px;
+}
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 </style>
 @endpush
 
@@ -119,6 +164,20 @@
                     {data: "aksi", className: "text-center", orderable: false, searchable: false}
                 ]
             });
+<<<<<<< HEAD
+=======
+
+            // Tampilkan form import saat tombol diklik
+            $('#import-btn').click(function() {
+                $('#import-form').toggle();
+                $('#template-btn').toggle();
+            });
+
+            // Tampilkan template saat tombol diklik
+            $('#template-btn').click(function() {
+                window.location.href = "{{ url('public/template/alpha.xlsx') }}";
+            });
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         });
     </script>
 @endpush

@@ -12,13 +12,13 @@ use App\Http\Controllers\DataMahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '[0-9]+');
-Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postlogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('register', [AuthController::class, 'register']);
 Route::post('register', [AuthController::class, 'store']);
 // Keep this route to point to the WelcomeController
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/welcome', [WelcomeController::class, 'index']);
 // Route::resource('level', LevelController::class);
 
 Route::middleware('auth')->group(function () {
@@ -40,6 +40,7 @@ Route::group(['prefix' => 'user', 'middleware'=>'authorize:ADM'], function() {
     Route::get('/{id}/show_ajax', [UserController::class, 'show_ajax']);
     Route::get('/{id}/edit', [UserController::class, 'edit']);  // menampilkan halaman form edit user
     Route::put('/{id}', [UserController::class, 'update']);     // menyimpan perubahan data user
+<<<<<<< HEAD
     Route::get('/{id}/edit_ajax', [UserController::class, 'edit_ajax']); // Menampilkan halaman form edit user Ajax
     Route::put('/{id}/update_ajax', [UserController::class, 'update_ajax']); // Menyimpan perubahan data user Ajax
     Route::get('/{id}/delete_ajax', [UserController::class, 'confirm_ajax']); // Untuk tampilkan form confirm delete user Ajax
@@ -51,6 +52,17 @@ Route::group(['prefix' => 'user', 'middleware'=>'authorize:ADM'], function() {
     Route::get('/export_pdf',[usercontroller::class,'export_pdf']); //ajax export pdf
 });
 
+=======
+    Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
+
+    // Rute untuk import mahasiswa
+    Route::post('/import/mahasiswa', [UserController::class, 'importMahasiswa']);
+    // Rute untuk import dosen/tendik
+    Route::post('/import/dosen-tendik', [UserController::class, 'importDosenTendik']);
+});
+
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 Route::group(['prefix' => 'level', 'middleware'=>'authorize:ADM'], function() {
     Route::get('/', [LevelController::class, 'index']);             
     Route::post('/list', [LevelController::class, 'list']);         
@@ -61,10 +73,13 @@ Route::group(['prefix' => 'level', 'middleware'=>'authorize:ADM'], function() {
     Route::get('/{id}', [LevelController::class, 'show']);         
     Route::get('/{id}/edit', [LevelController::class, 'edit']);    
     Route::put('/{id}', [LevelController::class, 'update']);      
+<<<<<<< HEAD
     Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']); 
     Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']); 
     Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']); 
     Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']); 
+=======
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     Route::delete('/{id}', [LevelController::class, 'destroy']);   
 });
 
@@ -80,6 +95,7 @@ Route::group(['prefix' => 'kompen', 'middleware'=>'authorize:ADM,DSN,TDK'], func
     Route::get('/{id}/show_ajax', [KompenController::class, 'show_ajax']); // Menampilkan detail kompen via Ajax
     Route::get('/{uuid}/edit', [KompenController::class, 'edit']);  // Menampilkan halaman form edit kompen
     Route::put('/{uuid}', [KompenController::class, 'update']);     // Menyimpan perubahan data kompen
+<<<<<<< HEAD
     Route::get('/{id}/edit_ajax', [KompenController::class, 'edit_ajax']); // Menampilkan halaman form edit kompen via Ajax
     Route::put('/{id}/update_ajax', [KompenController::class, 'update_ajax']); // Menyimpan perubahan data kompen via Ajax
     Route::get('/{id}/delete_ajax', [KompenController::class, 'confirm_ajax']); // Tampilkan form konfirmasi hapus kompen via Ajax
@@ -89,6 +105,9 @@ Route::group(['prefix' => 'kompen', 'middleware'=>'authorize:ADM,DSN,TDK'], func
     Route::post('/import_ajax', [KompenController::class, 'import_ajax']); // Proses import file excel via Ajax
     Route::get('/export_excel', [KompenController::class, 'export_excel']); // Export data kompen ke Excel
     Route::get('/export_pdf', [KompenController::class, 'export_pdf']); // Export data kompen ke PDF
+=======
+    Route::delete('/{uuid}', [KompenController::class, 'destroy']); // Menghapus data kompen
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 });
 Route::group(['prefix' => 'jenistugas', 'middleware' => 'authorize:ADM'], function() {
     Route::get('/', [JenisTugasController::class, 'index']);             
@@ -100,10 +119,13 @@ Route::group(['prefix' => 'jenistugas', 'middleware' => 'authorize:ADM'], functi
     Route::get('/{id}', [JenisTugasController::class, 'show']);         
     Route::get('/{id}/edit', [JenisTugasController::class, 'edit']);    
     Route::put('/{id}', [JenisTugasController::class, 'update']);      
+<<<<<<< HEAD
     Route::get('/{id}/edit_ajax', [JenisTugasController::class, 'edit_ajax']); 
     Route::put('/{id}/update_ajax', [JenisTugasController::class, 'update_ajax']); 
     Route::get('/{id}/delete_ajax', [JenisTugasController::class, 'confirm_ajax']); 
     Route::delete('/{id}/delete_ajax', [JenisTugasController::class, 'delete_ajax']); 
+=======
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     Route::delete('/{id}', [JenisTugasController::class, 'destroy']);   
 });
 Route::group(['prefix' => 'kompetensi', 'middleware' => 'authorize:ADM'], function() {
@@ -116,15 +138,22 @@ Route::group(['prefix' => 'kompetensi', 'middleware' => 'authorize:ADM'], functi
     Route::get('/{id}', [KompetensiController::class, 'show']);         
     Route::get('/{id}/edit', [KompetensiController::class, 'edit']);    
     Route::put('/{id}', [KompetensiController::class, 'update']);      
+<<<<<<< HEAD
     Route::get('/{id}/edit_ajax', [KompetensiController::class, 'edit_ajax']); 
     Route::put('/{id}/update_ajax', [KompetensiController::class, 'update_ajax']); 
     Route::get('/{id}/delete_ajax', [KompetensiController::class, 'confirm_ajax']); 
     Route::delete('/{id}/delete_ajax', [KompetensiController::class, 'delete_ajax']); 
+=======
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     Route::delete('/{id}', [KompetensiController::class, 'destroy']);   
 });
 
 
+<<<<<<< HEAD
 Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM'], function() {
+=======
+Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM,DSN,TDK'], function() {
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     Route::get('/', [DataMahasiswaController::class, 'index']);             
     Route::post('/list', [DataMahasiswaController::class, 'list']);         
     Route::get('/create', [DataMahasiswaController::class, 'create']);      
@@ -133,7 +162,16 @@ Route::group(['prefix' => 'datamahasiswa', 'middleware' => 'authorize:ADM'], fun
     Route::get('/{id_alpha}/edit', [DataMahasiswaController::class, 'edit']);    
     Route::put('/{id_alpha}', [DataMahasiswaController::class, 'update']);      
     Route::delete('/{id_alpha}', [DataMahasiswaController::class, 'destroy']);   
+<<<<<<< HEAD
 });
+=======
+    Route::post('/import_ajax', [DataMahasiswaController::class, 'import_ajax']);
+    Route::get('/export/excel', [DataMahasiswaController::class, 'export_excel'])->name('datamahasiswa.export.excel');
+    Route::get('/export/pdf', [DataMahasiswaController::class, 'export_pdf'])->name('datamahasiswa.export.pdf');
+    
+});
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 use App\Http\Controllers\MhsKompenController;
 
 Route::prefix('mhskompen')->group(function () {
@@ -170,6 +208,7 @@ Route::prefix('pengajuankompen')->group(function () {
 });
 use App\Http\Controllers\ProgressKompenController;
 
+<<<<<<< HEAD
 // Rute untuk menampilkan halaman awal kompen
 Route::get('/progresskompen', [ProgressKompenController::class, 'index'])->name('progresskompen.index');
 
@@ -192,6 +231,23 @@ Route::get('/progresskompen/detail-bukti/{uuidKompen}', [ProgressKompenControlle
 Route::get('/progresskompen/download-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDownloadBukti'])->name('progresskompen.download_bukti');
 
 Route::get('/progresskompen/{uuidKompen}/show', [ProgressKompenController::class, 'show'])->name('progresskompen.show');
+=======
+    // Rute untuk menampilkan halaman awal kompen
+    Route::get('/progresskompen', [ProgressKompenController::class, 'index'])->name('progresskompen.index');
+    // Rute untuk mengambil data kompen dalam bentuk JSON untuk DataTables
+    Route::get('/progresskompen/list', [ProgressKompenController::class, 'list'])->name('progresskompen.list');
+    // Rute untuk mengupdate bukti
+    Route::post('/progresskompen/update-bukti', [ProgressKompenController::class, 'updateBukti'])->name('progresskompen.update_bukti');
+    // Rute untuk melihat bukti berdasarkan UUID_Kompen
+    Route::get('/progresskompen/view-bukti/{uuidKompen}', [ProgressKompenController::class, 'viewBukti'])->name('progresskompen.view_bukti');
+    // Rute untuk menyelesaikan kompen berdasarkan UUID_Kompen
+    Route::post('/progresskompen/selesaikan/{uuidKompen}', [ProgressKompenController::class, 'selesaikanKompen'])->name('progresskompen.selesaikan');
+    // Rute untuk menampilkan detail bukti berdasarkan UUID_Kompen
+    Route::get('/progresskompen/detail-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDetailBukti'])->name('progresskompen.detail_bukti');
+    // Rute untuk mendownload bukti berdasarkan UUID_Kompen dan id_progres
+    Route::get('/progresskompen/download-bukti/{uuidKompen}', [ProgressKompenController::class, 'showDownloadBukti'])->name('progresskompen.download_bukti');
+    Route::get('/progresskompen/{uuidKompen}/show', [ProgressKompenController::class, 'show'])->name('progresskompen.show');
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
 use App\Http\Controllers\HistoryKompenController;
 
@@ -201,6 +257,7 @@ Route::prefix('history-kompen')->group(function () {
     Route::get('/', [HistoryKompenController::class, 'index'])->name('history.index');
     // API untuk DataTables (list riwayat kompensasi)
     Route::get('/list', [HistoryKompenController::class, 'list'])->name('history.list');
+<<<<<<< HEAD
 });
 
 use App\Http\Controllers\HistoryMhsController;
@@ -209,3 +266,16 @@ use App\Http\Controllers\HistoryMhsController;
     Route::get('/historykompenmhs', [HistoryMhsController::class, 'historyKompenMhs'])->name('historymhs.kompen');
     Route::get('/historymhs/export-pdf', [HistoryMhsController::class, 'exportPdf'])->name('historymhs.exportPdf');
     
+=======
+    // Route untuk menampilkan detail kompen
+    Route::get('/{UUID_Kompen}', [HistoryKompenController::class, 'show'])->name('history.show');
+});
+
+
+use App\Http\Controllers\HistoryMhsController;
+
+Route::get('/historymhs', [HistoryMhsController::class, 'indexMhs'])->name('historymhs.index');
+Route::get('/historykompenmhs', [HistoryMhsController::class, 'historyKompenMhs'])->name('historymhs.kompen');
+Route::get('/historymhs/export-pdf/{UUID_Kompen}', [HistoryMhsController::class, 'exportPdf'])->name('historymhs.exportPdf');
+Route::get('/historymhs/{UUID_Kompen}', [HistoryMhsController::class, 'show'])->name('historymhs.show');
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4

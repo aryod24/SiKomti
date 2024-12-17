@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\JenisTugas;
 use App\Models\KompenModel;
 use App\Models\LevelModel;
+<<<<<<< HEAD
+=======
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 use App\Models\Kompetensi;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -78,4 +82,42 @@ class HistoryKompenController extends Controller
             ->rawColumns(['aksi']) // Indicate that the action column contains HTML
             ->make(true);
     }
+<<<<<<< HEAD
+=======
+
+    public function show($UUID_Kompen)
+    {
+        $kompen = KompenModel::with(['user', 'level', 'jenisTugas', 'kompetensi', 'progresKompen' => function($query) {
+            $query->where('status_acc', 1);
+        }])->find($UUID_Kompen);
+    
+        if (!$kompen) {
+            abort(404, 'Data kompen tidak ditemukan');
+        }
+    
+        // Generate QR Code
+        $qrCode = QrCode::size(150)->generate(
+            'Anda telah menyelesaikan ' . $kompen->nama_kompen . ' dengan UUID: ' . $kompen->UUID_Kompen . "\n" .
+            'Oleh: ' . $kompen->user->nama . "\n" .
+            'Jam Kompen berjumlah: ' . $kompen->jam_kompen . "\n"
+        );
+    
+        $breadcrumb = (object) [
+            'title' => 'Detail Kompen',
+            'list' => ['Home', 'History Kompen', 'Detail']
+        ];
+        $page = (object) [
+            'title' => 'Detail Kompen'
+        ];
+        $activeMenu = 'history_kompen'; // set menu yang sedang aktif
+    
+        return view('history_kompen.show', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'kompen' => $kompen,
+            'activeMenu' => $activeMenu,
+            'qrCode' => $qrCode, // Kirim QR Code ke view
+        ]);
+    }
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 }

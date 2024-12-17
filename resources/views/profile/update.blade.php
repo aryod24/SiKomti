@@ -60,7 +60,11 @@
                         </button>
                     </div>
                 @endif
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                 <form action="{{ route('profile.update.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -73,12 +77,31 @@
                     </div>
                     <div class="form-group">
                         <label for="jurusan">Jurusan</label>
+<<<<<<< HEAD
                         <input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ auth()->user()->jurusan }}" required>
                     </div>
                     <div class="form-group">
                         <label for="jurusan">NIM/NIK/NIP</label>
                         <input type="text" class="form-control" id="ni" name="ni" value="{{ auth()->user()->ni }}" required>
                     </div>
+=======
+                        <input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ auth()->user()->jurusan }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="ni">NIM/NIK/NIP</label>
+                        <input type="text" class="form-control" id="ni" name="ni" value="{{ auth()->user()->ni }}" required>
+                    </div>
+                    @if (auth()->user()->level_id == 2)
+                        <div class="form-group">
+                            <label for="kelas">Kelas</label>
+                            <input type="text" class="form-control" id="kelas" name="kelas" value="{{ auth()->user()->kelas }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <input type="text" class="form-control" id="semester" name="semester" value="{{ auth()->user()->semester }}">
+                        </div>
+                    @endif
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                     <div class="form-group">
                         <label for="password">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
                         <input type="password" class="form-control" id="password" name="password">

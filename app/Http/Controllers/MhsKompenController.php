@@ -87,6 +87,7 @@ class MhsKompenController extends Controller
     }
 
     public function store(Request $request)
+<<<<<<< HEAD
     {
         $validatedData = $request->validate([
             'ni' => 'required|string|max:18|exists:m_user,ni',
@@ -115,6 +116,41 @@ class MhsKompenController extends Controller
             return redirect()->back()->with('error', 'Gagal mengajukan request kompen: ' . $e->getMessage());
         }
     }
+=======
+{
+    $validatedData = $request->validate([
+        'ni' => 'required|string|max:18|exists:m_user,ni',
+        'nama' => 'required|string|max:100',
+        'UUID_Kompen' => 'required|string|size:36|exists:t_kompen,UUID_Kompen',
+        'kelas' => 'nullable|string|max:100', // Adding kelas as nullable
+        'semester' => 'nullable|string|max:100', // Adding semester as nullable
+    ]);
+
+    $existingRequest = MahasiswaKompen::where('ni', $validatedData['ni'])
+        ->where('UUID_Kompen', $validatedData['UUID_Kompen'])
+        ->first();
+
+    if ($existingRequest) {
+        return redirect()->back()->with('error', 'Anda sudah mengajukan request untuk kompen ini.');
+    }
+
+    try {
+        MahasiswaKompen::create([
+            'ni' => $validatedData['ni'],
+            'nama' => $validatedData['nama'],
+            'UUID_Kompen' => $validatedData['UUID_Kompen'],
+            'status_Acc' => null,
+            'kelas' => $validatedData['kelas'] ?? null, // Adding kelas field
+            'semester' => $validatedData['semester'] ?? null, // Adding semester field
+        ]);
+
+        return redirect()->route('mhskompen.index', $validatedData['UUID_Kompen'])->with('success', 'Request kompen berhasil diajukan.');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Gagal mengajukan request kompen: ' . $e->getMessage());
+    }
+}
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     public function create_ajax($UUID_Kompen)
 {
     $kompen = KompenModel::where('UUID_Kompen', $UUID_Kompen)->firstOrFail();
@@ -127,7 +163,14 @@ public function store_ajax(Request $request)
         'ni' => 'required|string|max:18|exists:m_user,ni',
         'nama' => 'required|string|max:100',
         'UUID_Kompen' => 'required|string|size:36|exists:t_kompen,UUID_Kompen',
+<<<<<<< HEAD
     ]);
+=======
+        'kelas' => 'required|string|max:100', // Adding kelas as nullable
+        'semester' => 'required|string|max:100', // Adding semester as nullable
+    ]);
+    
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
     $existingRequest = MahasiswaKompen::where('ni', $validatedData['ni'])
         ->where('UUID_Kompen', $validatedData['UUID_Kompen'])
@@ -143,8 +186,15 @@ public function store_ajax(Request $request)
             'nama' => $validatedData['nama'],
             'UUID_Kompen' => $validatedData['UUID_Kompen'],
             'status_Acc' => null,
+<<<<<<< HEAD
         ]);
 
+=======
+            'kelas' => $validatedData['kelas'], // Adding kelas field
+            'semester' => $validatedData['semester'], // Adding semester field
+        ]);
+        
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         return response()->json(['success' => 'Request kompen berhasil diajukan.']);
     } catch (\Exception $e) {
         return response()->json(['error' => 'Gagal mengajukan request kompen: ' . $e->getMessage()], 500);

@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\KompenModel;
+<<<<<<< HEAD
+=======
+use App\Models\JenisTugas;
+use App\Models\Kompetensi;
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -41,6 +46,7 @@ class KompenApiController extends Controller
 
     // Menyimpan data kompen baru
     public function store(Request $request)
+<<<<<<< HEAD
     {
         $validator = Validator::make($request->all(), [
             'nama_kompen'    => 'required|string|max:100',
@@ -86,6 +92,57 @@ class KompenApiController extends Controller
             return response()->json(['status' => false, 'message' => 'Terjadi kesalahan saat menyimpan kompen'], 500);
         }
     }
+=======
+{
+    $jenisTugasList = JenisTugas::all();
+    $kompetensiList = Kompetensi::all();
+
+    $validator = Validator::make($request->all(), [
+        'nama_kompen'    => 'required|string|max:100',
+        'deskripsi'      => 'nullable|string',
+        'jenis_tugas'    => 'nullable|integer',
+        'quota'          => 'nullable|integer',
+        'jam_kompen'     => 'nullable|integer',
+        'status_dibuka'  => 'nullable|boolean',
+        'tanggal_mulai'  => 'nullable|date',
+        'tanggal_akhir'  => 'nullable|date|after_or_equal:tanggal_mulai',
+        'is_selesai'     => 'nullable|boolean',
+        'id_kompetensi'  => 'nullable|integer',
+        'periode_kompen' => 'nullable|string|max:50',
+    ]);
+
+    if ($validator->fails()) {
+        Log::error('Validasi gagal', ['errors' => $validator->errors()]);
+        return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+    }
+
+    try {
+        $kompen = KompenModel::create([
+            'UUID_Kompen'    => Str::uuid(),
+            'nama_kompen'    => $request->nama_kompen,
+            'deskripsi'      => $request->deskripsi,
+            'jenis_tugas'    => $request->jenis_tugas,
+            'quota'          => $request->quota,
+            'jam_kompen'     => $request->jam_kompen,
+            'status_dibuka'  => $request->status_dibuka,
+            'tanggal_mulai'  => $request->tanggal_mulai,
+            'tanggal_akhir'  => $request->tanggal_akhir,
+            'is_selesai'     => $request->is_selesai,
+            'id_kompetensi'  => $request->id_kompetensi,
+            'periode_kompen' => $request->periode_kompen,
+            'nama'           => $request->nama,
+            'user_id'        => $request->user_id,
+            'level_id'       => $request->level_id,
+        ]);
+
+        return response()->json(['status' => true, 'data' => $kompen, 'message' => 'Data kompen berhasil disimpan'], 201);
+    } catch (\Exception $e) {
+        Log::error('Terjadi kesalahan saat menyimpan kompen', ['error' => $e->getMessage()]);
+        return response()->json(['status' => false, 'message' => 'Terjadi kesalahan saat menyimpan kompen'], 500);
+    }
+}
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
     // Memperbarui data kompen berdasarkan UUID
     public function update(Request $request, $UUID_Kompen)
@@ -170,4 +227,39 @@ class KompenApiController extends Controller
 
         return response()->json(['status' => true, 'message' => 'Data kompen berhasil dihapus'], 200);
     }
+<<<<<<< HEAD
+=======
+
+    public function getKompetensi()
+    {
+        try {
+            $kompetensi = Kompetensi::select('id_kompetensi as id', 'nama_kompetensi as nama')->get();
+            return [
+                'status' => true,
+                'data' => $kompetensi
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'Gagal mengambil data kompetensi'
+            ];
+        }
+    }
+
+    public function getJenisTugas()
+    {
+        try {
+            $jenisTugas = JenisTugas::select('id_tugas as id', 'jenis_tugas as nama')->get();
+            return [
+                'status' => true,
+                'data' => $jenisTugas
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => false,
+                'message' => 'Gagal mengambil data jenis tugas'
+            ];
+        }
+    }
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 }

@@ -29,6 +29,17 @@
                     <th>Tanggal Upload</th>
                     <td>{{ $progress->updated_at->format('d F Y H:i') }}</td>
                 </tr>
+<<<<<<< HEAD
+=======
+                <tr>
+                    <th>Jam Kompen</th>
+                    <td>{{ $progress->jam_kompen }}</td>
+                </tr>
+                <tr>
+                    <th>Status Acc</th>
+                    <td>{{ $progress->status_acc }}</td>
+                </tr>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                 @if($progress->bukti_kompen)
                     <tr>
                         <th>Preview</th>
@@ -54,4 +65,8 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4

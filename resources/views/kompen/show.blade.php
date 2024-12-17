@@ -33,7 +33,11 @@
                         </tr>
                         <tr>
                             <th class="text-start">Jenis Tugas</th>
+<<<<<<< HEAD
                             <td class="text-start">{{ $kompen->jenis_tugas }}</td>
+=======
+                            <td class="text-start">{{ $kompen->jenisTugas->jenis_tugas ?? 'Tidak Diketahui' }}</td>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                         </tr>
                         <tr>
                             <th class="text-start">Quota</th>
@@ -53,6 +57,7 @@
                         </tr>
                         <tr>
                             <th class="text-start">Kompetensi</th>
+<<<<<<< HEAD
                             <td class="text-start">
                                 @if($kompen->id_kompetensi == 1)
                                     Pemrograman Dasar
@@ -60,6 +65,9 @@
                                     {{ $kompen->id_kompetensi ?? 'Tidak Diketahui' }}
                                 @endif
                             </td>
+=======
+                            <td class="text-start">{{ $kompen->kompetensi->nama_kompetensi ?? 'Tidak Diketahui' }}</td>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                         </tr>
                         <tr>
                             <th class="text-start">Periode Kompen</th>

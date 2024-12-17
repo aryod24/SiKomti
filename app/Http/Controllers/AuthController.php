@@ -10,7 +10,7 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) { // jika sudah login, maka redirect ke halaman home
-            return redirect('/');
+            return redirect('/welcome');
         }
         return view('auth.login');
     }
@@ -22,7 +22,7 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'Login Berhasil',
-                    'redirect' => url('/')
+                    'redirect' => url('/welcome')
                 ]);
             }
             return response()->json([
@@ -39,6 +39,7 @@ class AuthController extends Controller
             ->with('level', $level);
     }
     public function store(Request $request)
+<<<<<<< HEAD
     {
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
@@ -60,19 +61,49 @@ class AuthController extends Controller
                 ]);
             }
             UserModel::create($request->all());
+=======
+{
+    // cek apakah request berupa ajax
+    if ($request->ajax() || $request->wantsJson()) {
+        $rules = [
+            'level_id'  => 'required|integer',
+            'username'  => 'required|string|min:3|unique:m_user,username',
+            'nama'      => 'required|string|max:100',
+            'jurusan'   => 'nullable|string|max:100',
+            'ni'        => 'nullable|string|max:18',
+            'password'  => 'required|min:5',
+            'kelas'     => 'nullable|string|max:100', // Adding kelas as nullable
+            'semester'  => 'nullable|string|max:100'  // Adding semester as nullable
+        ];
+        
+        // use Illuminate\Support\Facades\Validator;
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             return response()->json([
-                'status'    => true,
-                'message'   => 'Data user berhasil disimpan',
-                'redirect' => url('login')
+                'status'    => false, // response status, false: error/gagal, true: berhasil
+                'message'   => 'Validasi Gagal',
+                'msgField'  => $validator->errors(), // pesan error validasi
             ]);
         }
-        return redirect('login');
+
+        UserModel::create($request->all());
+        
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Data user berhasil disimpan',
+            'redirect' => url('/')
+        ]);
     }
+
+    return redirect('/');
+}
+
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('login');
+        return redirect('/');
     }
 }

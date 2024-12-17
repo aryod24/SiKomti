@@ -11,6 +11,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -49,8 +50,13 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
+<<<<<<< HEAD
         <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
         <span class="brand-text font-weight-light">SiKomti</span>
+=======
+      <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+      <span class="brand-text font-weight-light">SiKomti</span>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     </a>
     <!-- Sidebar -->
     @if(Auth::user()->level_id == 1)
@@ -107,6 +113,8 @@
     }
   });
 </script>
-@stack('js') <!-- Digunakan untuk memanggil custom js dari perintah push('js') pada masing-masing view -->
+<!-- Add the Chart.js CDN or local path in the @stack('js') section -->
+@stack('js')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

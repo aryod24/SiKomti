@@ -45,7 +45,11 @@
             margin: 30px 0;
         }
         .content {
+<<<<<<< HEAD
             margin-left: 20px;
+=======
+            margin-left: 0px;
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         }
         .content-row {
             margin-bottom: 8px;
@@ -61,7 +65,11 @@
         }
         .signature-table {
             width: 100%;
+<<<<<<< HEAD
             margin-top: 50px;
+=======
+            margin-top: 10px;
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             border-spacing: 0 20px; /* Menambahkan jarak antar baris tabel */
         }
         .signature-table td {
@@ -86,7 +94,11 @@
             text-align: left; /* Rata kiri untuk teks dalam kolom */
         }
         .footer-note {
+<<<<<<< HEAD
             margin-top: 50px;
+=======
+            margin-top: 10px;
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             font-size: 11px;
         }
     </style>
@@ -154,7 +166,11 @@
             <div class="content-row">
                 <span class="label">Pekerjaan</span>
                 <span class="colon">:</span>
+<<<<<<< HEAD
                 <span>{{ $progress->kompen->nama }}</span>
+=======
+                <span>{{ $progress->kompen->nama_kompen }}</span>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             </div>
             <div class="content-row">
                 <span class="label">Jumlah Jam</span>
@@ -193,4 +209,8 @@
         </div>
     </div>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4

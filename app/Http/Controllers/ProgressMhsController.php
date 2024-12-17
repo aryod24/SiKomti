@@ -53,6 +53,7 @@ class ProgressMhsController extends Controller
                     return 'Ditolak';
                 }
             })
+<<<<<<< HEAD
             ->addColumn('aksi', function ($request) {
                 $buttons = '<button onclick="showDetail(\'' . $request->id_MahasiswaKompen . '\')" class="btn btn-info btn-sm mr-1">Detail</button>';
                 
@@ -60,16 +61,39 @@ class ProgressMhsController extends Controller
                     $buttons .= '<button onclick="uploadBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-primary btn-sm mr-1">Upload Bukti</button>';
                     
                     $progress = $request->progress()->first();
+=======
+            ->addColumn('aksi_request', function ($request) {
+                return '<button onclick="showDetail(\'' . $request->id_MahasiswaKompen . '\')" class="btn btn-info btn-sm mr-1">Detail</button>';
+            })
+            ->addColumn('aksi_progress', function ($request) {
+                $buttons = '';
+                if ($request->status_Acc == 1) {
+                    $buttons .= '<button onclick="uploadBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-primary btn-sm mr-1">Upload Bukti</button>';
+                    
+                    $progress = $request->progress()->where('ni', $request->ni)->where('UUID_Kompen', $request->UUID_Kompen)->first();
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                     if ($progress && $progress->bukti_kompen) {
                         $buttons .= '<button onclick="viewBukti(\'' . $request->UUID_Kompen . '\')" class="btn btn-success btn-sm">Lihat Bukti</button>';
                     }
                 }
+<<<<<<< HEAD
                 
                 return $buttons;
             })
             ->rawColumns(['aksi'])
             ->make(true);
     }
+=======
+                return $buttons;
+            })
+            ->rawColumns(['aksi_request', 'aksi_progress'])
+            ->with('emptyTable', 'No data available')
+            ->make(true);
+    }
+    
+    
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
     public function showAjaxReq($id)
     {
@@ -90,6 +114,7 @@ class ProgressMhsController extends Controller
     }
 
     public function uploadBukti(Request $request)
+<<<<<<< HEAD
     {
         $request->validate([
             'UUID_Kompen' => 'required',
@@ -127,6 +152,59 @@ class ProgressMhsController extends Controller
         $progress = ProgressModel::where('UUID_Kompen', $uuidKompen)->firstOrFail();
         return view('progressmhs.show_bukti', compact('progress'));
     }
+=======
+{
+    $request->validate([
+        'UUID_Kompen' => 'required',
+        'nama_progres' => 'required|string|max:255',
+        'bukti_kompen' => 'required|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:4048',
+    ]);
+
+    $ni = auth()->user()->ni; // Ambil 'ni' dari pengguna yang sedang login
+
+    // Cek apakah progress dengan UUID_Kompen dan ni ada
+    $progress = ProgressModel::where('UUID_Kompen', $request->UUID_Kompen)
+                             ->where('ni', $ni)
+                             ->first();
+
+    if (!$progress) {
+        $progress = new ProgressModel();
+        $progress->UUID_Kompen = $request->UUID_Kompen;
+        $progress->id_progres = Str::uuid();
+        $progress->ni = $ni; // Set ni dari pengguna yang sedang login
+    }
+
+    $file = $request->file('bukti_kompen');
+    $fileName = time() . '_' . $file->getClientOriginalName();
+    
+    $file->storeAs('public/bukti_kompen', $fileName);
+
+    $progress->nama_progres = $request->nama_progres;
+    $progress->bukti_kompen = $fileName;
+    $progress->save();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Bukti kompen berhasil diupload.',
+        'file_name' => $fileName,
+        'file_url' => "/storage/bukti_kompen/$fileName"
+    ], 200);
+}
+
+
+public function viewBukti($uuidKompen)
+{
+    $ni = auth()->user()->ni; // Ambil 'ni' dari pengguna yang sedang login
+
+    // Cek apakah progress dengan UUID_Kompen dan ni ada
+    $progress = ProgressModel::where('UUID_Kompen', $uuidKompen)
+                             ->where('ni', $ni)
+                             ->firstOrFail();
+
+    return view('progressmhs.show_bukti', compact('progress'));
+}
+
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
     public function downloadBukti($uuidKompen)
     {

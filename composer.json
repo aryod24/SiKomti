@@ -6,15 +6,26 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+<<<<<<< HEAD
         "barryvdh/laravel-dompdf": "*",
         "barryvdh/laravel-snappy": "*",
+=======
+        "bacon/bacon-qr-code": "^2.0",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "barryvdh/laravel-snappy": "^1.0",
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+<<<<<<< HEAD
+=======
+        "phpoffice/phpspreadsheet": "^3.6",
+>>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         "simplesoftwareio/simple-qrcode": "^4.2",
         "tymon/jwt-auth": "2.1.1",
-        "yajra/laravel-datatables": "10.0"
+        "yajra/laravel-datatables": "10.0",
+        "yajra/laravel-datatables-oracle": "^10.11"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -57,20 +57,24 @@ class LevelController extends Controller
         ]);
     }
     
-    // Menyimpan data level baru
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'level_kode' => 'required|string|min:3|unique:m_level,level_kode', // kode level unik
-            'level_nama' => 'required|string|max:100', // nama harus diisi, berupa string, maksimal 100 karakter
+            'level_kode' => 'required|string|min:3|unique:m_level,level_kode',
+            'level_nama' => 'required|string|max:100',
         ]);
+    
+        // Simpan data ke database
         LevelModel::create([
             'level_kode' => $request->level_kode,
             'level_nama' => $request->level_nama,
         ]);
-
+    
+        // Redirect dengan pesan sukses
         return redirect('/level')->with('success', 'Data level berhasil disimpan');
     }
+    
     // Menampilkan detail level
     public function show(string $level_id)
     {
