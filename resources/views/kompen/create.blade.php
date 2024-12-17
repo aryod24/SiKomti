@@ -8,6 +8,7 @@
         <div class="card-body">
             <form method="POST" action="{{ url('kompen') }}" class="form-horizontal">
                 @csrf
+                <!-- Nama Kompen -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Nama Kompen</label>
                     <div class="col-11">
@@ -17,6 +18,8 @@
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Deskripsi -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Deskripsi</label>
                     <div class="col-11">
@@ -26,15 +29,40 @@
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Jenis Tugas -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Jenis Tugas</label>
                     <div class="col-11">
-                        <input type="number" class="form-control" id="jenis_tugas" name="jenis_tugas" value="{{ old('jenis_tugas') }}">
+                        <select class="form-control" id="jenis_tugas" name="jenis_tugas" required>
+                            <option value="">- Pilih Jenis Tugas -</option>
+                            @foreach ($jenisTugas as $jenis)
+                                <option value="{{ $jenis->id_tugas }}" {{ old('jenis_tugas') == $jenis->id_tugas ? 'selected' : '' }}>{{ $jenis->jenis_tugas }}</option>
+                            @endforeach
+                        </select>
                         @error('jenis_tugas')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Bidang Kompetensi -->
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Bidang Kompetensi</label>
+                    <div class="col-11">
+                        <select class="form-control" id="id_kompetensi" name="id_kompetensi" required>
+                            <option value="">- Pilih Kompetensi -</option>
+                            @foreach ($kompetensi as $kompeten)
+                                <option value="{{ $kompeten->id_kompetensi }}" {{ old('id_kompetensi') == $kompeten->id_kompetensi ? 'selected' : '' }}>{{ $kompeten->nama_kompetensi }}</option>
+                            @endforeach
+                        </select>
+                        @error('id_kompetensi')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                
+                <!-- Quota -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Quota</label>
                     <div class="col-11">
@@ -44,6 +72,8 @@
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Jam Kompen -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Jam Kompen</label>
                     <div class="col-11">
@@ -53,6 +83,8 @@
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Status Dibuka -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Status Dibuka</label>
                     <div class="col-11">
@@ -66,6 +98,8 @@
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Tanggal Mulai -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Tanggal Mulai</label>
                     <div class="col-11">
@@ -75,6 +109,8 @@
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Tanggal Akhir -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Tanggal Akhir</label>
                     <div class="col-11">
@@ -84,15 +120,26 @@
                         @enderror
                     </div>
                 </div>
+                
+                <!-- Periode Kompen -->
+                @if (auth()->check() && auth()->user()->level_id == 1)
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Periode Kompen</label>
                     <div class="col-11">
-                        <input type="text" class="form-control" id="periode_kompen" name="periode_kompen" value="{{ old('periode_kompen') }}">
+                        <select class="form-control" id="periode_kompen" name="periode_kompen">
+                            <option value="">- Pilih Periode -</option>
+                            @for ($year = 2021; $year <= 2024; $year++)
+                                <option value="{{ $year }}" {{ old('periode_kompen') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endfor
+                        </select>
                         @error('periode_kompen')
                             <small class="form-text text-danger">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>
+                @endif
+                
+                <!-- Status Selesai -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Status Selesai</label>
                     <div class="col-11">
@@ -106,18 +153,16 @@
                         @enderror
                     </div>
                 </div>
+
+                <!-- Tombol Submit dan Kembali -->
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label"></label>
                     <div class="col-11">
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                        <a class="btn btn-sm btn-default ml-1" href="{{ url('kompen') }}">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <a href="{{ url('kompen') }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 @endsection
-@push('css')
-@endpush
-@push('js')
-@endpush
