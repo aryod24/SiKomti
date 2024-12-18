@@ -109,7 +109,7 @@
     }
   });
 </script>
-<!-- Add the Chart.js CDN or local path in the @stack('js') section -->
+
 @stack('js')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

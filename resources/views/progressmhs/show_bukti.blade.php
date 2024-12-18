@@ -35,7 +35,15 @@
                 </tr>
                 <tr>
                     <th>Status Acc</th>
-                    <td>{{ $progress->status_acc }}</td>
+                    <td>
+                        @if($progress->status_acc === 1)
+                            Diterima
+                        @elseif($progress->status_acc === 0)
+                            Ditolak
+                        @else
+                            Menunggu
+                        @endif
+                    </td>
                 </tr>
                 @if($progress->bukti_kompen)
                     <tr>
