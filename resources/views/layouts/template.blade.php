@@ -50,13 +50,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-<<<<<<< HEAD
-        <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
-        <span class="brand-text font-weight-light">SiKomti</span>
-=======
       <img src="{{ asset('adminlte/dist/img/LOGO.png') }}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
       <span class="brand-text font-weight-light">SiKomti</span>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     </a>
     <!-- Sidebar -->
     @if(Auth::user()->level_id == 1)

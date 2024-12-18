@@ -64,15 +64,12 @@ class KompenModel extends Model
         return $this->hasMany(MahasiswaKompen::class, 'UUID_Kompen', 'UUID_Kompen');
     }
 
-<<<<<<< HEAD
-=======
     // Relasi ke ProgressModel
     public function progresKompen(): HasMany
     {
         return $this->hasMany(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen');
     }
 
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     // Getter untuk nama periode kompen
     public function getPeriodName(): string
     {
@@ -84,13 +81,4 @@ class KompenModel extends Model
     {
         return $this->is_selesai == 1; // 1 berarti selesai
     }
-<<<<<<< HEAD
-
-    // Relasi ke ProgressModel
-    public function progresKompen(): HasMany
-    {
-        return $this->hasMany(ProgressModel::class, 'UUID_Kompen', 'UUID_Kompen');
-    }
-=======
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 }

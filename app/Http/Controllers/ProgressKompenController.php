@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KompenModel;
 use App\Models\ProgressModel;
-<<<<<<< HEAD
-=======
 use App\Models\MahasiswaAlpha;
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 
@@ -75,27 +72,6 @@ class ProgressKompenController extends Controller
             ->make(true);
     }
     public function updateBukti(Request $request)
-<<<<<<< HEAD
-    {
-        $id_progres = $request->input('id_progres');
-        $status_acc = $request->input('status_acc');
-
-        $progress = ProgressModel::findOrFail($id_progres);
-
-        // Update the status_acc field
-        $progress->status_acc = $status_acc;
-        $progress->save();
-
-        if ($status_acc == 1) {
-            return response()->json(['message' => 'Request approved successfully.'], 200);
-        } elseif ($status_acc == 0) {
-            return response()->json(['message' => 'Request rejected successfully.'], 200);
-        }
-
-        return response()->json(['message' => 'Invalid status.'], 400);
-    }
-
-=======
 {
     $id_progres = $request->input('id_progres');
     $status_acc = $request->input('status_acc');
@@ -140,7 +116,6 @@ class ProgressKompenController extends Controller
     return response()->json(['message' => 'Invalid status.'], 400);
 }
 
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     public function viewBukti($uuidKompen)
     {
         $bukti = ProgressModel::where('UUID_Kompen', $uuidKompen)->get();
@@ -203,8 +178,4 @@ class ProgressKompenController extends Controller
  
     }
     
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\MahasiswaAlpha;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-<<<<<<< HEAD
-=======
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -15,7 +13,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
 class DataMahasiswaController extends Controller
 {
@@ -113,17 +110,10 @@ class DataMahasiswaController extends Controller
     public function update(Request $request, $id_alpha)
     {
         $request->validate([
-<<<<<<< HEAD
-            'ni' => 'required|string|max:20',
-            'jam_alpha' => 'nullable|integer',
-            'nama' => 'nullable|string|max:100',
-            'semester' => 'nullabke|integer',
-=======
             'ni' => 'nullable|string|max:20',
             'jam_alpha' => 'nullable|integer',
             'nama' => 'nullable|string|max:100',
             'semester' => 'nullable|integer',
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             'jam_kompen' => 'nullable|integer',
         ]);
 
@@ -140,8 +130,6 @@ class DataMahasiswaController extends Controller
 
         return redirect('/datamahasiswa')->with('success', 'Data mahasiswa alpha berhasil dihapus');
     }
-<<<<<<< HEAD
-=======
     public function import_ajax(Request $request)
     {
         $rules = [
@@ -262,5 +250,4 @@ public function export_pdf()
     // Return PDF response to prompt file download
     return $pdf->download('Data Mahasiswa Alpha ' . now()->format('Y-m-d H:i:s') . '.pdf');
 }
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 }

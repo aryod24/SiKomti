@@ -147,23 +147,11 @@
                 </select>
                 <label class="error-message" id="level-error"></label>
             </div>
-<<<<<<< HEAD
-
-=======
         
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             <div class="input-group mb-3">
                 <input type="text" id="username" name="username" class="form-control" placeholder="Masukkan Username" required>
                 <label class="error-message" id="username-error"></label>
             </div>
-<<<<<<< HEAD
-
-            <div class="input-group mb-3">
-                <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan Nama" required>
-                <label class="error-message" id="nama-error"></label>
-            </div>
-
-=======
         
             <div id="nama-field" class="input-group mb-3" style="display: none;">
                 <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan Nama">
@@ -195,23 +183,15 @@
                 <label class="error-message" id="nomorinduk-error"></label>
             </div>
         
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             <div class="input-group mb-3">
                 <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan Password" required>
                 <label class="error-message" id="password-error"></label>
             </div>
-<<<<<<< HEAD
-
-            <button type="submit" class="btn-login">Sign Up</button>
-
-            <a href="{{ url('login') }}" class="register-prompt">Sudah punya akun? Login</a>
-=======
         
             <button type="submit" class="btn-login">Sign Up</button>
         </form>
         
             <a href="{{ url('/') }}" class="register-prompt">Sudah punya akun? Login</a>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         </form>
 
         <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
@@ -222,50 +202,6 @@
         <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
         <script>
             $(document).ready(function() {
-<<<<<<< HEAD
-                $("#form-register").validate({
-                    rules: {
-                        level_id: { required: true, number: true },
-                        username: { required: true, minlength: 3, maxlength: 20 },
-                        nama: { required: true, minlength: 3, maxlength: 100 },
-                        password: { required: true, minlength: 5, maxlength: 20 }
-                    },
-                    submitHandler: function(form) {
-                        $.ajax({
-                            url: form.action,
-                            type: form.method,
-                            data: $(form).serialize(),
-                            success: function(response) {
-                                if (response.status) {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Berhasil',
-                                        text: response.message,
-                                    }).then(function() {
-                                        window.location = response.redirect;
-                                    });
-                                } else {
-                                    $('.error-message').text('');
-                                    $.each(response.msgField, function(prefix, val) {
-                                        $('#' + prefix + '-error').text(val[0]);
-                                    });
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Terjadi Kesalahan',
-                                        text: response.message
-                                    });
-                                }
-                            }
-                        });
-                        return false;
-                    }
-                });
-            });
-        </script>
-    </div>
-</body>
-</html>
-=======
             $('#level_id').change(function() {
                 const level = $(this).val();
                 
@@ -369,4 +305,3 @@
     </div>
 </body>
 </html>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4

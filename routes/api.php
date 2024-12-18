@@ -40,12 +40,9 @@ Route::prefix('kompen')->group(function () {
     Route::delete('/{UUID_Kompen}', [KompenApiController::class, 'destroy']); // DELETE: /api/kompen/{UUID_Kompen} - Menghapus data kompen
 });
 
-<<<<<<< HEAD
-=======
 Route::get('/kompetensi', [KompenApiController::class, 'getKompetensi']);        // GET: /api/kompetensi - Mendapatkan data kompetensi
 Route::get('/jenis-tugas', [KompenApiController::class, 'getJenisTugas']);       // GET: /api/jenis-tugas - Mendapatkan data jenis tugas
 
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
 Route::group(['prefix'=>'users'], function(){
     Route::get('/', [UserController::class, 'index']);
@@ -55,12 +52,9 @@ Route::group(['prefix'=>'users'], function(){
     Route::delete('/{user}', [UserController::class, 'destroy']);
 });
 
-<<<<<<< HEAD
-=======
 Route::get('levels', [UserController::class, 'getLevels']);
 
 
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
     // Route for creating a kompen request
     Route::post('/kompen/request', [MahasiswaKompenApiController::class, 'createKompenRequest']);

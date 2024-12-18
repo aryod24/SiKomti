@@ -29,26 +29,6 @@ class KompenController extends Controller
     // Ambil data kompen dalam bentuk json untuk datatables
     public function list(Request $request)
     {
-<<<<<<< HEAD
-        $kompens = KompenModel::select(
-            'UUID_Kompen',
-            'nama_kompen',
-            'deskripsi',
-            'jenis_tugas',
-            'quota',
-            'jam_kompen',
-            'status_dibuka',
-            'tanggal_mulai',
-            'tanggal_akhir',
-            'is_selesai',
-            'id_kompetensi',
-            'periode_kompen',
-            'user_id',
-            'nama',
-            'level_id' // Add level_id to select fields
-        );
-    
-=======
         // Start building the query
         $kompens = KompenModel::with(['user', 'level']) // Eager load the user and level relationships
             ->select(
@@ -81,16 +61,11 @@ class KompenController extends Controller
         }
     
         // Apply level_id filter if provided
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         if ($request->has('level_id') && $request->level_id != '') {
             $kompens->where('level_id', $request->level_id); // Apply level_id filter if provided
         }
     
-<<<<<<< HEAD
-        // Return data untuk DataTables
-=======
         // Return data for DataTables
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         return DataTables::of($kompens)
             ->addIndexColumn() // Add index column
             ->addColumn('aksi', function ($kompen) {
@@ -106,10 +81,7 @@ class KompenController extends Controller
             ->make(true);
     }
     
-<<<<<<< HEAD
-=======
     
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     // Menampilkan halaman form tambah kompen
     public function create()
     {
@@ -180,9 +152,6 @@ class KompenController extends Controller
             'title' => 'Detail kompen'
         ];
         $activeMenu = 'kompen'; // set menu yang sedang aktif
-<<<<<<< HEAD
-        return view('kompen.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kompen' => $kompen, 'activeMenu' => $activeMenu, ]);
-=======
     
         return view('kompen.show', [
             'breadcrumb' => $breadcrumb,
@@ -190,7 +159,6 @@ class KompenController extends Controller
             'kompen' => $kompen,
             'activeMenu' => $activeMenu,
         ]);
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     }
     
     // Menampilkan halaman form edit kompen

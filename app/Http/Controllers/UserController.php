@@ -27,11 +27,7 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-<<<<<<< HEAD
-        $user = UserModel::select('user_id', 'username', 'nama','jurusan','ni', 'level_id')
-=======
         $user = UserModel::select('user_id', 'username', 'nama','jurusan','ni','kelas', 'semester', 'level_id')
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             ->with('level');
 
         if ($request->level_id){
@@ -74,15 +70,6 @@ class UserController extends Controller
     public function store(Request $request) {
         // Validasi data input
         $request->validate([
-<<<<<<< HEAD
-             // username harus diisi, berupa string, minimal 3 karakter, dan bernilai unik ditabel m_user komol username
-            'username' =>'required|string|min:3|unique:m_user,username',
-            'nama'     =>'required|string|max:100',
-            'jurusan'  => 'nullable|string|max:100',
-            'ni'       => 'nullable|string|max:18',
-            'password' => 'required|min:5',
-            'level_id' =>'required|integer'
-=======
             'username' => 'required|string|min:3|unique:m_user,username',
             'nama'     => 'required|string|max:100',
             'jurusan'  => 'nullable|string|max:100',
@@ -91,7 +78,6 @@ class UserController extends Controller
             'semester' => 'nullable|string|max:100', // Semester bersifat opsional
             'password' => 'required|string|min:5', // Password harus diisi
             'level_id' => 'required|integer'
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         ]);
     
         // Simpan data user ke dalam database dengan enkripsi password
@@ -100,13 +86,9 @@ class UserController extends Controller
             'nama'     => $request->nama,
             'jurusan'  => $request->jurusan,
             'ni'       => $request->ni,
-<<<<<<< HEAD
-            'password' =>  bcrypt($request->password),
-=======
             'kelas'    => $request->kelas,
             'semester' => $request->semester,
             'password' => bcrypt($request->password), // Enkripsi password sebelum disimpan
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             'level_id' => $request->level_id
         ]);
     
@@ -153,11 +135,8 @@ class UserController extends Controller
             'nama' => 'nullable|string|max:100',
             'jurusan'  => 'nullable|string|max:100',
             'ni'       => 'nullable|string|max:18',
-<<<<<<< HEAD
-=======
             'kelas'    => 'nullable|string|max:100', // Adding kelas as nullable
             'semester' => 'nullable|string|max:100',  // Adding semester as nullable
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             'password' => 'nullable|min:5',
             'level_id' => 'nullable|integer'
         ]);

@@ -6,23 +6,15 @@ use App\Models\ProgressModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
-use Barryvdh\DomPDF\Facade\Pdf; // Import PDF facade
-=======
 use App\Models\KompenModel;
 use Barryvdh\DomPDF\Facade\Pdf;
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class HistoryMhsController extends Controller
 {
     public function historyKompenMhs()
     {
-<<<<<<< HEAD
-        $userNi = Auth::user()->ni; // Get the logged-in user's NI
-=======
         $userNi = Auth::user()->ni;
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 
         $progress = ProgressModel::where('ni', $userNi)
             ->where('status_acc', 1)
@@ -35,13 +27,8 @@ class HistoryMhsController extends Controller
         return DataTables::of($progress)
             ->addIndexColumn()
             ->addColumn('aksi', function ($row) {
-<<<<<<< HEAD
-                return '<a href="#" class="btn btn-info btn-sm">Detail</a>
-                        <a href="' . route('historymhs.exportPdf', $row->id) . '" class="btn btn-success btn-sm">Export PDF</a>';
-=======
                 return '<a href="' . route('historymhs.show', $row->UUID_Kompen) . '" class="btn btn-info btn-sm">Detail</a>
                         <a href="' . route('historymhs.exportPdf', $row->UUID_Kompen) . '" class="btn btn-success btn-sm">Export PDF</a>';
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             })
             ->rawColumns(['aksi'])
             ->make(true);
@@ -61,26 +48,6 @@ class HistoryMhsController extends Controller
         return view('historymhs.kompen_mahasiswa', compact('breadcrumb', 'page', 'activeMenu'));
     }
 
-<<<<<<< HEAD
-    public function exportPdf()
-    {
-        // Assume $progress is predefined or fetched differently, not by ID
-        $progress = ProgressModel::first(); // Example: Fetch the first progress entry
-        
-        // Check if progress is found
-        if (!$progress) {
-            return response()->json(['error' => 'Progress not found'], 404);
-        }
-    
-        // Generate QR code for single entry
-        $qrCode = QrCode::size(150)->generate('UUID_Kompen: ' . $progress->UUID_Kompen);
-        
-        // Load view and generate PDF
-        $pdf = Pdf::loadView('historymhs.export_pdf', compact('progress', 'qrCode'));
-        return $pdf->stream('history_kompen_mahasiswa.pdf');
-    }
-}
-=======
     public function show($UUID_Kompen)
     {
         $kompen = KompenModel::with(['user', 'level', 'jenisTugas', 'kompetensi', 'progresKompen' => function($query) {
@@ -126,4 +93,4 @@ class HistoryMhsController extends Controller
         return $pdf->stream('historymhs_mahasiswa.pdf');
     }
 }
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
+

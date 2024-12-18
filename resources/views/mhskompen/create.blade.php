@@ -72,8 +72,6 @@
                 <label for="nama">Nama</label>
                 <input type="text" class="form-control" id="nama" name="nama" value="{{ auth()->user()->nama }}" readonly>
             </div>
-<<<<<<< HEAD
-=======
         
             <div class="form-group">
                 <label for="kelas">Kelas</label>
@@ -84,7 +82,6 @@
                 <label for="semester">Semester</label>
                 <input type="text" class="form-control" id="semester" name="semester" value="{{ auth()->user()->semester }}" readonly>
             </div>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             
             <div class="form-group">
                 <label for="nama_kompen">Nama Kompen</label>

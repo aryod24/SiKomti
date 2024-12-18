@@ -18,11 +18,7 @@
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Nama Jenis Tugas</label>
                         <div class="col-11">
-<<<<<<< HEAD
-                            <input type="text" class="form-control" name="nama_jenis_tugas" value="{{ old('nama_jenis_tugas', $jenisTugas->jenis_tugas) }}" required>
-=======
                             <input type="text" class="form-control" name="jenis_tugas" value="{{ old('jenis_tugas', $jenisTugas->jenis_tugas) }}" required>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                             @error('jenis_tugas')
                                 <small class="form-text text-danger">{{ $message }}</small>
                             @enderror

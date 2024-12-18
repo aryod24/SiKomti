@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\JenisTugas;
 use App\Models\KompenModel;
 use App\Models\LevelModel;
-<<<<<<< HEAD
-=======
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 use App\Models\Kompetensi;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -82,8 +79,6 @@ class HistoryKompenController extends Controller
             ->rawColumns(['aksi']) // Indicate that the action column contains HTML
             ->make(true);
     }
-<<<<<<< HEAD
-=======
 
     public function show($UUID_Kompen)
     {
@@ -119,5 +114,4 @@ class HistoryKompenController extends Controller
             'qrCode' => $qrCode, // Kirim QR Code ke view
         ]);
     }
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 }

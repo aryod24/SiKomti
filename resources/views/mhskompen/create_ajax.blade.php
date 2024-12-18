@@ -16,8 +16,6 @@
         <div class="form-group">
             <label for="nama">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" value="{{ auth()->user()->nama }}" readonly>
-<<<<<<< HEAD
-=======
    
         <div class="form-group">
             <label for="kelas">Kelas</label>
@@ -27,7 +25,6 @@
         <div class="form-group">
             <label for="semester">Semester</label>
             <input type="text" class="form-control" id="semester" name="semester" value="{{ auth()->user()->semester }}" readonly>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         </div>
         
         <div class="form-group">
