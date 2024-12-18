@@ -1,17 +1,5 @@
 @extends('layouts.template')
-<<<<<<< HEAD
 
-@section('content')
-<div class="container-fluid" style="background-color: #f5f5f5;">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-12">
-            <div class="card shadow-lg" style="border-radius: 10px; overflow: hidden; height: 100%; padding: 0;">
-                <!-- Header Card -->
-                <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
-                    <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Data Mahasiswa</h3>
-                </div>
-                <!-- Body Card -->
-=======
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
@@ -19,66 +7,61 @@
     </div>
     <div class="card-body">
         <div class="card-tools mb-3 text-right">  
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
-                <div class="card-body" style="text-align: right;">
-                    <button onclick="modalAction('{{ url('datamahasiswa/create') }}')" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Tambah Data Mahasiswa Alpha
-                    </button>
-<<<<<<< HEAD
-=======
-                    <button class="btn btn-primary mt-1" id="import-btn">
-                        <i class="fas fa-upload"></i> Import Data Mahasiswa Alpha
-                    </button>
-                    <a href="{{ route('datamahasiswa.export.excel') }}" class="btn btn-success mt-1">
-                        <i class="fas fa-file-excel"></i> Export Excel
-                    </a>
-                    <a href="{{ route('datamahasiswa.export.pdf') }}" class="btn btn-danger mt-1">
-                        <i class="fas fa-file-pdf"></i> Export PDF
-                    </a>
-                </div>
-                <!-- Form Import -->
-                <div class="card-body" id="import-form" style="display: none;">
-                    <form action="{{ url('datamahasiswa/import_ajax') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="file_mahasiswa">Upload File (Excel):</label>
-                            <input type="file" name="file_mahasiswa" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Import</button>
-                            <a href="{{ url('/template/alpha.xlsx') }}" class="btn btn-info" id="template-btn" style="display: none;">Download Template Excel</a>
-                        </div>
-                    </form>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
-                </div>
-                <!-- Tabel -->
-                <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                    <!-- Tabel -->
-                    <table class="table table-bordered table-striped table-hover table-sm" id="m_mahasiswa_alpha">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>NI</th>
-                                <th>Nama</th>
-                                <th>Semester</th>
-                                <th>Jam Alpha</th>
-                                <th>Jam Kompen</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+            <div class="card-body" style="text-align: right;">
+                <a class="btn btn-primary" href="{{ url('datamahasiswa/create') }}">
+                    <i class="fas fa-plus"></i> Tambah Mahasiswa Alpha
+                </a>
+                <button class="btn btn-primary mt-1" id="import-btn">
+                    <i class="fas fa-upload"></i> Import Data Mahasiswa Alpha
+                </button>
+                <a href="{{ route('datamahasiswa.export.excel') }}" class="btn btn-success mt-1">
+                    <i class="fas fa-file-excel"></i> Export Excel
+                </a>
+                <a href="{{ route('datamahasiswa.export.pdf') }}" class="btn btn-danger mt-1">
+                    <i class="fas fa-file-pdf"></i> Export PDF
+                </a>
             </div>
+            <!-- Form Import -->
+            <div class="card-body" id="import-form" style="display: none;">
+                <form action="{{ url('datamahasiswa/import_ajax') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="file_mahasiswa">Upload File (Excel):</label>
+                        <input type="file" name="file_mahasiswa" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Import</button>
+                        <a href="{{ url('/template/alpha.xlsx') }}" class="btn btn-info" id="template-btn" style="display: none;">Download Template Excel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Tabel -->
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <table class="table table-bordered table-striped table-hover table-sm" id="m_mahasiswa_alpha">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NI</th>
+                        <th>Nama</th>
+                        <th>Semester</th>
+                        <th>Jam Alpha</th>
+                        <th>Jam Kompen</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </div>
@@ -127,57 +110,45 @@
     background-color: #6b83a8 !important;
     color: #ffffff !important;
 }
-<<<<<<< HEAD
-=======
-/* Align 'Show entries' dropdown to the left */
-.dataTables_length {
-    float: left;
-    margin-bottom: 10px;
-}
-
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
 </style>
 @endpush
 
 @push('js')
-    <script>
-        function modalAction(url = '') {
-            $('#myModal').load(url, function() {
-                $('#myModal').modal('show');
-            });
-        }
-        $(document).ready(function() {
-            var mahasiswaAlpha = $('#m_mahasiswa_alpha').DataTable({
-                serverSide: true,
-                ajax: {
-                    "url": "{{ url('datamahasiswa/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                },
-                columns: [
-                    {data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false},
-                    {data: "ni", orderable: true, searchable: true},
-                    {data: "nama", orderable: true, searchable: true},
-                    {data: "semester", orderable: true, searchable: true},
-                    {data: "jam_alpha", orderable: true, searchable: true},
-                    {data: "jam_kompen", orderable: true, searchable: true},
-                    {data: "aksi", className: "text-center", orderable: false, searchable: false}
-                ]
-            });
-<<<<<<< HEAD
-=======
-
-            // Tampilkan form import saat tombol diklik
-            $('#import-btn').click(function() {
-                $('#import-form').toggle();
-                $('#template-btn').toggle();
-            });
-
-            // Tampilkan template saat tombol diklik
-            $('#template-btn').click(function() {
-                window.location.href = "{{ url('public/template/alpha.xlsx') }}";
-            });
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
+<script>
+    function modalAction(url = '') {
+        $('#myModal').load(url, function() {
+            $('#myModal').modal('show');
         });
-    </script>
+    }
+    $(document).ready(function() {
+        var mahasiswaAlpha = $('#m_mahasiswa_alpha').DataTable({
+            serverSide: true,
+            ajax: {
+                "url": "{{ url('datamahasiswa/list') }}",
+                "dataType": "json",
+                "type": "POST",
+            },
+            columns: [
+                {data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false},
+                {data: "ni", orderable: true, searchable: true},
+                {data: "nama", orderable: true, searchable: true},
+                {data: "semester", orderable: true, searchable: true},
+                {data: "jam_alpha", orderable: true, searchable: true},
+                {data: "jam_kompen", orderable: true, searchable: true},
+                {data: "aksi", className: "text-center", orderable: false, searchable: false}
+            ]
+        });
+
+        // Tampilkan form import saat tombol diklik
+        $('#import-btn').click(function() {
+            $('#import-form').toggle();
+            $('#template-btn').toggle();
+        });
+
+        // Tampilkan template saat tombol diklik
+        $('#template-btn').click(function() {
+            window.location.href = "{{ url('public/template/alpha.xlsx') }}";
+        });
+    });
+</script>
 @endpush
