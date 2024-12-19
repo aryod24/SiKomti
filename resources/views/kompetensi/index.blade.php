@@ -6,9 +6,9 @@
     </div>
     <div class="card-body">
         <div class="card-tools mb-3 text-right">  
-            <div class="card-tools">
-                <button onclick="modalAction('{{ url('kompetensi/create') }}')" class="btn btn-sm btn-success mt-1">Tambah Kompetensi</button>
-            </div>
+            <a class="btn btn-primary" href="{{ url('kompetensi/create') }}">
+                <i class="fas fa-plus"></i> Tambah Kompetensi
+            </a>
         </div>
         <div class="card-body">
             @if (session('success'))

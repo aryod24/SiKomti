@@ -1,4 +1,5 @@
 @extends('layouts.template')
+
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
@@ -6,9 +7,9 @@
     </div>
     <div class="card-body">
         <div class="card-tools mb-3 text-right">  
-            <div class="card-tools">
-                <button onclick="modalAction('{{ url('kompen/create') }}')" class="btn btn-sm btn-success mt-1">Tambah Kompen</button>
-            </div>
+            <a class="btn btn-primary" href="{{ url('kompen/create') }}">
+                <i class="fas fa-plus"></i> Tambah Kompen
+            </a>
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -58,6 +59,7 @@
 @endsection
 
 @push('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Styling untuk tabel */
         .table {
