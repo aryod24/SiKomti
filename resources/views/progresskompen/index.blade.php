@@ -121,15 +121,22 @@ function showProgressModal(uuidKompen) {
                             <td>${index + 1}</td>
                             <td>${bukti.nama}</td>
                             <td>${bukti.nama_progres}</td>
-                            <td>${bukti.status_acc == 1 ? 'Approved' : bukti.status_acc == 0 ? 'Rejected' : 'Menunggu'}</td>
+                            <td>${bukti.status_acc == 1 ? 'Setujui' : bukti.status_acc == 0 ? 'Tolak' : 'Menunggu'}</td>
                             <td>${bukti.bukti_kompen}</td>
-                            <td>
-                                <button class='btn btn-success btn-sm' onclick='updateStatus(${bukti.id_progres}, 1)'>Setujui</button> 
-                                <button class='btn btn-danger btn-sm' onclick='updateStatus(${bukti.id_progres}, 0)'>Tolak</button> 
+                            <td class="action-buttons d-flex gap-2">
+                                <button class="btn btn-success btn-sm d-flex align-items-center" onclick="updateStatus(${bukti.id_progres}, 1)">
+                                    <i class="fas fa-check me-2"></i> Setujui
+                                </button>
+                                <button class="btn btn-danger btn-sm d-flex align-items-center" onclick="updateStatus(${bukti.id_progres}, 0)">
+                                    <i class="fas fa-times me-2"></i> Tolak
+                                </button>
                                 <a href="{{ asset('storage/bukti_kompen/') }}/${bukti.bukti_kompen}" 
-                                   class='btn btn-primary btn-sm' 
-                                   download>Download</a> 
-                            </td></tr>`;
+                                class="btn btn-primary btn-sm d-flex align-items-center" 
+                                download>
+                                    <i class="fas fa-download me-2"></i> Unduh
+                                </a>
+                            </td>
+                        </tr>`;
                 });
 
                 detailsHtml += `</tbody></table></div>`;

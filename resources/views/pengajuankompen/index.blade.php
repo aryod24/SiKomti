@@ -131,10 +131,16 @@ function getKompenRequestByUuid(uuidKompen) {
                             <td>${request.ni}</td>
                             <td>${request.nama}</td>
                             <td>${request.status_Acc === 1 ? 'Diterima' : (request.status_Acc === 0 ? 'Ditolak' : 'Menunggu')}</td>
-                            <td class="action-buttons">
-                                <button onclick="updateStatus('${request.ni}', '${uuidKompen}', 1)" class="btn btn-success btn-sm">Terima</button>
-                                <button onclick="updateStatus('${request.ni}', '${uuidKompen}', 0)" class="btn btn-danger btn-sm">Tolak</button>
-                                <button onclick="deleteRequest('${request.ni}', '${uuidKompen}')" class="btn btn-danger btn-sm">Hapus</button>
+                            <td class="action-buttons d-flex gap-2">
+                                <button onclick="updateStatus('${request.ni}', '${uuidKompen}', 1)" class="btn btn-success btn-sm">
+                                    <i class="fas fa-check"></i> Terima
+                                </button>
+                                <button onclick="updateStatus('${request.ni}', '${uuidKompen}', 0)" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-times"></i> Tolak
+                                </button>
+                                <button onclick="deleteRequest('${request.ni}', '${uuidKompen}')" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
                             </td>
                         </tr>`;
                 });
