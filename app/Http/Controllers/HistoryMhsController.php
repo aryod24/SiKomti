@@ -83,16 +83,13 @@ class HistoryMhsController extends Controller
                              ->where('ni', $ni)
                              ->firstOrFail();
     
-    $qrCode = QrCode::size(150)->generate(
-        'Anda telah menyelesaikan ' . $progress->kompen->nama_kompen . ' dengan UUID: ' . $progress->UUID_Kompen . "\n" .
-        'Oleh: ' . $progress->kompen->user->nama . "\n" .
-        'Jam Kompen berjumlah: ' . $progress->kompen->jam_kompen . "\n" .
-        'Detail Mahasiswa:' . "\n" .
-        'Nama: ' . $progress->nama . "\n" .
-        'NIM: ' . $progress->ni . "\n" .
-        'Kelas: ' . $progress->kelas . "\n" .
-        'Semester: ' . $progress->semester
-    );
+                             $qrCode = QrCode::size(150)->generate(
+                                "Kompen: " . $progress->kompen->nama_kompen . "\n\n" .
+                                "UUID: " . $progress->UUID_Kompen . "\n\n" .
+                                "Oleh: " . $progress->kompen->user->nama . "\n\n" .
+                                "Jam Kompen: " . $progress->kompen->jam_kompen . " jam"
+                            );
+                            
 
     $pdf = Pdf::loadView('historymhs.export_pdf', compact('progress', 'qrCode'));
     return $pdf->stream('historymhs_mahasiswa.pdf');

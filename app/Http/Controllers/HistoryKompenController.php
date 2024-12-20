@@ -92,9 +92,10 @@ class HistoryKompenController extends Controller
     
         // Generate QR Code
         $qrCode = QrCode::size(150)->generate(
-            'Anda telah menyelesaikan ' . $kompen->nama_kompen . ' dengan UUID: ' . $kompen->UUID_Kompen . "\n" .
-            'Oleh: ' . $kompen->user->nama . "\n" .
-            'Jam Kompen berjumlah: ' . $kompen->jam_kompen . "\n"
+            "Kompen: " . $kompen->nama_kompen . "\n\n" .
+            "UUID: " . $kompen->UUID_Kompen . "\n\n" .
+            "Oleh: " . $kompen->user->nama . "\n\n" .
+            "Jam Kompen: " . $kompen->jam_kompen . " jam"
         );
     
         $breadcrumb = (object) [
