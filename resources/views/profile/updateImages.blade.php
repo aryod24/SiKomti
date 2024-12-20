@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-<<<<<<< HEAD
             background: linear-gradient(90deg, #ffffff, #ffffff);
-=======
-            background: linear-gradient(90deg, #5c759c, #2C3E50);
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
             color: white;
         }
         .container {
@@ -65,10 +61,6 @@
                         <label for="avatar" class="form-label">Upload Foto Profil</label>
                         <input type="file" name="avatar" id="avatar" class="form-control-file">
                     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="{{ url('profile/') }}" class="btn btn-secondary">Batal</a>
@@ -77,17 +69,9 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
