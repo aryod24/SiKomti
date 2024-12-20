@@ -26,6 +26,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/datamahasiswa') }}" class="nav-link {{ $activeMenu == 'datamahasiswa' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user-graduate"></i>
+                    <p>Data Mahasiswa</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/kompen') }}" class="nav-link {{ $activeMenu == 'kompen' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tasks"></i>
                     <p>Kompen</p>
@@ -61,11 +67,7 @@
 <style>
     /* Custom CSS for Sidebar */
     .sidebar {
-<<<<<<< HEAD
         background: linear-gradient(90deg, #5c759c, #2C3E50);
-=======
-        background: linear-gradient(90deg, #3B465D, #2C3E50);
->>>>>>> 2c64608886508e017e155a04be3170f2d8927dc4
         font-family: 'Montserrat', sans-serif;
         font-weight: bold;
     }
