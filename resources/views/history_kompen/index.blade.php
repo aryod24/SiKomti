@@ -101,6 +101,9 @@ $(document).ready(function() {
     var table = $('#t_history_kompen').DataTable({
         processing: true,
         serverSide: true,
+        language: {
+            emptyTable: "Belum ada Kompen Selesai"
+        },
         ajax: {
             url: "{{ route('history.list') }}",
             type: 'GET',

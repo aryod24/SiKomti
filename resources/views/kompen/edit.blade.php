@@ -80,17 +80,6 @@
                         </div>
                     </div>
                     
-                    <!-- Jam Kompen -->
-                    <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Jam Kompen</label>
-                        <div class="col-11">
-                            <input type="number" class="form-control" name="jam_kompen" value="{{ old('jam_kompen', $kompen->jam_kompen) }}">
-                            @error('jam_kompen')
-                                <small class="form-text text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    
                     <!-- Status Dibuka -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Status Dibuka</label>

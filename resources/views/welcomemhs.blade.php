@@ -1,14 +1,14 @@
 @extends('layouts.template')
 @section('content')
 <div class="card">
-    <div class="card-header">
+    <div class="card-header bg-gradient-primary text-white">
         <h3 class="card-title">Akumulasi Data Kompen per Semester</h3>
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover">
                 <thead>
-                    <tr class="bg-light">
+                    <tr class="bg-gradient-secondary text-white text-center">
                         <th>Semester</th>
                         <th>Total Jam Alpha</th>
                         <th>Total Jam Kompen</th>
@@ -33,17 +33,20 @@
                             $totalSisaKompen += $sisaKompen;
                         @endphp
                         <tr>
-                            <td>{{ $semester }}</td>
-                            <td>{{ $jamAlpha }} jam</td>
-                            <td>{{ $jamKompen }} jam</td>
-                            <td>{{ $sisaKompen }} jam</td>
+                            <td class="text-center"><strong>Semester {{ $semester }}</strong></td>
+                            <td class="text-end">{{ number_format($jamAlpha) }} jam</td>
+                            <td class="text-end">{{ number_format($jamKompen) }} jam</td>
+                            <td class="text-end {{ $sisaKompen < 0 ? 'text-danger' : 'text-success' }}">
+                                <i class="fas {{ $sisaKompen < 0 ? 'fa-times-circle' : 'fa-check-circle' }}"></i> 
+                                {{ number_format($sisaKompen) }} jam
+                            </td>
                         </tr>
                     @endfor
-                    <tr class="bg-light font-weight-bold">
+                    <tr class="bg-gradient-light font-weight-bold text-center">
                         <td>Total</td>
-                        <td>{{ $totalJamAlpha }} jam</td>
-                        <td>{{ $totalJamKompen }} jam</td>
-                        <td>{{ $totalSisaKompen }} jam</td>
+                        <td class="text-end">{{ number_format($totalJamAlpha) }} jam</td>
+                        <td class="text-end">{{ number_format($totalJamKompen) }} jam</td>
+                        <td class="text-end">{{ number_format($totalSisaKompen) }} jam</td>
                     </tr>
                 </tbody>
             </table>
@@ -52,7 +55,7 @@
 </div>
 
 <div class="card mt-4">
-    <div class="card-header">
+    <div class="card-header bg-gradient-success text-white">
         <h3 class="card-title">Grafik Akumulasi Kompen</h3>
     </div>
     <div class="card-body">
@@ -67,7 +70,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('kompenChart').getContext('2d');
     const data = @json($akumulasiData);
-    
+
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -76,14 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     label: 'Jam Alpha',
                     data: data.map(item => item.total_jam_alpha),
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)', // Red with transparency
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 },
                 {
                     label: 'Jam Kompen',
                     data: data.map(item => item.total_jam_kompen),
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)', // Blue with transparency
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
                 }
@@ -91,12 +94,52 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14,
+                            weight: 'bold',
+                        },
+                        color: '#333'
+                    }
+                }
+            },
             scales: {
-                y: {
-                    beginAtZero: true,
+                x: {
+                    ticks: {
+                        color: '#333',
+                        font: {
+                            size: 12
+                        }
+                    },
                     title: {
                         display: true,
-                        text: 'Jumlah Jam'
+                        text: 'Semester',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        color: '#333'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: '#333',
+                        font: {
+                            size: 12
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Jumlah Jam',
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        color: '#333'
                     }
                 }
             }

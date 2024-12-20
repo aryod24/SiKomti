@@ -37,6 +37,9 @@
     .sidebar .nav-icon {
       color: #ffffff;
     }
+    .content-wrapper {
+      padding-top: 20px; /* Add some space between the top and content */
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -67,9 +70,6 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    @include('layouts.breadcrumb')
-
     <!-- Main content -->
     <section class="content">
       @yield('content')

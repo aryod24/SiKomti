@@ -53,39 +53,45 @@
     }
     
     function getKompenRequestByUuid(uuidKompen) {
-        $.ajax({
-            url: "{{ route('pengajuankompen.requests', '') }}/" + uuidKompen,
-            method: 'GET',
-            success: function(response) {
-                if (response.data) {
-                    let rows = '';
-                    response.data.forEach(function(request) {
-                        const isAccepted = request.status_Acc === 1;
-                        const isRejected = request.status_Acc === 0;
-                        const isPending = request.status_Acc === null;
-    
-                        rows += `
-                            <tr>
-                                <td>${request.ni}</td>
-                                <td>${request.nama}</td>
-                                <td>${isAccepted ? 'Diterima' : (isRejected ? 'Ditolak' : 'Menunggu')}</td>
-                                <td class="action-buttons">
-                                    <button onclick="confirmAction('Terima', '${request.ni}', '${uuidKompen}', 1)" class="btn btn-success btn-sm" ${isAccepted ? 'disabled' : ''}>Terima</button>
-                                    <button onclick="confirmAction('Tolak', '${request.ni}', '${uuidKompen}', 0)" class="btn btn-danger btn-sm" ${isAccepted || isRejected ? 'disabled' : ''}>Tolak</button>
-                                    <button onclick="confirmAction('Hapus', '${request.ni}', '${uuidKompen}', null)" class="btn btn-danger btn-sm">Hapus</button>
-                                </td>
-                            </tr>`;
-                    });
-                    $('#request-body').html(rows);
-                } else {
-                    $('#request-body').html('<tr><td colspan="4" class="text-center">Tidak ada permintaan ditemukan.</td></tr>');
-                }
-            },
-            error: function() {
-                $('#request-body').html('<tr><td colspan="4" class="text-center">Belum ada Request.</td></tr>');
+    $.ajax({
+        url: "{{ route('pengajuankompen.requests', '') }}/" + uuidKompen,
+        method: 'GET',
+        success: function(response) {
+            if (response.data) {
+                let rows = '';
+                response.data.forEach(function(request) {
+                    const isAccepted = request.status_Acc === 1;
+                    const isRejected = request.status_Acc === 0;
+
+                    rows += `
+                        <tr>
+                            <td>${request.ni}</td>
+                            <td>${request.nama}</td>
+                            <td>${isAccepted ? 'Diterima' : (isRejected ? 'Ditolak' : 'Menunggu')}</td>
+                            <td class="action-buttons d-flex gap-2">
+                                <button onclick="confirmAction('Terima', '${request.ni}', '${uuidKompen}', 1)" class="btn btn-success btn-sm" ${isAccepted ? 'disabled' : ''}>
+                                    <i class="fas fa-check"></i> Terima
+                                </button>
+                                <button onclick="confirmAction('Tolak', '${request.ni}', '${uuidKompen}', 0)" class="btn btn-danger btn-sm" ${isAccepted || isRejected ? 'disabled' : ''}>
+                                    <i class="fas fa-times"></i> Tolak
+                                </button>
+                                <button onclick="confirmAction('Hapus', '${request.ni}', '${uuidKompen}', null)" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </td>
+                        </tr>`;
+                });
+                $('#request-body').html(rows);
+            } else {
+                $('#request-body').html('<tr><td colspan="4" class="text-center">Tidak ada permintaan ditemukan.</td></tr>');
             }
-        });
-    }
+        },
+        error: function() {
+            $('#request-body').html('<tr><td colspan="4" class="text-center">Belum ada Request.</td></tr>');
+        }
+    });
+}
+
     
     function confirmAction(action, ni, uuidKompen, statusAcc) {
         $('#confirmationMessage').text(`Apakah Anda yakin ingin ${action} request ini?`);
