@@ -124,8 +124,8 @@ function showProgressModal(uuidKompen) {
                             <td>${bukti.status_acc == 1 ? 'Approved' : bukti.status_acc == 0 ? 'Rejected' : 'Menunggu'}</td>
                             <td>${bukti.bukti_kompen}</td>
                             <td>
-                                <button class='btn btn-success btn-sm' onclick='updateStatus(${bukti.id_progres}, 1)'>Approve</button> 
-                                <button class='btn btn-danger btn-sm' onclick='updateStatus(${bukti.id_progres}, 0)'>Reject</button> 
+                                <button class='btn btn-success btn-sm' onclick='updateStatus(${bukti.id_progres}, 1)'>Setujui</button> 
+                                <button class='btn btn-danger btn-sm' onclick='updateStatus(${bukti.id_progres}, 0)'>Tolak</button> 
                                 <a href="{{ asset('storage/bukti_kompen/') }}/${bukti.bukti_kompen}" 
                                    class='btn btn-primary btn-sm' 
                                    download>Download</a> 
