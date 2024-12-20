@@ -108,9 +108,9 @@ class ProgressKompenController extends Controller
     $progress->save();
 
     if ($status_acc == 1) {
-        return response()->json(['message' => 'Request approved successfully.'], 200);
+        return response()->json(['message' => 'Progress Diterima.'], 200);
     } elseif ($status_acc == 0) {
-        return response()->json(['message' => 'Request rejected successfully.'], 200);
+        return response()->json(['message' => 'Progress Ditolak.'], 200);
     }
 
     return response()->json(['message' => 'Invalid status.'], 400);
