@@ -30,24 +30,26 @@ class KompenController extends Controller
     public function list(Request $request)
     {
         // Start building the query
-        $kompens = KompenModel::with(['user', 'level']) // Eager load the user and level relationships
-            ->select(
-                'UUID_Kompen',
-                'nama_kompen',
-                'deskripsi',
-                'jenis_tugas',
-                'quota',
-                'jam_kompen',
-                'status_dibuka',
-                'tanggal_mulai',
-                'tanggal_akhir',
-                'is_selesai',
-                'id_kompetensi',
-                'periode_kompen',
-                'user_id',
-                'nama',
-                'level_id' // Add level_id to select fields
-            );
+        $kompens = KompenModel::with(['user', 'level', 'jenisTugas' => function($query) {
+            $query->select('id_tugas', 'jenis_tugas');
+        }])
+        ->select(
+            'UUID_Kompen',
+            'nama_kompen',
+            'deskripsi',
+            'jenis_tugas', // Foreign key column that references id_tugas in JenisTugas
+            'quota',
+            'jam_kompen',
+            'status_dibuka',
+            'tanggal_mulai',
+            'tanggal_akhir',
+            'is_selesai',
+            'id_kompetensi',
+            'periode_kompen',
+            'user_id',
+            'nama',
+            'level_id' // Add level_id to select fields
+        );
     
         // Check if the user is logged in as Dosen (level_id 3) or Tendik (level_id 4)
         if (auth()->check()) {
@@ -68,6 +70,9 @@ class KompenController extends Controller
         // Return data for DataTables
         return DataTables::of($kompens)
             ->addIndexColumn() // Add index column
+            ->addColumn('jenis_tugas', function ($kompen) {
+                return $kompen->jenisTugas ? $kompen->jenisTugas->jenis_tugas : '-';
+            })
             ->addColumn('aksi', function ($kompen) {
                 // Add action buttons for edit, detail, and delete
                 $btn = '<a href="' . url('/kompen/' . $kompen->UUID_Kompen) . '" class="btn btn-info btn-sm">Detail</a> ';
@@ -81,7 +86,7 @@ class KompenController extends Controller
             ->make(true);
     }
     
-    
+
     // Menampilkan halaman form tambah kompen
     public function create()
     {
@@ -186,7 +191,6 @@ class KompenController extends Controller
             'deskripsi' => 'nullable|string', // deskripsi boleh kosong
             'jenis_tugas' => 'nullable|integer', // jenis tugas bisa kosong atau integer
             'quota' => 'nullable|integer', // quota bisa kosong atau integer
-            'jam_kompen' => 'nullable|integer', // jam kompen bisa kosong atau integer
             'status_dibuka' => 'nullable|boolean', // status dibuka bisa kosong atau boolean
             'tanggal_mulai' => 'nullable|date', // tanggal mulai bisa kosong atau tanggal
             'tanggal_akhir' => 'nullable|date', // tanggal akhir bisa kosong atau tanggal// status selesai bisa kosong atau boolean
@@ -199,7 +203,6 @@ class KompenController extends Controller
             'deskripsi' => $request->deskripsi,
             'jenis_tugas' => $request->jenis_tugas,
             'quota' => $request->quota,
-            'jam_kompen' => $request->jam_kompen,
             'status_dibuka'  => $request->status_dibuka,
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_akhir' => $request->tanggal_akhir,

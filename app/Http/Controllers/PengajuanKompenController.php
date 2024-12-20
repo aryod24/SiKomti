@@ -26,50 +26,55 @@ class PengajuanKompenController extends Controller
 
     public function list(Request $request)
     {
-        // Start building the query
-        $kompens = KompenModel::select(
-            'UUID_Kompen',
-            'nama_kompen',
-            'deskripsi',
-            'jenis_tugas',
-            'quota',
-            'jam_kompen',
-            'status_dibuka',
-            'tanggal_mulai',
-            'tanggal_akhir',
-            'is_selesai',
-            'id_kompetensi',
-            'periode_kompen',
-            'user_id',
-            'nama',
-            'level_id' // Add level_id to select fields
-        );
-    
+        // Start building the query with the 'jenisTugas' relationship
+        $kompens = KompenModel::with(['jenisTugas']) // Include the jenisTugas relationship
+            ->select(
+                'UUID_Kompen',
+                'nama_kompen',
+                'deskripsi',
+                'jenis_tugas',  // Existing foreign key column
+                'quota',
+                'jam_kompen',
+                'status_dibuka',
+                'tanggal_mulai',
+                'tanggal_akhir',
+                'is_selesai',
+                'id_kompetensi',
+                'periode_kompen',
+                'user_id',
+                'nama',
+                'level_id' // Add level_id to select fields
+            );
+        
         // Check if the user is logged in as Dosen (level_id 3) or Tendik (level_id 4)
         if (auth()->check()) {
             $userLevel = auth()->user()->level_id; // Get the logged-in user's level_id
             $userId = auth()->user()->user_id; // Get the logged-in user's ID
-    
+        
             if ($userLevel == 3 || $userLevel == 4) {
                 // Filter kompen based on user_id for level_id 3 and 4
                 $kompens->where('user_id', $userId);
             }
         }
-    
+        
         // Apply level_id filter if provided
         if ($request->has('level_id') && $request->level_id != '') {
             $kompens->where('level_id', $request->level_id); // Apply level_id filter if provided
         }
-    
+        
         // Return data for DataTables
         return DataTables::of($kompens)
             ->addIndexColumn() // Add index column
-            ->addColumn('aksi_request', function ($kompen) {
-                return '<button onclick="showRequestModal(\'' . $kompen->UUID_Kompen . '\')" class="btn btn-info btn-sm">Request</button>';
+            ->addColumn('jenis_tugas', function ($kompen) {
+                return $kompen->jenisTugas ? $kompen->jenisTugas->jenis_tugas : '-'; // Display the related jenis_tugas
             })
-            ->rawColumns(['aksi_request']) // Indicate that the action column contains HTML
+            ->addColumn('aksi_progress', function ($kompen) {
+                return '<button onclick="showProgressModal(\'' . $kompen->UUID_Kompen . '\')" class="btn btn-info btn-sm">Progress</button>';
+            })
+            ->rawColumns(['aksi_progress']) // Indicate that the action column contains HTML
             ->make(true);
     }
+    
 
     public function updateStatus(Request $request)
     {

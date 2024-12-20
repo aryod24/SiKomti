@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header">
+    <div class="card-header text-center" style="font-family: 'Montserrat', sans-serif;">
         <h3 class="card-title">Selamat datang di SiKomti</h3>
-        <div class="card-tools"></div>
     </div>
     <div class="card-body">
         <div class="row">
@@ -14,7 +13,7 @@
                     <div class="row">
                         <!-- Menampilkan Jumlah Kompen -->
                         <div class="col-lg-4 col-6">
-                            <div class="small-box bg-info">
+                            <div class="small-box" style="background: linear-gradient(45deg, #1E90FF, #00BFFF); color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                                 <div class="inner">
                                     <h3>{{ $jumlahKompen }}</h3>
                                     <p>Jumlah Kompen</p>
@@ -27,7 +26,7 @@
 
                         <!-- Menampilkan Jumlah User -->
                         <div class="col-lg-4 col-6">
-                            <div class="small-box bg-success">
+                            <div class="small-box" style="background: linear-gradient(45deg, #28a745, #32CD32); color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                                 <div class="inner">
                                     <h3>{{ $jumlahUser }}</h3>
                                     <p>Jumlah User</p>
@@ -40,7 +39,7 @@
 
                         <!-- Menampilkan Jumlah Kompen Selesai -->
                         <div class="col-lg-4 col-6">
-                            <div class="small-box bg-success">
+                            <div class="small-box" style="background: linear-gradient(45deg, #20c997, #17a2b8); color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                                 <div class="inner">
                                     <h3>{{ $jumlahKompenSelesai }}</h3>
                                     <p>Jumlah Kompen Selesai</p>
@@ -53,7 +52,7 @@
 
                         <!-- Menampilkan Jumlah Bidang Kompetensi -->
                         <div class="col-lg-4 col-6">
-                            <div class="small-box bg-warning">
+                            <div class="small-box" style="background: linear-gradient(45deg, #ffc107, #ffdd57); color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                                 <div class="inner">
                                     <h3>{{ $jumlahKompentensi }}</h3>
                                     <p>Jumlah Bidang Kompetensi</p>
@@ -66,7 +65,7 @@
 
                         <!-- Menampilkan Jumlah Mahasiswa Kompen -->
                         <div class="col-lg-4 col-6">
-                            <div class="small-box bg-danger">
+                            <div class="small-box" style="background: linear-gradient(45deg, #ff4757, #ff6b81); color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                                 <div class="inner">
                                     <h3>{{ $jumlahMahasiswaKompen }}</h3>
                                     <p>Jumlah Mahasiswa Kompen</p>
@@ -79,7 +78,7 @@
 
                         <!-- Menampilkan Jumlah Jenis Kompen -->
                         <div class="col-lg-4 col-6">
-                            <div class="small-box bg-secondary">
+                            <div class="small-box" style="background: linear-gradient(45deg, #6c757d, #adb5bd); color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                                 <div class="inner">
                                     <h3>{{ $jumlahJenisKompen }}</h3>
                                     <p>Jumlah Jenis Kompen</p>
@@ -94,27 +93,12 @@
                     <!-- Data Chart section -->
                     <div class="col-lg-12 mt-4">
                         <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Data Kompen</h3>
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="card-title">Grafik Data Kompen</h3>
                             </div>
                             <div class="card-body">
-                                <canvas id="myChart" width="1200" height="500"></canvas> <!-- Adjusted size for larger chart -->
+                                <canvas id="myChart" width="1200" height="500"></canvas>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            <!-- Menampilkan data khusus untuk level_id 2 -->
-            @if (auth()->user()->level_id == 2)
-                <!-- Data Chart section -->
-                <div class="col-lg-12 mt-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Data Kompen</h3>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="myChart" width="1200" height="500"></canvas> <!-- Adjusted size for larger chart -->
                         </div>
                     </div>
                 </div>
@@ -124,63 +108,38 @@
 </div>
 @endsection
 
-@section('css')
-<link rel="stylesheet" href="{{ asset('path/to/adminlte.min.css') }}">
-@endsection
-
 @push('js')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    console.log("Chart.js loaded");
-
-    // Assuming you have these variables available from your backend
-    var jumlahKompen = {{ $jumlahKompen }}; // Total compensations
-    var jumlahKompenSelesai = {{ $jumlahKompenSelesai }}; // Completed compensations
-
-    // Create a canvas context for the chart
-    var ctx = document.getElementById('myChart').getContext('2d');
-
-    // Create the bar chart with two bars
-    var myChart = new Chart(ctx, {
-        type: 'bar', // Bar chart type
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
         data: {
-            labels: ['Kompen'], // Label for the x-axis, only one value for both bars
+            labels: ['Kompen'],
             datasets: [
                 {
-                    label: 'Jumlah Kompen Selesai', // First bar for completed compensations
-                    data: [jumlahKompenSelesai], // Data point for completed compensations
-                    backgroundColor: 'rgba(28, 200, 138, 0.2)', // Light green background color
-                    borderColor: 'rgba(28, 200, 138, 1)', // Green border color
+                    label: 'Jumlah Kompen Selesai',
+                    data: [{{ $jumlahKompenSelesai }}],
+                    backgroundColor: 'rgba(28, 200, 138, 0.6)',
+                    borderColor: 'rgba(28, 200, 138, 1)',
                     borderWidth: 2,
                 },
                 {
-                    label: 'Jumlah Kompen', // Second bar for total compensations
-                    data: [jumlahKompen], // Data point for total compensations
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Light blue background color
-                    borderColor: 'rgba(54, 162, 235, 1)', // Blue border color
+                    label: 'Jumlah Kompen',
+                    data: [{{ $jumlahKompen }}],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 2,
                 }
             ]
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
             scales: {
                 y: {
                     beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Jumlah'
-                    },
                     ticks: {
-                        stepSize: 1, // Set the step size to ensure no fractional numbers are displayed
-                        precision: 0 // This ensures that no decimals are shown
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Status Kompen'
+                        stepSize: 1
                     }
                 }
             }
