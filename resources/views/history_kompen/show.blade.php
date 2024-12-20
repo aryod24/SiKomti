@@ -14,13 +14,9 @@
             @else
                 <table class="table table-bordered table-hover table-sm">
                     <thead style="background-color: #6b83a8; color: white;">
-                        <tr>
-                            <th colspan="2" class="text-center"><i class="fas fa-info-circle"></i> Detail Kompen</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <th class="text-start">ID Kompen</th>
+                            <th class="text-start">UUID Kompen</th>
                             <td class="text-start">{{ $kompen->UUID_Kompen }}</td>
                         </tr>
                         <tr>
@@ -68,18 +64,11 @@
                     <div class="text-center">{!! $qrCode !!}</div>
                 </div>
 
-                <!-- QR Code Reader -->
-                <div class="qr-code-reader my-4">
-                    <h5>Scan QR Code:</h5>
-                    <div id="reader" style="width: 300px; margin: auto;"></div>
-                    <div id="qr-result" class="mt-3 text-center"></div>
-                </div>
-
                 <h5 class="mt-4">Mahasiswa Kompen</h5>
                 <table class="table table-bordered table-hover table-sm mt-3">
                     <thead style="background-color: #6b83a8; color: white;">
                         <tr>
-                            <th>NI</th>
+                            <th>NIM</th>
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Semester</th>

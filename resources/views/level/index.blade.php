@@ -1,4 +1,5 @@
 @extends('layouts.template')
+
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header text-center" style="background-color: #ffffff; padding: 20px;">
@@ -6,7 +7,9 @@
     </div>
     <div class="card-body">
         <div class="card-tools mb-3 text-right">  
-            <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">Tambah</a>
+            <a class="btn btn-sm btn-primary mt-1" href="{{ url('level/create') }}">
+                <i class="fas fa-plus"></i> Tambah
+            </a>
         </div>
     </div>
     <div class="card-body">
@@ -29,6 +32,7 @@
     </div>
 </div>
 @endsection
+
 @push('css')
     <style>
         /* Styling untuk tabel */
@@ -78,11 +82,11 @@
 
     </style>
 @endpush
+
 @push('js')
 <script>
     $(document).ready(function() {
         var dataLevel = $('#table_level').DataTable({
-            // serverSide: true, jika ingin menggunakan server side processing
             serverSide: true, 
             ajax: {
                 "url": "{{ url('level/list') }}",

@@ -159,6 +159,9 @@
         $(document).ready(function() {
             var dataKompen = $('#table_kompen').DataTable({
                 serverSide: true,
+                language: {
+            emptyTable: "Belum ada Kompen"
+        },
                 ajax: {
                     "url": "{{ url('kompen/list') }}",
                     "dataType": "json",
@@ -191,16 +194,6 @@
                         className: "",
                         orderable: true,
                         searchable: true,
-                        render: function(data) {
-                            if (data == 1) {
-                                return 'Penelitian';
-                            } else if (data == 2) {
-                                return 'Pengabdian';
-                            } else if (data == 3) {
-                                return 'Teknis';
-                            }
-                            return data;
-                        }
                     },
                     {
                         data: "nama", // Field for Pembuat Tugas

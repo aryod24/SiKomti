@@ -256,6 +256,9 @@ function updateStatus(id_progres, status_acc) {
 $(document).ready(function() {
     var dataKompen = $('#t_kompen').DataTable({
         serverSide: true,
+        language: {
+            emptyTable: "Belum ada Progress"
+        },
         ajax: {
             "url": "{{ route('progresskompen.list') }}",
             "dataType": "json",
@@ -268,17 +271,7 @@ $(document).ready(function() {
             { data: "DT_RowIndex", orderable: false, searchable: false },
             { data: "nama_kompen", orderable: true, searchable: true },
             { data: "deskripsi", orderable: true, searchable: true },
-            { data: "jenis_tugas", orderable: true, searchable: true, render: function(data) {
-                if (data == 1) {
-                    return 'Penelitian';
-                } else if (data == 2) {
-                    return 'Pengabdian';
-                } else if (data == 3) {
-                    return 'Teknis';
-                } else {
-                    return 'Tidak Diketahui';
-                }
-            }},
+            { data: "jenis_tugas", orderable: true, searchable: true},
             { data: "nama", orderable: true, searchable: true },
             { data: "quota", orderable: true, searchable: true },
             { data: "is_selesai", render: function(data) {

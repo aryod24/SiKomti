@@ -115,6 +115,9 @@
     $(document).ready(function() {
         var dataKompen = $('#t_kompen').DataTable({
             serverSide: true,
+            language: {
+            emptyTable: "Belum ada Pengajuan"
+        },
             ajax: {
                 "url": "{{ route('pengajuankompen.list') }}",
                 "dataType": "json",
@@ -127,12 +130,7 @@
                 { data: "DT_RowIndex", orderable: false, searchable: false },
                 { data: "nama_kompen", orderable: true, searchable: true },
                 { data: "deskripsi", orderable: true, searchable: true },
-                { data: "jenis_tugas", orderable: true, searchable: true, render: function(data) {
-                    if (data == 1) return 'Penelitian';
-                    if (data == 2) return 'Pengabdian';
-                    if (data == 3) return 'Teknis';
-                    return data;
-                }},
+                { data: "jenis_tugas", orderable: true, searchable: true},
                 { data: "nama", orderable: true, searchable: true },
                 { data: "quota", orderable: true, searchable: true },
                 { data: "is_selesai", render: function(data) {
