@@ -27,7 +27,7 @@
                     </tr>
                     <tr>
                         <th>Jenis Tugas</th>
-                        <td>{{ $kompen->jenis_tugas }}</td>
+                        <td>{{ $kompen->jenisTugas->jenis_tugas ?? 'Tidak Diketahui' }}</td>
                     </tr>
                     <tr>
                         <th>Quota</th>
@@ -47,24 +47,14 @@
                     </tr>
                     <tr>
                         <th>Kompetensi</th>
-                        <td>
-                            @if($kompen->id_kompetensi == 1)
-                                Pemrograman Dasar
-                            @elseif($kompen->id_kompetensi == 2)
-                                Pengembangan Web
-                            @elseif($kompen->id_kompetensi == 3)
-                                Pengembangan Aplikasi Mobile
-                            @else
-                                {{ $kompen->id_kompetensi ?? 'Tidak Diketahui' }}
-                            @endif
-                        </td>
+                        <td>{{ $kompen->kompetensi->nama_kompetensi ?? 'Tidak Diketahui' }}</td>
                     </tr>
                     <tr>
                         <th>Periode Kompen</th>
                         <td>{{ $kompen->periode_kompen }}</td>
                     </tr>
                     <tr>
-                        <th>Status</th>
+                        <th>Status Selesai</th>
                         <td>
                             @if($kompen->is_selesai == '1')
                                 <span class="badge bg-success">Selesai</span>

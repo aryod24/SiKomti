@@ -93,7 +93,7 @@ class PengajuanKompenController extends Controller
     
             // If the accepted requests are already equal to or greater than the quota
             if ($acceptedRequests >= $kompen->quota) {
-                return response()->json(['message' => 'Quota already full. Cannot accept more requests.'], 400);
+                return response()->json(['message' => 'Quota Sudah Penuh. Tidak Bisa Menerima Request Lagi.'], 400);
             }
     
             $mahasiswaKompen->status_Acc = 1;
@@ -117,7 +117,7 @@ class PengajuanKompenController extends Controller
             );
             
     
-            return response()->json(['message' => 'Status updated and progress created successfully.'], 200);
+            return response()->json(['message' => 'Status Telah Di Update dan Mahasiswa sudah bisa melakukan progress.'], 200);
         }
     
         // Check if status_Acc is changing to 0 (reject request)
@@ -125,10 +125,10 @@ class PengajuanKompenController extends Controller
             $mahasiswaKompen->status_Acc = 0;
             $mahasiswaKompen->save();
     
-            return response()->json(['message' => 'Request rejected successfully.'], 200);
+            return response()->json(['message' => 'Request Berhasil Ditolak.'], 200);
         }
     
-        return response()->json(['message' => 'No status change or invalid status.'], 400);
+        return response()->json(['message' => 'Tidak ada yang Status yang Dirubah.'], 400);
     }
     
 
@@ -143,7 +143,7 @@ class PengajuanKompenController extends Controller
 
         $mahasiswaKompen->delete();
 
-        return response()->json(['message' => 'Request deleted successfully.'], 200);
+        return response()->json(['message' => 'Request berhasil dihapus.'], 200);
     }
 
     public function getKompenRequestByUuid($uuidKompen)

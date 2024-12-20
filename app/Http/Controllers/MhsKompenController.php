@@ -45,6 +45,7 @@ class MhsKompenController extends Controller
     public function show($UUID_Kompen)
     {
         $kompen = KompenModel::where('UUID_Kompen', $UUID_Kompen)->firstOrFail();
+        $kompen = KompenModel::with(['jenisTugas', 'kompetensi'])->find($UUID_Kompen);
         $kompenRequests = MahasiswaKompen::where('UUID_Kompen', $UUID_Kompen)->get();
 
         $breadcrumb = (object) [
