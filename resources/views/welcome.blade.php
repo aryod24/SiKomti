@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header text-center" style="font-family: 'Montserrat', sans-serif;">
-        <h3 class="card-title">Selamat datang di SiKomti</h3>
+    <div class="card-header d-flex align-items-center justify-content-center" style="font-family: 'Montserrat', sans-serif; height: 100px;">
+        <h3 class="card-title" style="font-size: 2rem; color: #415f8d;">Selamat datang di SiKomti</h3>
     </div>
     <div class="card-body">
         <div class="row">

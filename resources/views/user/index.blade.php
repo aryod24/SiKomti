@@ -6,11 +6,20 @@
     </div>
     <div class="card-body">
         <div class="card-tools mb-3 text-right">  
-        <div class="card-tools">
-            <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">Tambah</a>
-            <button class="btn btn-sm btn-success mt-1" id="import-mahasiswa-btn">Import Mahasiswa</button>
-            <button class="btn btn-sm btn-info mt-1" id="import-dosen-tendik-btn">Import Dosen/Tendik</button>
-        </div>
+            <div class="card-tools">
+                <!-- Tombol Tambah dengan ikon -->
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('user/create') }}">
+                    <i class="fas fa-plus"></i> Tambah
+                </a>
+                <!-- Tombol Import Mahasiswa dengan ikon -->
+                <button class="btn btn-sm btn-success mt-1" id="import-mahasiswa-btn">
+                    <i class="fas fa-upload"></i> Import Mahasiswa
+                </button>
+                <!-- Tombol Import Dosen/Tendik dengan ikon -->
+                <button class="btn btn-sm btn-info mt-1" id="import-dosen-tendik-btn">
+                    <i class="fas fa-upload"></i> Import Dosen/Tendik
+                </button>
+            </div>       
     </div>
     <div class="card-body">
         @if (session('success'))

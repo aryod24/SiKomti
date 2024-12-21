@@ -6,28 +6,26 @@
         <h3 class="mb-0 font-weight-bold" style="color: #415f8d; font-size: 36px;">Data Mahasiswa Alpha</h3>     
     </div>
     <div class="card-body">
-        <div class="d-flex justify-content-end gap-2 mb-3">
-            <!-- Button to Add Mahasiswa Alpha -->
-            <a class="btn btn-primary mt-1" href="{{ url('datamahasiswa/create') }}">
-                <i class="fas fa-plus"></i> Tambah Mahasiswa Alpha
-            </a>
-            
-            <!-- Button to Import Data -->
-            <button class="btn btn-primary mt-1" id="import-btn">
-                <i class="fas fa-upload"></i> Import Data Mahasiswa Alpha
-            </button>
-            
-            <!-- Button to Export Excel -->
-            <a href="{{ route('datamahasiswa.export.excel') }}" class="btn btn-success mt-1">
-                <i class="fas fa-file-excel"></i> Export Excel
-            </a>
-            
-            <!-- Button to Export PDF -->
-            <a href="{{ route('datamahasiswa.export.pdf') }}" class="btn btn-danger mt-1">
-                <i class="fas fa-file-pdf"></i> Export PDF
-            </a>
-        </div>
-        
+        <div class="card-tools mb-3 text-right">  
+            <div class="card-body" style="text-align: right;">
+                    <!-- Tombol Tambah Mahasiswa Alpha -->
+                    <a class="btn btn-primary" href="{{ url('datamahasiswa/create') }}">
+                        <i class="fas fa-plus"></i> Tambah Mahasiswa Alpha
+                    </a>
+                    <!-- Tombol Import Data -->
+                    <button class="btn btn-info" id="import-btn">
+                        <i class="fas fa-upload"></i> Import Data Mahasiswa Alpha
+                    </button>
+                    <!-- Tombol Export Excel -->
+                    <a href="{{ route('datamahasiswa.export.excel') }}" class="btn btn-success">
+                        <i class="fas fa-file-excel"></i> Export Excel
+                    </a>
+                    <!-- Tombol Export PDF -->
+                    <a href="{{ route('datamahasiswa.export.pdf') }}" class="btn btn-danger">
+                        <i class="fas fa-file-pdf"></i> Export PDF
+                    </a>
+                </div>
+            </div> 
 
             <!-- Form Import -->
             <div class="card-body" id="import-form" style="display: none;">

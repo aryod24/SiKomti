@@ -1,5 +1,11 @@
 @extends('layouts.template')
 @section('content')
+
+<div class="card mb-4">
+    <div class="card-header d-flex align-items-center justify-content-center" style="font-family: 'Montserrat', sans-serif; height: 100px; background-color: #f8f9fa; border: none;">
+        <h2 class="card-title" style="font-size: 2rem; color: #415f8d;">Selamat Datang di SiKomti</h2>
+    </div>
+</div>
 <div class="card">
     <div class="card-header bg-gradient-primary text-white">
         <h3 class="card-title">Akumulasi Data Kompen per Semester</h3>
