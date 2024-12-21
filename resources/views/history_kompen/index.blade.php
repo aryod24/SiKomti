@@ -122,8 +122,14 @@ $(document).ready(function() {
             { data: 'nama', name: 'nama' },
             { data: 'quota', name: 'quota' },
             { data: 'is_selesai', name: 'is_selesai', render: function(data) {
-                return data == 1 ? 'Selesai' : 'Belum Selesai';
-            }},
+                            if (data == 1) {
+                                return '<span class="badge bg-success">Selesai</span>';
+                            } else if (data == 0) {
+                                return '<span class="badge bg-warning">Belum Selesai</span>';
+                            }
+                            return '<span class="badge bg-secondary">Status Tidak Diketahui</span>';
+                        }
+            },
             { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
         ]
     });

@@ -85,7 +85,7 @@ $(document).ready(function() {
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'kompen.nama_kompen', name: 'kompen.nama_kompen' },
             { data: 'kompen.deskripsi', name: 'kompen.deskripsi' },
-            { data: 'status_acc', name: 'status_acc', render: data => data == 1 ? 'Selesai' : 'Belum Selesai' },
+            { data: 'status_acc', name: 'status_acc', render: data => data == 1 ? '<span class="badge bg-success">Selesai</span>' : '<span class="badge bg-warning">Belum Selesai</span>' },
             { data: 'kompen.user.nama', name: 'kompen.user.nama', defaultContent: '-' },
             { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
         ]
